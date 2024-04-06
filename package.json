@@ -19,5 +19,11 @@
   "bugs": {
     "url": "https://github.com/MTtankkeo/react_widgets/issues"
   },
-  "homepage": "https://github.com/MTtankkeo/react_widgets#readme"
+  "homepage": "https://github.com/MTtankkeo/react_widgets#readme",
+  "devDependencies": {
+    "@types/react": "^18.2.74"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0"
+  }
 }
