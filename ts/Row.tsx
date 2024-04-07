@@ -1,17 +1,109 @@
-import React from "react";
+import React, { CSSProperties } from "react";
 
-export function Row({children, gap, reverse, wrap}: {
+export interface RowProperties {
     children?: React.ReactNode,
     gap?: string,
-    reverse?: any
+    reverse?: any,
     wrap?: any,
-}) {
+
+    bottomCenter?: any,
+    bottomLeft?: any,
+    bottomRight?: any,
+    bottomSpaceBetween?: any,
+    bottomSpaceAround?: any,
+    bottomSpaceEvenly?: any,
+    center?: any,
+    centerLeft?: any,
+    centerRight?: any,
+    centerSpaceBetween?: any,
+    centerSpaceAround?: any,
+    centerSpaceEvenly?: any,
+    topCenter?: any,
+    topLeft?: any,
+    topRight?: any,
+    topSpaceBetween?: any,
+    topSpaceAround?: any,
+    topSpaceEvenly?: any,
+}
+
+export function Row(p: RowProperties) {
+    const style: CSSProperties = {
+        display: "flex",
+        flexDirection: p.reverse != null ? "row-reverse" : "row",
+        flexWrap: p.wrap != null ? "wrap" : undefined,
+        gap: p.gap,
+    };
+
+    // BOTTOM RELATED
+    if (p.bottomCenter) {
+        style.height = "100%";
+        style.alignContent = "end",
+        style.justifyContent = "center";
+    } else if (p.bottomLeft) {
+        style.height = "100%";
+        style.alignContent = "end";
+        style.justifyContent = "left";
+    } else if (p.bottomRight) {
+        style.height = "100%";
+        style.alignContent = "end";
+        style.justifyContent = "right";
+    } else if (p.bottomSpaceBetween) {
+        style.height = "100%";
+        style.alignContent = "end";
+        style.justifyContent = "space-between";
+    } else if (p.bottomSpaceAround) {
+        style.height = "100%";
+        style.alignContent = "end";
+        style.justifyContent = "space-around";
+    } else if (p.bottomSpaceEvenly) {
+        style.height = "100%";
+        style.alignContent = "end";
+        style.justifyContent = "space-evenly";
+    } else
+
+    // CENTER RELATED
+    if (p.center) {
+        style.height = "100%";
+        style.alignContent = "center";
+        style.justifyContent = "center";
+    } else if (p.centerLeft) {
+        style.height = "100%";
+        style.alignContent = "center";
+        style.justifyContent = "left";
+    } else if (p.centerRight) {
+        style.height = "100%";
+        style.alignContent = "center";
+        style.justifyContent = "right";
+    } else if (p.centerSpaceBetween) {
+        style.height = "100%";
+        style.alignContent = "center";
+        style.justifyContent = "space-between";
+    } else if (p.centerSpaceAround) {
+        style.height = "100%";
+        style.alignContent = "center";
+        style.justifyContent = "space-around";
+    } else if (p.centerSpaceEvenly) {
+        style.height = "100%";
+        style.alignContent = "center";
+        style.justifyContent = "space-evenly";
+    } else
+
+    // TOP RELATED
+    if (p.topCenter) {
+        style.justifyContent = "center";
+    } else if (p.topLeft) {
+        style.justifyContent = "left";
+    } else if (p.topRight) {
+        style.justifyContent = "right";
+    } else if (p.topSpaceBetween) {
+        style.justifyContent = "space-between";
+    } else if (p.topSpaceAround) {
+        style.justifyContent = "space-around";
+    } else if (p.topSpaceEvenly) {
+        style.justifyContent = "space-evenly";
+    }
+
     return (
-        <div style={{
-            display: "flex",
-            flexDirection: reverse != null ? "row-reverse" : "row",
-            flexWrap: wrap != null ? "wrap" : undefined,
-            gap: gap,
-        }}>{children}</div>
+        <div style={style}>{p.children}</div>
     )
 }

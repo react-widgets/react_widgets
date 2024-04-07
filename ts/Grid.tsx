@@ -1,4 +1,4 @@
-import React from "react";
+import React, { CSSProperties } from "react";
 
 export function Grid({children, rowCount, gap, verticalGap, horizontalGap, reverse = false}: {
     children?: React.ReactNode,
@@ -8,15 +8,20 @@ export function Grid({children, rowCount, gap, verticalGap, horizontalGap, rever
     horizontalGap?: string,
     reverse?: boolean
 }) {
+    const style: CSSProperties = {
+        display: "grid",
+        gridTemplateColumns: Array.from({length: rowCount}, () => "1fr").join(" "),
+    }
+
+    if (gap != null) {
+        style.gap = gap;
+    } else if (verticalGap != null) {
+        style.rowGap = verticalGap;
+    } else if (horizontalGap != null) {
+        style.columnGap = horizontalGap;
+    }
+
     return (
-        <div style={{
-            display: "flex",
-            flexDirection: reverse ? "column-reverse" : "column",
-            gap: gap,
-            rowGap: horizontalGap,
-            columnGap: verticalGap
-        }}>
-            {children}
-        </div>
+        <div style={style}>{children}</div>
     )
 }

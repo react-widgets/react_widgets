@@ -3,12 +3,26 @@ This is package that provides templates that can significantly reduce CSS develo
 
 > Consider integrating not only business logic but also design logic into script code.
 
+## How to make responsive grid?
 ```tsx
 return (
-    <Row gap="15px">
-        <p>item 1</p>
-        <p>item 2</p>
-        <p>item 3</p>
-    </Row>
+    <ConstraintBuilder<number>
+        constraints={[
+            new Constraint(1000, Infinity, 3),
+            new Constraint(600, 1000, 2),
+            new Constraint(-Infinity, 600, 1)
+        ]}
+        builder={(value: number) => {
+            return (
+                <Grid gap="5px" rowCount={value}>
+                    <p>1</p>
+                    <p>2</p>
+                    <p>3</p>
+                    <p>4</p>
+                    <p>5</p>
+                </Grid>
+            );
+        }
+    } />
 )
 ```
