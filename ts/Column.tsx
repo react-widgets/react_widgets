@@ -37,14 +37,17 @@ export function Column(p: ColumnProperties) {
     // BOTTOM RELATED
     if (p.bottomCenter) {
         style.height = "100%";
+        style.alignItems = "center";
         style.alignContent = "center",
         style.justifyContent = "end";
     } else if (p.bottomLeft) {
         style.height = "100%";
+        style.alignItems = "start";
         style.alignContent = "start";
         style.justifyContent = "end";
     } else if (p.bottomRight) {
         style.height = "100%";
+        style.alignItems = "end";
         style.alignContent = "end";
         style.justifyContent = "end";
     } else
@@ -52,24 +55,30 @@ export function Column(p: ColumnProperties) {
     // CENTER RELATED
     if (p.center) {
         style.height = "100%";
+        style.alignItems = "center";
         style.alignContent = "center";
         style.justifyContent = "center";
     } else if (p.centerLeft) {
         style.height = "100%";
+        style.alignItems = "start";
         style.alignContent = "start";
         style.justifyContent = "center";
     } else if (p.centerRight) {
         style.height = "100%";
+        style.alignItems = "end";
         style.alignContent = "end";
         style.justifyContent = "center";
     } else
 
     // TOP RELATED
     if (p.topCenter) {
+        style.alignItems = "center";
         style.alignContent = "center";
     } else if (p.topLeft) {
+        style.alignItems = "left";
         style.alignContent = "left";
     } else if (p.topRight) {
+        style.alignItems = "right";
         style.alignContent = "right";
     } else
 
@@ -107,10 +116,12 @@ export function Column(p: ColumnProperties) {
         style.justifyContent = "space-evenly";
     } else if (p.spaceEvenlyCenter) {
         style.height = "100%";
+        style.alignItems = "center";
         style.alignContent = "center";
         style.justifyContent = "space-evenly";
     } else if (p.spaceEvenlyRight) {
         style.height = "100%";
+        style.alignItems = "end";
         style.alignContent = "end";
         style.justifyContent = "space-evenly";
     }
