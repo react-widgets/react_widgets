@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+        "outDir": "./dist/",
+        "noImplicitAny": true,
+        "module": "ES2022",
+        "target": "ES2017",
+        "jsx": "react-jsx",
+        "jsxImportSource": "react",
+        "allowJs": true,
+        "allowSyntheticDefaultImports": true,
+        "moduleResolution": "Node"
+    }
+}

@@ -6,7 +6,7 @@ export type SizedBuilder = (width: number, height: number) => React.ReactNode;
 export function SizeBuilder({builder}: {
     builder: SizedBuilder
 }) {
-    // Returns current window inner absolute display size object.
+    // Returns current window inner relative display size object.
     const getSize = () => {
         return { width: window.innerWidth, height: window.innerHeight };
     }
