@@ -1,26 +1,21 @@
 import React, { CSSProperties } from "react";
 
-/*
-export interface ScrollableProperties {
-    children?: React.ReactNode
-}
-*/
+export namespace Scrollable {
+    export function Horizontal(p: {
+        children?: React.ReactNode,
+        center?: any,
+        right?: any,
+    }) {
+        const style: CSSProperties = {
+            display: "flex",
+            justifyContent: p.center ? "center": p.right ? "right" : null,
+            overflowX: "auto"
+        }
 
-export function Scrollable(p: {
-    children?: React.ReactNode,
-}) {
-    const parentStyle: CSSProperties = {
-        display: "flex",
-        justifyContent: "center",
-        overflow: "auto",
+        return (
+            <div style={style}>
+                <div style={{width: "100%", maxWidth: "max-content"}}>{p.children}</div>    
+            </div>
+        )
     }
-    const childStyle: CSSProperties = {
-        minWidth: "max-content",
-    }
-
-    return (
-        <div style={parentStyle}>
-            <div style={childStyle}>{p.children}</div>    
-        </div>
-    )
 }

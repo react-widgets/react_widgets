@@ -8,7 +8,7 @@ import { createRoot } from "react-dom/client";
 
 export default function RootPage() {
     return (
-        <Scrollable>
+        <Scrollable.Horizontal>
             <Row gap="15px">
                 <p>1</p>
                 <p>2</p>
@@ -21,7 +21,7 @@ export default function RootPage() {
                 <p>9</p>
                 <p>10</p>
             </Row>
-        </Scrollable>
+        </Scrollable.Horizontal>
     )
 }
 
