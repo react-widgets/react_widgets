@@ -1,6 +1,6 @@
 import React, { CSSProperties } from "react";
 
-export interface RowProperties {
+export interface RowProperties extends Omit<CSSProperties, "display" | "flexDirection" | "flexWrap" | "gap" | "alignItems" | "alignContent" | "justifyContent"> {
     children?: React.ReactNode,
     gap?: string,
     reverse?: any,
@@ -28,12 +28,12 @@ export interface RowProperties {
 }
 
 export function Row(p: RowProperties) {
-    const style: CSSProperties = {
+    const style: CSSProperties = {...p, ...{
         display: "flex",
         flexDirection: p.reverse != null ? "row-reverse" : "row",
         flexWrap: p.wrap != null ? "wrap" : undefined,
         gap: p.gap,
-    };
+    }};
 
     if (p.wrap && p.scrollable) {
         throw new Error("wrap and scrollable.");

@@ -1,6 +1,6 @@
 import React, { CSSProperties } from "react";
 
-export function Grid({children, rowCount, gap, verticalGap, horizontalGap, padding, margin}: {
+export interface GridProperties extends Omit<CSSProperties, "display" | "gridTemplateColumns" | "padding" | "margin"> {
     children?: React.ReactNode,
     rowCount: number,
     gap?: string,
@@ -8,23 +8,25 @@ export function Grid({children, rowCount, gap, verticalGap, horizontalGap, paddi
     horizontalGap?: string,
     padding?: string,
     margin?: string,
-}) {
-    const style: CSSProperties = {
-        display: "grid",
-        gridTemplateColumns: Array.from({length: rowCount}, () => "1fr").join(" "),
-        padding: padding,
-        margin: margin,
-    }
+}
 
-    if (gap != null) {
-        style.gap = gap;
-    } else if (verticalGap != null) {
-        style.rowGap = verticalGap;
-    } else if (horizontalGap != null) {
-        style.columnGap = horizontalGap;
+export function Grid(p: GridProperties) {
+    const style: CSSProperties = {...p, ...{ // given style + automatic and required style
+        display: "grid",
+        gridTemplateColumns: Array.from({length: p.rowCount}, () => "1fr").join(" "),
+        padding: p.padding,
+        margin: p.margin,
+    }};
+
+    if (p.gap != null) {
+        style.gap = p.gap;
+    } else if (p.verticalGap != null) {
+        style.rowGap = p.verticalGap;
+    } else if (p.horizontalGap != null) {
+        style.columnGap = p.horizontalGap;
     }
 
     return (
-        <div style={style}>{children}</div>
+        <div style={style}>{p.children}</div>
     )
 }

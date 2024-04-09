@@ -1,6 +1,6 @@
 import React, { CSSProperties } from "react";
 
-export interface ColumnProperties {
+export interface ColumnProperties extends Omit<CSSProperties, "display" | "flexDirection" | "flexWrap" | "gap" | "alignItems" | "alignContent" | "justifyContent"> {
     children?: React.ReactNode,
     gap?: string,
     reverse?: any,
@@ -27,12 +27,12 @@ export interface ColumnProperties {
 }
 
 export function Column(p: ColumnProperties) {
-    const style: CSSProperties = {
+    const style: CSSProperties = {...p, ...{
         display: "flex",
         flexDirection: p.reverse != null ? "column-reverse" : "column",
         flexWrap: p.wrap != null ? "wrap" : undefined,
         gap: p.gap,
-    };
+    }};
 
     // BOTTOM RELATED
     if (p.bottomCenter) {
