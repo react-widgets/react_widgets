@@ -4,11 +4,11 @@ This is package that provides templates that can significantly reduce CSS develo
 > Consider integrating not only business logic but also design logic into script code.
 
 ```tsx
-<Box backgroundColor="red">hello world</Box>
+return <Box backgroundColor="red">hello world</Box>
 ```
 
 ```tsx
-<Row gap="15px">...</Row>
+return <Row gap="15px">...</Row>
 ```
 
 ## How to make responsive grid?
