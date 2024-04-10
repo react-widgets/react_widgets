@@ -13,10 +13,17 @@ class Colors {
 export default function RootPage() {
     return (
         <Column padding="15px" gap="15px">
-            <Box gap="5px">
+            <Column gap="5px">
                 <h1>Header</h1>
                 <p>description</p>
-            </Box>
+                <Row gap="15px">
+                    <p>1</p>
+                    <p>2</p>
+                    <p>3</p>
+                    <p>4</p>
+                    <p>5</p>
+                </Row>
+            </Column>
             <ConstraintBuilder<number>
                 constraints={[
                     new Constraint(1000, Infinity, 3),
