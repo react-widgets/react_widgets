@@ -1,7 +1,7 @@
-import React, { CSSProperties } from "react";
+import { CSSProperties, ReactNode } from "react";
 
 export interface RowProperties extends Omit<CSSProperties, "display" | "flexDirection" | "flexWrap" | "gap" | "alignItems" | "alignContent" | "justifyContent"> {
-    children?: React.ReactNode,
+    children?: ReactNode,
     gap?: string,
     reverse?: any,
     wrap?: any,

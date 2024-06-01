@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 
 // Signature for a factory function of a react-node about display size.
-export type SizedBuilder = (width: number, height: number) => React.ReactNode;
+export type SizedBuilder = (width: number, height: number) => ReactNode;
 
 export function SizeBuilder({builder}: {
     builder: SizedBuilder

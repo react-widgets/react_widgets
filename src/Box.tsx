@@ -1,7 +1,7 @@
-import React, { CSSProperties } from "react";
+import { CSSProperties, ReactNode } from "react";
 
 export interface BoxProperties extends CSSProperties {
-    children?: React.ReactNode,
+    children?: ReactNode,
 }
 
 export function Box(p: BoxProperties) {

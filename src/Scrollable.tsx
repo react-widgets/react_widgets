@@ -1,8 +1,8 @@
-import React, { CSSProperties } from "react";
+import { CSSProperties, ReactNode } from "react";
 
 export namespace Scrollable {
     export function Horizontal(p: {
-        children?: React.ReactNode,
+        children?: ReactNode,
         center?: any,
         right?: any,
     }) {

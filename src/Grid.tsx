@@ -1,7 +1,7 @@
-import React, { CSSProperties } from "react";
+import { CSSProperties, ReactNode } from "react";
 
 export interface GridProperties extends Omit<CSSProperties, "display" | "gridTemplateColumns" | "padding" | "margin"> {
-    children?: React.ReactNode,
+    children?: ReactNode,
     rowCount: number,
     gap?: string,
     verticalGap?: string,

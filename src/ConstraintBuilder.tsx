@@ -1,4 +1,3 @@
-import React from "react"
 import { SizeBuilder } from "./SizeBuilder";
 
 // Signature for factory function of a react-node about constraint.
