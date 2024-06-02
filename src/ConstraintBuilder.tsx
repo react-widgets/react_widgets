@@ -1,7 +1,8 @@
+import { ReactNode } from "react";
 import { SizeBuilder } from "./SizeBuilder";
 
-// Signature for factory function of a react-node about constraint.
-export type ConstraintsBuilder<T> = (value: T) => React.ReactNode;
+// Signature for a factory function of a react-node about constraint.
+export type ConstraintsBuilder<T> = (value: T) => ReactNode;
 
 export class Constraint<T = number> {
     constructor(

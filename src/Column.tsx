@@ -24,6 +24,8 @@ export interface ColumnProperties extends Omit<CSSProperties, "display" | "flexD
     spaceEvenlyLeft?: any,
     spaceEvenlyCenter?: any,
     spaceEvenlyRight?: any,
+
+    [key: string]: any;
 }
 
 export function Column(p: ColumnProperties) {
@@ -32,7 +34,7 @@ export function Column(p: ColumnProperties) {
         flexDirection: p.reverse != null ? "column-reverse" : "column",
         flexWrap: p.wrap != null ? "wrap" : undefined,
         gap: p.gap,
-    }};
+    } as CSSProperties};
 
     // BOTTOM RELATED
     if (p.bottomCenter) {

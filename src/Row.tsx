@@ -25,6 +25,8 @@ export interface RowProperties extends Omit<CSSProperties, "display" | "flexDire
     topSpaceBetween?: any,
     topSpaceAround?: any,
     topSpaceEvenly?: any,
+
+    [key: string]: any;
 }
 
 export function Row(p: RowProperties) {
@@ -33,7 +35,7 @@ export function Row(p: RowProperties) {
         flexDirection: p.reverse != null ? "row-reverse" : "row",
         flexWrap: p.wrap != null ? "wrap" : undefined,
         gap: p.gap,
-    }};
+    } as CSSProperties};
 
     if (p.wrap && p.scrollable) {
         throw new Error("wrap and scrollable.");

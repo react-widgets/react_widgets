@@ -8,6 +8,8 @@ export interface GridProperties extends Omit<CSSProperties, "display" | "gridTem
     horizontalGap?: string,
     padding?: string,
     margin?: string,
+
+    [key: string]: any;
 }
 
 export function Grid(p: GridProperties) {
@@ -16,7 +18,7 @@ export function Grid(p: GridProperties) {
         gridTemplateColumns: Array.from({length: p.rowCount}, () => "1fr").join(" "),
         padding: p.padding,
         margin: p.margin,
-    }};
+    } as CSSProperties};
 
     if (p.gap != null) {
         style.gap = p.gap;

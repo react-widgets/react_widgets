@@ -22,5 +22,5 @@ export function SizeBuilder({builder}: {
         };
     });
 
-    return builder(size.width, size.height);
+    return <>{builder(size.width, size.height)}</>;
 }
