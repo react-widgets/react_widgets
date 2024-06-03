@@ -25,7 +25,7 @@ export interface ColumnProperties extends Omit<CSSProperties, "display" | "flexD
     spaceEvenlyCenter?: any,
     spaceEvenlyRight?: any,
 
-    [key: string]: any;
+    [key: string]: any
 }
 
 export function Column(p: ColumnProperties) {
