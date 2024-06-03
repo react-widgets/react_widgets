@@ -43,32 +43,26 @@ export function Row(p: RowProperties) {
 
     // BOTTOM RELATED
     if (p.bottomCenter) {
-        style.height = "100%";
         style.alignItems = "end";
         style.alignContent = "end",
         style.justifyContent = "center";
     } else if (p.bottomLeft) {
-        style.height = "100%";
         style.alignItems = "end";
         style.alignContent = "end";
         style.justifyContent = "left";
     } else if (p.bottomRight) {
-        style.height = "100%";
         style.alignItems = "end";
         style.alignContent = "end";
         style.justifyContent = "right";
     } else if (p.bottomSpaceBetween) {
-        style.height = "100%";
         style.alignItems = "end";
         style.alignContent = "end";
         style.justifyContent = "space-between";
     } else if (p.bottomSpaceAround) {
-        style.height = "100%";
         style.alignItems = "end";
         style.alignContent = "end";
         style.justifyContent = "space-around";
     } else if (p.bottomSpaceEvenly) {
-        style.height = "100%";
         style.alignItems = "end";
         style.alignContent = "end";
         style.justifyContent = "space-evenly";
@@ -76,33 +70,26 @@ export function Row(p: RowProperties) {
 
     // CENTER RELATED
     if (p.center) {
-        console.log("sdfdsfsdfs");
-        style.height = "100%";
         style.alignItems = "center";
         style.alignContent = "center";
         style.justifyContent = "center";
     } else if (p.centerLeft) {
-        style.height = "100%";
         style.alignItems = "center";
         style.alignContent = "center";
         style.justifyContent = "left";
     } else if (p.centerRight) {
-        style.height = "100%";
         style.alignItems = "center";
         style.alignContent = "center";
         style.justifyContent = "right";
     } else if (p.centerSpaceBetween) {
-        style.height = "100%";
         style.alignItems = "center";
         style.alignContent = "center";
         style.justifyContent = "space-between";
     } else if (p.centerSpaceAround) {
-        style.height = "100%";
         style.alignItems = "center";
         style.alignContent = "center";
         style.justifyContent = "space-around";
     } else if (p.centerSpaceEvenly) {
-        style.height = "100%";
         style.alignItems = "center";
         style.alignContent = "center";
         style.justifyContent = "space-evenly";
