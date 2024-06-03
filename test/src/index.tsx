@@ -6,6 +6,7 @@ import { Scrollable } from "../../src/Scrollable";
 import { Constraint, ConstraintBuilder } from "../../src/ConstraintBuilder";
 import { createRoot } from "react-dom/client";
 import { SizeBuilder } from "../../src/SizeBuilder"
+import { Text, TextType } from "../../src/Text"
 
 export default function RootPage() {
     return (
@@ -17,9 +18,9 @@ export default function RootPage() {
             builder={(value: number) => {
                 return (
                     <Grid rowCount={value}>
-                        <p>1</p>
-                        <p>2</p>
-                        <p>3</p>
+                        <Text type={TextType.h1} maxLine={1}>1</Text>
+                        <Text type={TextType.h2} maxLine={2}>2</Text>
+                        <Text type={TextType.h3} maxLine={3}>3</Text>
                     </Grid>
                 )
             }

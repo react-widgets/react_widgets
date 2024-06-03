@@ -23,11 +23,11 @@ return (
         builder={(value: number) => {
             return (
                 <Grid gap="5px" rowCount={value}>
-                    <p>1</p>
-                    <p>2</p>
-                    <p>3</p>
-                    <p>4</p>
-                    <p>5</p>
+                    <Text>1</Text>
+                    <Text maxLine={1}>2</Text>
+                    <Text type={TextType.h1} maxLine={1}>3</Text>
+                    <Text type={TextType.h2} maxLine={2}>4</Text>
+                    <Text type={TextType.h3} maxLine={3}>5</Text>
                 </Grid>
             );
         }
