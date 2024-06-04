@@ -1,6 +1,7 @@
 import { CSSProperties, ReactNode } from "react";
 
 export interface ColumnProperties extends Omit<CSSProperties, "display" | "flexDirection" | "flexWrap" | "gap" | "alignItems" | "alignContent" | "justifyContent"> {
+    className?: string,
     children?: ReactNode,
     gap?: string,
     reverse?: any,
@@ -114,6 +115,6 @@ export function Column(p: ColumnProperties) {
     }
 
     return (
-        <div style={style}>{p.children}</div>
+        <div className={p.className} style={style}>{p.children}</div>
     )
 }
