@@ -1,6 +1,7 @@
-import { CSSProperties, ReactNode } from "react";
+import { CSSProperties, ReactNode, Ref } from "react";
 
 export interface BoxProperties extends CSSProperties {
+    refer?: Ref<HTMLDivElement>,
     className?: string,
     children?: ReactNode,
 
@@ -8,5 +9,5 @@ export interface BoxProperties extends CSSProperties {
 }
 
 export function Box(p: BoxProperties) {
-    return <div className={p.className} style={p}>{p.children}</div>
+    return <div ref={p.refer} className={p.className} style={p}>{p.children}</div>
 }

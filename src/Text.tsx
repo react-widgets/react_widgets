@@ -1,4 +1,4 @@
-import { CSSProperties, ReactNode } from "react"
+import { CSSProperties, ReactNode, Ref } from "react"
 
 export enum TextType {
     h1,
@@ -14,6 +14,7 @@ export enum TextType {
 
 export interface TextProperties extends Omit<CSSProperties, "display" | "webkitBoxOrient" | "webkitLineClamp" | "overflow"> {
     children: ReactNode,
+    refer?: Ref<any>,
     type?: TextType,
     maxLine?: number,
 
@@ -29,15 +30,15 @@ export function Text(p: TextProperties) {
     } as CSSProperties}
 
     switch (p.type) {
-        case TextType.h1: return <h1 style={style}>{p.children}</h1>
-        case TextType.h2: return <h2 style={style}>{p.children}</h2>
-        case TextType.h3: return <h3 style={style}>{p.children}</h3>
-        case TextType.h4: return <h4 style={style}>{p.children}</h4>
-        case TextType.h5: return <h5 style={style}>{p.children}</h5>
-        case TextType.h6: return <h6 style={style}>{p.children}</h6>
-        case TextType.a: return <a style={style}>{p.children}</a>
-        case TextType.p: return <p style={style}>{p.children}</p>
-        case TextType.span: return <span style={style}>{p.children}</span>
-        default: return <div style={style}>{p.children}</div>
+        case TextType.h1: return <h1 ref={p.refer} style={style}>{p.children}</h1>
+        case TextType.h2: return <h2 ref={p.refer} style={style}>{p.children}</h2>
+        case TextType.h3: return <h3 ref={p.refer} style={style}>{p.children}</h3>
+        case TextType.h4: return <h4 ref={p.refer} style={style}>{p.children}</h4>
+        case TextType.h5: return <h5 ref={p.refer} style={style}>{p.children}</h5>
+        case TextType.h6: return <h6 ref={p.refer} style={style}>{p.children}</h6>
+        case TextType.a: return <a ref={p.refer} style={style}>{p.children}</a>
+        case TextType.p: return <p ref={p.refer} style={style}>{p.children}</p>
+        case TextType.span: return <span ref={p.refer} style={style}>{p.children}</span>
+        default: return <div ref={p.refer} style={style}>{p.children}</div>
     }
 }
