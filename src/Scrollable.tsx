@@ -14,7 +14,7 @@ export namespace Scrollable {
 
         return (
             <div style={style}>
-                <div style={{width: "100%", maxWidth: "max-content"}}>{p.children}</div>    
+                <div style={{width: "100%", minWidth: "max-content"}}>{p.children}</div>    
             </div>
         )
     }
