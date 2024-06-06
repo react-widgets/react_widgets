@@ -8,13 +8,14 @@ export namespace Scrollable {
     }) {
         const style: CSSProperties = {
             display: "flex",
+            width: "100%",
             justifyContent: p.center ? "center": p.right ? "right" : null,
             overflowX: "auto"
         }
 
         return (
             <div style={style}>
-                <div style={{width: "100%", minWidth: "max-content"}}>{p.children}</div>    
+                <div style={{minWidth: "max-content"}}>{p.children}</div>    
             </div>
         )
     }
@@ -24,8 +25,8 @@ export namespace Scrollable {
     }) {
         const style: CSSProperties = {
             display: "flex",
-            overflowY: "auto",
-            height: "100%"
+            height: "100%",
+            overflowY: "auto"
         }
 
         return (
