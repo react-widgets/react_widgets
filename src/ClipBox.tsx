@@ -1,4 +1,4 @@
-import { CSSProperties, ReactNode, Ref } from "react";
+import { ReactNode, Ref } from "react";
 import { Box } from "./Box";
 
 export interface ClipBoxProperties {
