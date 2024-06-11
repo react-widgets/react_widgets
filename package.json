@@ -25,9 +25,6 @@
     "@types/react-dom": "^18.2.24"
   },
   "peerDependencies": {
-    "react": "^18.2.0"
-  },
-  "dependencies": {
-    "react-dom": "^18.2.0"
+    "react": "^18.3.1"
   }
 }
