@@ -15,14 +15,16 @@ export default function RootPage() {
 
     return (
         <Column center>
-            <button onClick={() => setItems([...items, items.length + 1])}>Add item</button> 
-            <AnimatedSize duration="1s">
-                <Column>
-                    {items.map((value, i) => {
-                        return <h1 key={i}>Item {value}</h1>
-                    })}
-                </Column>
-            </AnimatedSize>
+            <button onClick={() => setItems([...items, items.length * 1000])}>Add item</button> 
+            <Box backgroundColor="red" padding="15px" borderRadius="15px" overflow="hidden">
+                <AnimatedSize duration="0.5s">
+                    <Column>
+                        {items.map((value, i) => {
+                            return <h1 key={i}>Item {value}</h1>
+                        })}
+                    </Column>
+                </AnimatedSize>
+            </Box>
         </Column>
     )
 }

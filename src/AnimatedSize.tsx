@@ -7,13 +7,34 @@ export function AnimatedSize({children, duration, timingFunction}: {
     timingFunction?: string,
 }) {
     const wrapperRef = useRef<HTMLDivElement>(null);
+    const presizeRef = useRef<{width: number, height: number}>(null);
 
     useLayoutEffect(() => {
         const wrapper = wrapperRef.current;
-        const observer = new MutationObserver((list, observer) => {
-            console.log(list);
+
+        presizeRef.current = {
+            width: wrapper.firstElementChild.clientWidth,
+            height: wrapper.firstElementChild.clientHeight
+        }
+
+        wrapper.style.width  = `${presizeRef.current.width}px`;
+        wrapper.style.height = `${presizeRef.current.height}px`;
+
+        // Called when a child is added or removed, or the state changes.
+        const observer = new MutationObserver(records => {
+            const styles = records.filter(r => r.attributeName == "style");
+            if (styles.length == records.length) {
+                console.log(records);
+            }
+
+            const width  = wrapper.firstElementChild.clientWidth;
+            const height = wrapper.firstElementChild.clientHeight;
+
+            wrapper.style.width  = `${width}px`;
+            wrapper.style.height = `${height}px`;
         });
-        observer.observe(wrapper, {attributes: true, childList: true});
+
+        observer.observe(wrapper, {attributes: true, childList: true, subtree: true});
 
         return () => {
             observer.disconnect();
@@ -26,7 +47,10 @@ export function AnimatedSize({children, duration, timingFunction}: {
             transitionProperty="width, height"
             transitionDuration={duration}
             transitionTimingFunction={timingFunction}
-            children={children}
-        />
+        >
+            <Box minWidth="max-content" minHeight="max-cotnent">
+                {children}
+            </Box>
+        </Box>
     )
 }
