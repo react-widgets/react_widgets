@@ -20,13 +20,8 @@ export function AnimatedSize({children, duration, timingFunction}: {
         wrapper.style.width  = `${presizeRef.current.width}px`;
         wrapper.style.height = `${presizeRef.current.height}px`;
 
-        // Called when a child is added or removed, or the state changes.
+        // Called when a child is added or removed, or the style changes.
         const observer = new MutationObserver(records => {
-            const styles = records.filter(r => r.attributeName == "style");
-            if (styles.length == records.length) {
-                console.log(records);
-            }
-
             const width  = wrapper.firstElementChild.clientWidth;
             const height = wrapper.firstElementChild.clientHeight;
 
