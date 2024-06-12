@@ -43,9 +43,13 @@ export function AnimatedSize({children, duration, timingFunction}: {
             transitionDuration={duration}
             transitionTimingFunction={timingFunction}
         >
-            <Box minWidth="max-content" minHeight="max-cotnent">
-                {children}
-            </Box>
+            <Box
+                minWidth="max-content"
+                maxWidth="max-content"
+                minHeight="max-cotnent"
+                maxHeight="max-content"
+                children={children}
+            />
         </Box>
     )
 }

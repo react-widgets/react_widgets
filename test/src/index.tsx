@@ -16,7 +16,7 @@ export default function RootPage() {
     return (
         <Column center>
             <button onClick={() => setItems([...items, items.length * 1000])}>Add item</button> 
-            <button onClick={() => setItems(items.splice(0, 1))}>Remove item</button> 
+            <button onClick={() => setItems(items.splice(0, 1))}>Remove items</button> 
             <Box backgroundColor="red" padding="15px" borderRadius="15px" overflow="hidden">
                 <AnimatedSize duration="0.5s">
                     <Column>
