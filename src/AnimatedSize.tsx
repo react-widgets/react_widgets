@@ -21,7 +21,7 @@ export function AnimatedSize({children, duration, timingFunction}: {
         wrapper.style.height = `${presizeRef.current.height}px`;
 
         // Called when a child is added or removed, or the style changes.
-        const observer = new MutationObserver(records => {
+        const observer = new MutationObserver(() => {
             const width  = wrapper.firstElementChild.clientWidth;
             const height = wrapper.firstElementChild.clientHeight;
 
