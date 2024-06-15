@@ -4,6 +4,8 @@ export interface ClipBoxProperties extends Omit<CSSProperties, "display" | "over
     refer?: Ref<HTMLDivElement>,
     className?: string,
     children: ReactNode,
+
+    [key: string]: any;
 }
 
 export function ClipBox(p: ClipBoxProperties) {
