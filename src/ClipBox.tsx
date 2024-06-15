@@ -1,21 +1,23 @@
-import { ReactNode, Ref } from "react";
-import { Box } from "./Box";
+import { CSSProperties, ReactNode, Ref } from "react";
 
-export interface ClipBoxProperties {
+export interface ClipBoxProperties extends Omit<CSSProperties, "display" | "overflow"> {
     refer?: Ref<HTMLDivElement>,
     className?: string,
     children: ReactNode,
 }
 
 export function ClipBox(p: ClipBoxProperties) {
+    const style = {...p, ...{
+        display: "flex",
+        overflow: "hidden"
+    }}
+
     return (
-        <Box
+        <div
+            ref={p.refer}
             className={p.className}
-            refer={p.refer}
-            display="flex"
-            overflow="hidden"
-        >
-            {p.children}
-        </Box>
+            style={style}
+            children={p.children} 
+        />
     )
 }

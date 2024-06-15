@@ -12,6 +12,53 @@ import { createRoot } from "react-dom/client";
 import { useRef, useState } from "react";
 
 export default function RootPage() {
+    const [message, setMessage] = useState("hello world 1");
+    const controllerRef = useRef(new AnimatedPageController());
+    const controller = controllerRef.current;
+
+    return (
+        <Column centerLeft>
+            <button onClick={() => setMessage("hello world 1, hello world 2, hello world 3, hello world 4, hello world 5")}>Expand</button>
+            <Box backgroundColor="red" padding="15px" maxWidth="600px">
+                <AnimatedSize duration="0.5s">
+                    <div>{message}</div>
+                </AnimatedSize>
+            </Box>
+        </Column>
+    )
+}
+
+createRoot(document.getElementById("renderer")).render(<RootPage />);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+import { Column } from "../../src/Column";
+import { Row } from "../../src/Row";
+import { Grid } from "../../src/Grid";
+import { Box } from "../../src/Box";
+import { Scrollable } from "../../src/Scrollable";
+import { Constraint, ConstraintBuilder } from "../../src/ConstraintBuilder";
+import { SizeBuilder } from "../../src/SizeBuilder"
+import { Text, TextType } from "../../src/Text"
+import { AnimatedSize } from "../../src/AnimatedSize";
+import { AnimatedPage, AnimatedPageBehavior, AnimatedPageController } from "../../src/AnimatedPage";
+import { createRoot } from "react-dom/client";
+import { useRef, useState } from "react";
+
+export default function RootPage() {
     const controllerRef = useRef(new AnimatedPageController());
     const controller = controllerRef.current;
 
@@ -62,3 +109,4 @@ function Items() {
 }
 
 createRoot(document.getElementById("renderer")).render(<RootPage />);
+*/

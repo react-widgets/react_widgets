@@ -1,5 +1,6 @@
 import { ReactNode, useLayoutEffect, useRef } from "react";
 import { Box } from "./Box";
+import { ClipBox } from "./ClipBox";
 
 export function AnimatedSize({children, duration, timingFunction}: {
     children: ReactNode,
@@ -11,10 +12,11 @@ export function AnimatedSize({children, duration, timingFunction}: {
 
     useLayoutEffect(() => {
         const wrapper = wrapperRef.current;
+        const wrapperChild = wrapper.firstElementChild;
 
         presizeRef.current = {
-            width: wrapper.firstElementChild.clientWidth,
-            height: wrapper.firstElementChild.clientHeight
+            width: wrapperChild.clientWidth,
+            height: wrapperChild.clientHeight
         }
 
         wrapper.style.width  = `${presizeRef.current.width}px`;
@@ -22,14 +24,14 @@ export function AnimatedSize({children, duration, timingFunction}: {
 
         // Called when a child is added or removed, or the style changes.
         const observer = new MutationObserver(() => {
-            const width  = wrapper.firstElementChild.clientWidth;
-            const height = wrapper.firstElementChild.clientHeight;
+            const width  = wrapperChild.clientWidth;
+            const height = wrapperChild.clientHeight;
 
             wrapper.style.width  = `${width}px`;
             wrapper.style.height = `${height}px`;
         });
 
-        observer.observe(wrapper, {attributes: true, childList: true, subtree: true});
+        observer.observe(wrapper, {attributes: true, childList: true, subtree: true, characterData: true});
 
         return () => {
             observer.disconnect();
@@ -37,7 +39,7 @@ export function AnimatedSize({children, duration, timingFunction}: {
     }, []);
 
     return (
-        <Box
+        <ClipBox
             refer={wrapperRef}
             transitionProperty="width, height"
             transitionDuration={duration}
@@ -50,6 +52,6 @@ export function AnimatedSize({children, duration, timingFunction}: {
                 maxHeight="max-content"
                 children={children}
             />
-        </Box>
+        </ClipBox>
     )
 }
