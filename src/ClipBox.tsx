@@ -12,7 +12,7 @@ export function ClipBox(p: ClipBoxProperties) {
     const style = {...p, ...{
         display: "flex",
         overflow: "hidden"
-    }}
+    } as CSSProperties}
 
     return (
         <div
