@@ -15,22 +15,35 @@ export default function RootPage() {
     const [items, setItems] = useState([1]);
     const controllerRef = useRef(new AnimatedPageController());
     const controller = controllerRef.current;
-    const behavior: AnimatedPageBehavior = {
-        duration: "0.5s",
-        fadeInKeyframeName: "fade-in",
-        fadeOutKeyframeName: "fade-out",
-    }
 
     return (
         <Column center>
             <button onClick={() => setItems([...items, items.length * 1000])}>Add Item</button> 
             <button onClick={() => setItems(items.splice(0, 1))}>Clear Items</button>
             <button onClick={() => {
-                controller.push(<h1>hello world</h1>)
+                controller.push((
+                    <Column>
+                        <h1>hello world 1</h1>
+                        <h1>hello world 2</h1>
+                        <h1>hello world 3</h1>
+                    </Column>
+                ))
             }}>Push Page</button>
             <button onClick={() => controller.pop()}>Pop Page</button>
             <Box backgroundColor="red" padding="15px" borderRadius="15px" overflow="hidden">
-                <AnimatedPage controller={controller} behavior={behavior}>
+                <AnimatedPage
+                    controller={controller}
+                    pushBehavior={{
+                        duration: "0.5s",
+                        fadeInKeyframeName: "page-fade_in-push",
+                        fadeOutKeyframeName: "page-fade_out-push",
+                    }}
+                    popBehavior={{
+                        duration: "0.5s",
+                        fadeInKeyframeName: "page-fade_in-pop",
+                        fadeOutKeyframeName: "page-fade_out-pop",
+                    }}
+                >
                     <Column>
                         {items.map((value, i) => {
                             return <h1 key={i}>Item {value}</h1>

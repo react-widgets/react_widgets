@@ -11,6 +11,26 @@
         body { width: 100%; height: 100%; margin: 0px; }
 
         * { margin: 0px; }
+
+        @keyframes page-fade_in-push {
+            from { opacity: 0; transform: translate(100%, 0%); }
+            to   { opacity: 1; transform: translate(0%, 0%); }
+        }
+
+        @keyframes page-fade_out-push {
+            from { opacity: 1; transform: translate(0%, 0%); }
+            to   { opacity: 0; transform: translate(-100%, 0%); }
+        }
+
+        @keyframes page-fade_in-pop {
+            from { opacity: 0; transform: translate(-100%, 0%); }
+            to   { opacity: 1; transform: translate(0%, 0%); }
+        }
+
+        @keyframes page-fade_out-pop {
+            from { opacity: 1; transform: translate(0%, 0%); }
+            to   { opacity: 0; transform: translate(100%, 0%); }
+        }
     </style>
     <div id="renderer" style="height: 100%;"></div>
 </body>
