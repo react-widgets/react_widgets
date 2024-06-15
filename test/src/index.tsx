@@ -12,17 +12,14 @@ import { createRoot } from "react-dom/client";
 import { useRef, useState } from "react";
 
 export default function RootPage() {
-    const [items, setItems] = useState([1]);
     const controllerRef = useRef(new AnimatedPageController());
     const controller = controllerRef.current;
 
     return (
         <Column center>
-            <button onClick={() => setItems([...items, items.length * 1000])}>Add Item</button> 
-            <button onClick={() => setItems(items.splice(0, 1))}>Clear Items</button>
             <button onClick={() => {
                 controller.push((
-                    <Column>
+                    <Column padding="15px">
                         <h1>hello world 1</h1>
                         <h1>hello world 2</h1>
                         <h1>hello world 3</h1>
@@ -30,7 +27,7 @@ export default function RootPage() {
                 ))
             }}>Push Page</button>
             <button onClick={() => controller.pop()}>Pop Page</button>
-            <Box backgroundColor="red" padding="15px" borderRadius="15px" overflow="hidden">
+            <Box backgroundColor="red" borderRadius="15px" overflow="hidden">
                 <AnimatedPage
                     controller={controller}
                     pushBehavior={{
@@ -43,14 +40,23 @@ export default function RootPage() {
                         fadeInKeyframeName: "page-fade_in-pop",
                         fadeOutKeyframeName: "page-fade_out-pop",
                     }}
-                >
-                    <Column>
-                        {items.map((value, i) => {
-                            return <h1 key={i}>Item {value}</h1>
-                        })}
-                    </Column>
-                </AnimatedPage>
+                    children={<Items />}
+                />
             </Box>
+        </Column>
+    )
+}
+
+function Items() {
+    const [items, setItems] = useState([1, 2, 3]);
+
+    return (
+        <Column padding="15px">
+            <button onClick={() => setItems([...items, items.length + 1])}>Add Item</button> 
+            <button onClick={() => setItems(items.splice(0, 1))}>Clear Items</button>
+            {
+                items.map((value, i) => <h1 key={i}>Init {value}</h1>)
+            }
         </Column>
     )
 }
