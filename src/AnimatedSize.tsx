@@ -1,5 +1,4 @@
 import { ReactNode, useLayoutEffect, useRef } from "react";
-import { Box } from "./Box";
 import { ClipBox } from "./ClipBox";
 
 export function AnimatedSize({children, duration, timingFunction}: {
@@ -12,29 +11,53 @@ export function AnimatedSize({children, duration, timingFunction}: {
 
     useLayoutEffect(() => {
         const wrapper = wrapperRef.current;
-        const wrapperChild = wrapper.firstElementChild;
+        const wrapperInner = wrapper.firstElementChild as HTMLElement;
 
         presizeRef.current = {
-            width: wrapperChild.clientWidth,
-            height: wrapperChild.clientHeight
+            width: wrapperInner.clientWidth,
+            height: wrapperInner.clientHeight
         }
 
-        wrapper.style.width  = `${presizeRef.current.width}px`;
-        wrapper.style.height = `${presizeRef.current.height}px`;
-
         // Called when a child is added or removed, or the style changes.
-        const observer = new MutationObserver(() => {
-            const width  = wrapperChild.clientWidth;
-            const height = wrapperChild.clientHeight;
+        const observer1 = new MutationObserver(() => {
+            wrapper.style.width = null;
+            wrapper.style.height = null;
+            wrapperInner.style.minWidth = null;
+            wrapperInner.style.minHeight = null;
+
+            const rect = wrapperInner.getBoundingClientRect(); // reflowed
+            const width = rect.width;
+            const height = rect.height;
+
+            wrapper.style.width = `${presizeRef.current.width}px`;
+            wrapper.style.height = `${presizeRef.current.height}px`;
+
+            wrapperInner.getBoundingClientRect(); // reflowed
 
             wrapper.style.width  = `${width}px`;
             wrapper.style.height = `${height}px`;
+            wrapperInner.style.minWidth = `${width}px`;
+            wrapperInner.style.minHeight = `${height}px`;
         });
 
-        observer.observe(wrapper, {attributes: true, childList: true, subtree: true, characterData: true});
+        const observer2 = new ResizeObserver(() => {
+            presizeRef.current = {
+                width: wrapper.clientWidth,
+                height: wrapper.clientHeight
+            }
+        });
+
+        observer2.observe(wrapper);
+        observer1.observe(wrapperInner.firstChild, {
+            attributes: true,
+            childList: true,
+            subtree: true,
+            characterData: true
+        });
 
         return () => {
-            observer.disconnect();
+            observer1.disconnect();
+            observer2.disconnect();
         }
     }, []);
 
@@ -45,13 +68,7 @@ export function AnimatedSize({children, duration, timingFunction}: {
             transitionDuration={duration}
             transitionTimingFunction={timingFunction}
         >
-            <Box
-                minWidth="max-content"
-                maxWidth="max-content"
-                minHeight="max-cotnent"
-                maxHeight="max-content"
-                children={children}
-            />
+            <div>{children}</div>
         </ClipBox>
     )
 }

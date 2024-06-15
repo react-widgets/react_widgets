@@ -1,3 +1,4 @@
+/*
 import { Column } from "../../src/Column";
 import { Row } from "../../src/Row";
 import { Grid } from "../../src/Grid";
@@ -12,14 +13,14 @@ import { createRoot } from "react-dom/client";
 import { useRef, useState } from "react";
 
 export default function RootPage() {
-    const [message, setMessage] = useState("hello world 1");
+    const [message, setMessage] = useState("hello world");
     const controllerRef = useRef(new AnimatedPageController());
     const controller = controllerRef.current;
 
     return (
         <Column centerLeft>
-            <button onClick={() => setMessage("hello world 1, hello world 2, hello world 3, hello world 4, hello world 5")}>Expand</button>
-            <Box backgroundColor="red" padding="15px" maxWidth="600px">
+            <button onClick={() => setMessage(p => p + " hello world")}>Expand</button>
+            <Box backgroundColor="red" padding="15px" maxWidth="400px">
                 <AnimatedSize duration="0.5s">
                     <div>{message}</div>
                 </AnimatedSize>
@@ -29,6 +30,7 @@ export default function RootPage() {
 }
 
 createRoot(document.getElementById("renderer")).render(<RootPage />);
+*/
 
 
 
@@ -40,11 +42,6 @@ createRoot(document.getElementById("renderer")).render(<RootPage />);
 
 
 
-
-
-
-
-/*
 import { Column } from "../../src/Column";
 import { Row } from "../../src/Row";
 import { Grid } from "../../src/Grid";
@@ -100,7 +97,7 @@ function Items() {
     return (
         <Column padding="15px">
             <button onClick={() => setItems([...items, items.length + 1])}>Add Item</button> 
-            <button onClick={() => setItems(items.splice(0, 1))}>Clear Items</button>
+            <button onClick={() => setItems(items.splice(0, 1))}>Clear Item</button>
             {
                 items.map((value, i) => <h1 key={i}>Init {value}</h1>)
             }
@@ -109,4 +106,3 @@ function Items() {
 }
 
 createRoot(document.getElementById("renderer")).render(<RootPage />);
-*/
