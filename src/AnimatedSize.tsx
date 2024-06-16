@@ -42,7 +42,7 @@ export function AnimatedSize({children, duration, timingFunction}: {
         });
 
         const observer2 = new ResizeObserver(() => {
-            const rect = wrapperInner.getBoundingClientRect();
+            const rect = wrapper.getBoundingClientRect();
             presizeRef.current = {
                 width: rect.width,
                 height: rect.height
