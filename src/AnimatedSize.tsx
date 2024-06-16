@@ -13,9 +13,10 @@ export function AnimatedSize({children, duration, timingFunction}: {
         const wrapper = wrapperRef.current;
         const wrapperInner = wrapper.firstElementChild as HTMLElement;
 
+        const rect = wrapperInner.getBoundingClientRect();
         presizeRef.current = {
-            width: wrapperInner.clientWidth,
-            height: wrapperInner.clientHeight
+            width: rect.width,
+            height: rect.height
         }
 
         // Called when a child is added or removed, or the style changes.
@@ -41,9 +42,10 @@ export function AnimatedSize({children, duration, timingFunction}: {
         });
 
         const observer2 = new ResizeObserver(() => {
+            const rect = wrapperInner.getBoundingClientRect();
             presizeRef.current = {
-                width: wrapper.clientWidth,
-                height: wrapper.clientHeight
+                width: rect.width,
+                height: rect.height
             }
         });
 
