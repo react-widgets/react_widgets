@@ -1,7 +1,6 @@
-import { ReactNode, Ref, useLayoutEffect, useRef, useState } from "react"
+import { ReactNode, useLayoutEffect, useRef, useState } from "react"
 import { AnimatedSize } from "./AnimatedSize";
 import { Row } from "./Row";
-import { Box } from "./Box";
 
 export type AnimatedPageListener = (event: AnimatedPageEvent) => void;
 
