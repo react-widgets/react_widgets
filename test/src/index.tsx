@@ -14,8 +14,6 @@ import { useRef, useState } from "react";
 
 export default function RootPage() {
     const [message, setMessage] = useState("hello world");
-    const controllerRef = useRef(new AnimatedPageController());
-    const controller = controllerRef.current;
 
     return (
         <Column centerLeft>

@@ -45,12 +45,6 @@ export class AnimatedPageController {
     }
 }
 
-export class AnimatedPageElement extends HTMLElement {
-    connectedCallback() {
-
-    }
-}
-
 export enum AnimatedPageStatus {
     none,
     push,
@@ -84,8 +78,8 @@ export function AnimatedPage({children, controller, pushBehavior, popBehavior}: 
     }, []);
 
     useLayoutEffect(() => {
-        const cPage = cpRef.current;
-        const rPage = rpRef.current?.firstElementChild as HTMLElement;
+        const cPage = cpRef.current?.getElementsByClassName("ghost-inner")[0] as HTMLElement;
+        const rPage = rpRef.current?.getElementsByClassName("ghost-inner")[0] as HTMLElement;
 
         if (status == AnimatedPageStatus.none) return;
         if (status == AnimatedPageStatus.push) {
@@ -107,32 +101,49 @@ export function AnimatedPage({children, controller, pushBehavior, popBehavior}: 
     return (
         <AnimatedSize duration={pushBehavior.duration}>
             <Row position="relative" children={pages.map((page, i) => {
-                if (status == AnimatedPageStatus.none || pages.length == 1) return page;
-                if (status == AnimatedPageStatus.push) {
-                    if (i != pages.length - 1) {
-                        return <Ghost key={i} refer={rpRef} children={page} />
-                    } else {
-                        return <div key={i} ref={cpRef}>{page}</div>;
-                    }
-                } else {
-                    if (i == pages.length - 2) {
-                        return <div key={i} ref={cpRef}>{page}</div>;
-                    } else {
-                        return <Ghost key={i} refer={rpRef}>{page}</Ghost>
-                    }
-                }
+                let isCurrentPage = (status == AnimatedPageStatus.push)
+                    ? i == pages.length - 1
+                    : i == pages.length - 2
+
+                // To keep alive for a page component state.
+                if (pages.length == 1) isCurrentPage = true;
+
+                return (
+                    <AnimatedPagePlace
+                        key={i}
+                        refer={isCurrentPage ? cpRef : rpRef}
+                        ghost={isCurrentPage == false}
+                        children={page}
+                    />
+                )
             })} />
         </AnimatedSize>
     )
 }
 
-function Ghost({refer, children}: {
-    refer: Ref<HTMLDivElement>
+function AnimatedPagePlace({refer, ghost, children}: {
+    refer: React.MutableRefObject<HTMLDivElement>,
+    ghost: boolean,
     children: ReactNode,
 }) {
+    useLayoutEffect(() => {
+        const wrapper = refer.current;
+        const wrapperInner = wrapper.firstElementChild as HTMLElement;
+
+        if (ghost) {
+            wrapper.style.position = "absolute";
+            wrapper.style.width = "0px";
+            wrapper.style.height = "0px";
+            wrapperInner.style.minWidth = "max-content";
+            wrapperInner.style.maxWidth = "max-cotnent";
+        } else {
+            wrapper.removeAttribute("style");
+        }
+    }, [ghost]);
+
     return (
-        <Box refer={refer} position="absolute" width="0px" height="0px">
-            <Box minWidth="max-content" maxWidth="max-content" children={children} />
-        </Box>
+        <div ref={refer}>
+            <div className="ghost-inner" children={children} />
+        </div>
     )
 }
