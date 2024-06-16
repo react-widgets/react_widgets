@@ -1,4 +1,3 @@
-/*
 import { Column } from "../../src/Column";
 import { Row } from "../../src/Row";
 import { Grid } from "../../src/Grid";
@@ -28,7 +27,6 @@ export default function RootPage() {
 }
 
 createRoot(document.getElementById("renderer")).render(<RootPage />);
-*/
 
 
 
@@ -40,6 +38,11 @@ createRoot(document.getElementById("renderer")).render(<RootPage />);
 
 
 
+
+
+
+
+/*
 import { Column } from "../../src/Column";
 import { Row } from "../../src/Row";
 import { Grid } from "../../src/Grid";
@@ -104,3 +107,4 @@ function Items() {
 }
 
 createRoot(document.getElementById("renderer")).render(<RootPage />);
+*/

@@ -7,17 +7,21 @@ export function AnimatedSize({children, duration, timingFunction}: {
     timingFunction?: string,
 }) {
     const wrapperRef = useRef<HTMLDivElement>(null);
-    const presizeRef = useRef<{width: number, height: number}>(null);
+    const lowerSizeRef = useRef<{width: number, height: number}>(null);
+    const upperSizeRef = useRef<{width: number, height: number}>(null);
 
     useLayoutEffect(() => {
         const wrapper = wrapperRef.current;
         const wrapperInner = wrapper.firstElementChild as HTMLElement;
 
         const rect = wrapperInner.getBoundingClientRect();
-        presizeRef.current = {
+        const size = {
             width: rect.width,
             height: rect.height
         }
+
+        lowerSizeRef.current = size;
+        upperSizeRef.current = size;
 
         // Called when a child is added or removed, or the style changes.
         const observer1 = new MutationObserver(() => {
@@ -27,23 +31,33 @@ export function AnimatedSize({children, duration, timingFunction}: {
             wrapperInner.style.minHeight = null;
 
             const rect = wrapperInner.getBoundingClientRect(); // reflowed
-            const width = rect.width;
-            const height = rect.height;
+            const size = {
+                width: rect.width,
+                height: rect.height
+            }
 
-            wrapper.style.width = `${presizeRef.current.width}px`;
-            wrapper.style.height = `${presizeRef.current.height}px`;
+            // The current size must be different from the previous size.
+            if (size.width == upperSizeRef.current.width
+             && size.height == upperSizeRef.current.height) {
+                return;
+            }
+            
+            upperSizeRef.current = size;
+
+            wrapper.style.width = `${lowerSizeRef.current.width}px`;
+            wrapper.style.height = `${lowerSizeRef.current.height}px`;
 
             wrapperInner.getBoundingClientRect(); // reflowed
 
-            wrapper.style.width  = `${width}px`;
-            wrapper.style.height = `${height}px`;
-            wrapperInner.style.minWidth = `${width}px`;
-            wrapperInner.style.minHeight = `${height}px`;
+            wrapper.style.width  = `${size.width}px`;
+            wrapper.style.height = `${size.height}px`;
+            wrapperInner.style.minWidth = `${size.width}px`;
+            wrapperInner.style.minHeight = `${size.height}px`;
         });
 
         const observer2 = new ResizeObserver(() => {
             const rect = wrapper.getBoundingClientRect();
-            presizeRef.current = {
+            lowerSizeRef.current = {
                 width: rect.width,
                 height: rect.height
             }
