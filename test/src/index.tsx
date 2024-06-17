@@ -1,3 +1,4 @@
+/*
 import { Column } from "../../src/Column";
 import { Row } from "../../src/Row";
 import { Grid } from "../../src/Grid";
@@ -27,6 +28,7 @@ export default function RootPage() {
 }
 
 createRoot(document.getElementById("renderer")).render(<RootPage />);
+*/
 
 
 
@@ -41,8 +43,6 @@ createRoot(document.getElementById("renderer")).render(<RootPage />);
 
 
 
-
-/*
 import { Column } from "../../src/Column";
 import { Row } from "../../src/Row";
 import { Grid } from "../../src/Grid";
@@ -52,7 +52,7 @@ import { Constraint, ConstraintBuilder } from "../../src/ConstraintBuilder";
 import { SizeBuilder } from "../../src/SizeBuilder"
 import { Text, TextType } from "../../src/Text"
 import { AnimatedSize } from "../../src/AnimatedSize";
-import { AnimatedPage, AnimatedPageBehavior, AnimatedPageController } from "../../src/AnimatedPage";
+import { AnimatedPage, AnimatedPageController } from "../../src/AnimatedPage";
 import { createRoot } from "react-dom/client";
 import { useRef, useState } from "react";
 
@@ -65,9 +65,9 @@ export default function RootPage() {
             <button onClick={() => {
                 controller.push((
                     <Column padding="15px">
-                        <h1>hello world 1</h1>
-                        <h1>hello world 2</h1>
-                        <h1>hello world 3</h1>
+                        <h1>hello 1</h1>
+                        <h1>hello 2</h1>
+                        <h1>hello 3</h1>
                     </Column>
                 ))
             }}>Push Page</button>
@@ -75,16 +75,7 @@ export default function RootPage() {
             <Box backgroundColor="red" borderRadius="15px" overflow="hidden">
                 <AnimatedPage
                     controller={controller}
-                    pushBehavior={{
-                        duration: "0.5s",
-                        fadeInKeyframeName: "page-fade_in-push",
-                        fadeOutKeyframeName: "page-fade_out-push",
-                    }}
-                    popBehavior={{
-                        duration: "0.5s",
-                        fadeInKeyframeName: "page-fade_in-pop",
-                        fadeOutKeyframeName: "page-fade_out-pop",
-                    }}
+                    duration="0.5s"
                     children={<Items />}
                 />
             </Box>
@@ -100,11 +91,10 @@ function Items() {
             <button onClick={() => setItems([...items, items.length + 1])}>Add Item</button> 
             <button onClick={() => setItems(items.splice(0, 1))}>Clear Item</button>
             {
-                items.map((value, i) => <h1 key={i}>Init {value}</h1>)
+                items.map((value, i) => <h1 key={i}>Hello world {value}</h1>)
             }
         </Column>
     )
 }
 
 createRoot(document.getElementById("renderer")).render(<RootPage />);
-*/

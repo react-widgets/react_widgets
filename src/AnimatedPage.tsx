@@ -9,14 +9,6 @@ export interface AnimatedPageEvent {
     target?: ReactNode;
 }
 
-export interface AnimatedPageBehavior {
-    fadeInKeyframeName: string,
-    fadeInTimeFunction?: string,
-    fadeOutKeyframeName: string,
-    fadeOutTimeFunction?: string,
-    duration: string,
-}
-
 /** Manages an animated-page widget from the outside imperatively. */
 export class AnimatedPageController {
     private _listeners: AnimatedPageListener[] = [];
@@ -50,11 +42,11 @@ export enum AnimatedPageStatus {
     pop,
 }
 
-export function AnimatedPage({children, controller, pushBehavior, popBehavior}: {
+export function AnimatedPage({children, controller, duration, opacityEffect = false}: {
     children: ReactNode,
     controller: AnimatedPageController,
-    pushBehavior: AnimatedPageBehavior,
-    popBehavior: AnimatedPageBehavior,
+    duration: string,
+    opacityEffect?: boolean
 }) {
     const cpRef = useRef<HTMLDivElement>(null); // is current page.
     const rpRef = useRef<HTMLDivElement>(null); // is reference page.
@@ -80,25 +72,42 @@ export function AnimatedPage({children, controller, pushBehavior, popBehavior}: 
         const cPage = cpRef.current?.getElementsByClassName("ghost-inner")[0] as HTMLElement;
         const rPage = rpRef.current?.getElementsByClassName("ghost-inner")[0] as HTMLElement;
 
+        const cRect = cPage?.getBoundingClientRect();
+        const rRect = rPage?.getBoundingClientRect();
+
         if (status == AnimatedPageStatus.none) return;
         if (status == AnimatedPageStatus.push) {
-            const behavior = pushBehavior;
-            cPage.style.animation = `${behavior.fadeInKeyframeName} ${behavior.duration}`;
-            rPage.style.animation = `${behavior.fadeOutKeyframeName} ${behavior.duration}`;
-            cPage.style.animationFillMode = "forwards";
-            rPage.style.animationFillMode = "forwards";
+            cPage.style.transform = `translate(${rRect.width}px, 0px)`;
+            cPage.getBoundingClientRect(); // for reflow
+            cPage.style.transform = "translate(0px, 0px)";
+            cPage.style.transitionProperty = "opacity, transform";
+            cPage.style.transitionDuration = duration;
+
+            rPage.style.transform = `0px, 0px)`;
+            rPage.getBoundingClientRect(); // for reflow
+            rPage.style.transform = `translate(-${cRect.width - (cRect.width - rRect.width)}px, 0px)`;
+            rPage.style.transitionProperty = "opacity, transform";
+            rPage.style.transitionDuration = duration;
         } else {
-            const behavior = popBehavior;
-            cPage.style.animation = `${behavior.fadeInKeyframeName} ${behavior.duration}`;
-            rPage.style.animation = `${behavior.fadeOutKeyframeName} ${behavior.duration}`;
-            cPage.style.animationFillMode = "forwards";
-            rPage.style.animationFillMode = "forwards";
-            rPage.onanimationend = () => setPages(pages.splice(0, pages.length - 1));
+            cPage.style.transform = `translate(${rRect.width}px, 0px)`;
+            cPage.getBoundingClientRect(); // for reflow
+            cPage.style.transform = "translate(0px, 0px)";
+            cPage.style.transitionProperty = "opacity, transform";
+            cPage.style.transitionDuration = duration;
+
+            rPage.style.transform = `0px, 0px)`;
+            rPage.getBoundingClientRect(); // for reflow
+            rPage.style.transform = `translate(${cRect.width}px, 0px)`;
+            rPage.style.transitionProperty = "opacity, transform";
+            rPage.style.transitionDuration = duration;
+            rPage.onanimationend = () => {
+                setPages(pages.splice(0, pages.length - 1));
+            }
         }
     }, [status]);
 
     return (
-        <AnimatedSize duration={pushBehavior.duration}>
+        <AnimatedSize duration={duration}>
             <Row position="relative" children={pages.map((page, i) => {
                 let isCurrentPage = (status == AnimatedPageStatus.push)
                     ? i == pages.length - 1
