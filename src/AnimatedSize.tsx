@@ -25,6 +25,16 @@ export function AnimatedSize({children, duration, timingFunction}: {
 
         // Called when a child is added or removed, or the style changes.
         const observer1 = new MutationObserver(() => {
+            {
+                const a = wrapperInner.firstElementChild.getBoundingClientRect();
+                const b = upperSizeRef.current;
+
+                // The current size must be different from the previous size.
+                if (a.width == b.width && a.height == b.height) {
+                    return;
+                }
+            }
+
             wrapper.style.width = null;
             wrapper.style.height = null;
             wrapperInner.style.minWidth = null;
@@ -34,12 +44,6 @@ export function AnimatedSize({children, duration, timingFunction}: {
             const size = {
                 width: rect.width,
                 height: rect.height
-            }
-
-            // The current size must be different from the previous size.
-            if (size.width == upperSizeRef.current.width
-             && size.height == upperSizeRef.current.height) {
-                return;
             }
             
             upperSizeRef.current = size;
