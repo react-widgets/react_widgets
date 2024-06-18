@@ -29,8 +29,13 @@ export function AnimatedSize({children, duration, timingFunction}: {
                 const a = wrapperInner.firstElementChild.getBoundingClientRect();
                 const b = upperSizeRef.current;
 
-                // The current size must be different from the previous size.
+                // The measured size must be different from the previous size.
                 if (a.width == b.width && a.height == b.height) {
+                    return;
+                }
+
+                // The measured size must be must be greater than zero.
+                if (a.width == 0 && a.height == 0) {
                     return;
                 }
             }

@@ -83,7 +83,7 @@ export function AnimatedPage({children, controller, duration, opacityEffect = fa
             cPage.style.transitionProperty = "opacity, transform";
             cPage.style.transitionDuration = duration;
 
-            rPage.style.transform = `0px, 0px)`;
+            rPage.style.transform = "translate(0px, 0px)";
             rPage.getBoundingClientRect(); // for reflow
             rPage.style.transform = `translate(-${cRect.width - (cRect.width - rRect.width)}px, 0px)`;
             rPage.style.transitionProperty = "opacity, transform";
@@ -95,7 +95,7 @@ export function AnimatedPage({children, controller, duration, opacityEffect = fa
             cPage.style.transitionProperty = "opacity, transform";
             cPage.style.transitionDuration = duration;
 
-            rPage.style.transform = `0px, 0px)`;
+            rPage.style.transform = "translate(0px, 0px)";
             rPage.getBoundingClientRect(); // for reflow
             rPage.style.transform = `translate(${cRect.width}px, 0px)`;
             rPage.style.transitionProperty = "opacity, transform";
