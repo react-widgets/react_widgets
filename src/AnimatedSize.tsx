@@ -45,6 +45,13 @@ export function AnimatedSize({children, duration, timingFunction}: {
                 width: rect.width,
                 height: rect.height
             }
+
+            // If the printed size is different from the unique size,
+            // the exact size cannot be calculated.
+            if (Math.round(size.width) != wrapperInner.offsetWidth
+             || Math.round(size.height) != wrapperInner.offsetHeight) {
+                return;
+            }
             
             upperSizeRef.current = size;
 

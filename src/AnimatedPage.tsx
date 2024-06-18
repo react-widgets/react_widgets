@@ -78,25 +78,25 @@ export function AnimatedPage({children, controller, duration, opacityEffect = fa
         if (status == AnimatedPageStatus.none) return;
         if (status == AnimatedPageStatus.push) {
             cPage.style.transform = `translate(${rRect.width}px, 0px)`;
-            cPage.getBoundingClientRect(); // for reflow
+            cPage.getBoundingClientRect(); // reflowed
             cPage.style.transform = "translate(0px, 0px)";
             cPage.style.transitionProperty = "opacity, transform";
             cPage.style.transitionDuration = duration;
 
             rPage.style.transform = "translate(0px, 0px)";
-            rPage.getBoundingClientRect(); // for reflow
+            rPage.getBoundingClientRect(); // reflowed
             rPage.style.transform = `translate(-${cRect.width - (cRect.width - rRect.width)}px, 0px)`;
             rPage.style.transitionProperty = "opacity, transform";
             rPage.style.transitionDuration = duration;
         } else {
             cPage.style.transform = `translate(${rRect.width}px, 0px)`;
-            cPage.getBoundingClientRect(); // for reflow
+            cPage.getBoundingClientRect(); // reflowed
             cPage.style.transform = "translate(0px, 0px)";
             cPage.style.transitionProperty = "opacity, transform";
             cPage.style.transitionDuration = duration;
 
             rPage.style.transform = "translate(0px, 0px)";
-            rPage.getBoundingClientRect(); // for reflow
+            rPage.getBoundingClientRect(); // reflowed
             rPage.style.transform = `translate(${cRect.width}px, 0px)`;
             rPage.style.transitionProperty = "opacity, transform";
             rPage.style.transitionDuration = duration;
