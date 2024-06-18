@@ -33,11 +33,6 @@ export function AnimatedSize({children, duration, timingFunction}: {
                 if (a.width == b.width && a.height == b.height) {
                     return;
                 }
-
-                // The measured size must be must be greater than zero.
-                if (a.width == 0 && a.height == 0) {
-                    return;
-                }
             }
 
             wrapper.style.width = null;
