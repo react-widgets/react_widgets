@@ -15,7 +15,7 @@ export namespace Scrollable {
 
         return (
             <div style={style}>
-                <div style={{minWidth: "max-content"}}>{p.children}</div>    
+                <div style={{flexShrink: 0}}>{p.children}</div>    
             </div>
         )
     }
