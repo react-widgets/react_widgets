@@ -6,7 +6,7 @@ import { Box } from "./Box";
 export type AnimatedPageListener = (event: AnimatedPageEvent) => void;
 
 export interface AnimatedPageEvent {
-    type: "push" | "pop";
+    type: "push" | "pop" | "clear";
     target?: ReactNode;
 }
 
@@ -19,8 +19,11 @@ export class AnimatedPageController {
     }
 
     pop() {
-        console.log("pop");
-        this.notifyListeners({type: "pop"})
+        this.notifyListeners({type: "pop"});
+    }
+
+    clear() {
+        this.notifyListeners({type: "clear"});
     }
 
     addListeners(callback: AnimatedPageListener) {
@@ -42,6 +45,7 @@ export enum AnimatedPageStatus {
     none,
     push,
     pop,
+    clear,
 }
 
 export function AnimatedPage({children, controller, duration, opacityEffect = false, maxWidth}: {
@@ -65,6 +69,10 @@ export function AnimatedPage({children, controller, duration, opacityEffect = fa
             
             if (event.type == "pop") {
                 return setStatus(AnimatedPageStatus.pop);
+            }
+
+            if (event.type == "clear") {
+                return setStatus(AnimatedPageStatus.clear), setPages([pages[0]]);
             }
         });
         
@@ -91,7 +99,7 @@ export function AnimatedPage({children, controller, duration, opacityEffect = fa
             rPage.style.transform = `translate(-${cRect.width - (cRect.width - rRect.width)}px, 0px)`;
             rPage.style.transitionProperty = "opacity, transform";
             rPage.style.transitionDuration = duration;
-        } else {
+        } else if (status == AnimatedPageStatus.pop) {
             cPage.style.transform = `translate(${rRect.width}px, 0px)`;
             cPage.getBoundingClientRect(); // reflowed
             cPage.style.transform = "translate(0px, 0px)";
@@ -107,10 +115,10 @@ export function AnimatedPage({children, controller, duration, opacityEffect = fa
             rPage.style.transform = `translate(${cRect.width}px, 0px)`;
             rPage.style.transitionProperty = "opacity, transform";
             rPage.style.transitionDuration = duration;
+        } else {
+            cPage?.removeAttribute("style");
         }
     }, [status]);
-
-    console.log(pages.length);
 
     return (
         <AnimatedSize duration={duration}>
