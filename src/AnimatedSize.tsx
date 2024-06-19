@@ -23,7 +23,7 @@ export function AnimatedSize({children, duration, timingFunction}: {
         lowerSizeRef.current = size;
         upperSizeRef.current = size;
 
-        // Called when a child is added or removed, or the style changes.
+        // Called when a child is reflowed and added or removed, or the style changes.
         const observer1 = new MutationObserver(() => {
             {
                 const a = wrapperInner.firstElementChild.getBoundingClientRect();
@@ -48,7 +48,7 @@ export function AnimatedSize({children, duration, timingFunction}: {
 
             // If the printed size is different from the unique size,
             // the exact size cannot be calculated.
-            if (Math.round(size.width) != wrapperInner.offsetWidth
+            if (Math.round(size.width)  != wrapperInner.offsetWidth
              || Math.round(size.height) != wrapperInner.offsetHeight) {
                 return;
             }
@@ -74,7 +74,7 @@ export function AnimatedSize({children, duration, timingFunction}: {
             }
         });
 
-        observer2.observe(wrapper);
+        observer2.observe(wrapper, {});
         observer1.observe(wrapperInner.firstChild, {
             attributes: true,
             childList: true,
