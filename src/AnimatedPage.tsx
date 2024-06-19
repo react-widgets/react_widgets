@@ -1,6 +1,7 @@
 import { ReactNode, useLayoutEffect, useRef, useState } from "react"
 import { AnimatedSize } from "./AnimatedSize";
 import { Row } from "./Row";
+import { Box } from "./Box";
 
 export type AnimatedPageListener = (event: AnimatedPageEvent) => void;
 
@@ -18,6 +19,7 @@ export class AnimatedPageController {
     }
 
     pop() {
+        console.log("pop");
         this.notifyListeners({type: "pop"})
     }
 
@@ -42,11 +44,12 @@ export enum AnimatedPageStatus {
     pop,
 }
 
-export function AnimatedPage({children, controller, duration, opacityEffect = false}: {
+export function AnimatedPage({children, controller, duration, opacityEffect = false, maxWidth}: {
     children: ReactNode,
     controller: AnimatedPageController,
     duration: string,
-    opacityEffect?: boolean
+    opacityEffect?: boolean,
+    maxWidth?: string
 }) {
     const cpRef = useRef<HTMLDivElement>(null); // is current page.
     const rpRef = useRef<HTMLDivElement>(null); // is reference page.
@@ -94,17 +97,20 @@ export function AnimatedPage({children, controller, duration, opacityEffect = fa
             cPage.style.transform = "translate(0px, 0px)";
             cPage.style.transitionProperty = "opacity, transform";
             cPage.style.transitionDuration = duration;
+            cPage.ontransitionend = () => {
+                cPage.ontransitionend = null;
+                setPages(pages.splice(0, pages.length - 1));
+            }
 
             rPage.style.transform = "translate(0px, 0px)";
             rPage.getBoundingClientRect(); // reflowed
             rPage.style.transform = `translate(${cRect.width}px, 0px)`;
             rPage.style.transitionProperty = "opacity, transform";
             rPage.style.transitionDuration = duration;
-            rPage.onanimationend = () => {
-                setPages(pages.splice(0, pages.length - 1));
-            }
         }
     }, [status]);
+
+    console.log(pages.length);
 
     return (
         <AnimatedSize duration={duration}>
@@ -121,7 +127,7 @@ export function AnimatedPage({children, controller, duration, opacityEffect = fa
                         key={i}
                         refer={isCurrentPage ? cpRef : rpRef}
                         ghost={isCurrentPage == false}
-                        children={page}
+                        children={<Box maxWidth={maxWidth}>{page}</Box>}
                     />
                 )
             })} />
