@@ -1,5 +1,6 @@
 import { MutableRefObject, ReactNode, useLayoutEffect, useRef } from "react";
 import { ClipBox } from "./ClipBox";
+import { HTMLElementUtil } from "./utils/html";
 
 export function AnimatedSize({scaleRefer, children, duration, timingFunction}: {
     scaleRefer?: MutableRefObject<HTMLElement>
@@ -10,7 +11,6 @@ export function AnimatedSize({scaleRefer, children, duration, timingFunction}: {
     const wrapperRef = useRef<HTMLDivElement>(null);
     const lowerSizeRef = useRef<{width: number, height: number}>(null);
     const upperSizeRef = useRef<{width: number, height: number}>(null);
-    const previousSize = useRef<{width: number, height: number}>(null);
 
     /**
      * Returns a unique size of the given element by calculating
@@ -26,11 +26,6 @@ export function AnimatedSize({scaleRefer, children, duration, timingFunction}: {
             width: paintedSize.width * scaleX + tolerance,
             height: paintedSize.height * scaleY + tolerance
         };
-    }
-
-    /** Call the function to trigger a reflow of the given element. */
-    const reflow = (target: HTMLElement) => {
-        target.getBoundingClientRect();
     }
 
     useLayoutEffect(() => {
@@ -68,7 +63,7 @@ export function AnimatedSize({scaleRefer, children, duration, timingFunction}: {
             wrapper.style.width = `${lowerSizeRef.current.width}px`;
             wrapper.style.height = `${lowerSizeRef.current.height}px`;
 
-            reflow(wrapperInner);
+            HTMLElementUtil.reflow(wrapperInner);
 
             wrapper.style.width = `${size.width}px`;
             wrapper.style.height = `${size.height}px`;

@@ -2,6 +2,7 @@ import { ReactNode, useLayoutEffect, useRef, useState } from "react"
 import { AnimatedSize } from "./AnimatedSize";
 import { Row } from "./Row";
 import { Box } from "./Box";
+import { HTMLElementUtil } from "./utils/html";
 
 export type AnimatedPageListener = (event: AnimatedPageEvent) => void;
 
@@ -88,22 +89,23 @@ export function AnimatedPage({children, controller, duration, opacityEffect = fa
 
         if (status == AnimatedPageStatus.none) return;
         if (status == AnimatedPageStatus.push) {
+            cPage.ontransitionend = null;
+            rPage.ontransitionend = null;
+
             cPage.style.transform = `translate(${rRect.width}px, 0px)`;
-            cPage.getBoundingClientRect(); // reflowed
+            HTMLElementUtil.reflow(cPage);
             cPage.style.transform = "translate(0px, 0px)";
             cPage.style.transitionProperty = "opacity, transform";
             cPage.style.transitionDuration = duration;
-            cPage.ontransitionend = null;
 
             rPage.style.transform = "translate(0px, 0px)";
-            rPage.getBoundingClientRect(); // reflowed
+            HTMLElementUtil.reflow(rPage);
             rPage.style.transform = `translate(-${cRect.width - (cRect.width - rRect.width)}px, 0px)`;
             rPage.style.transitionProperty = "opacity, transform";
             rPage.style.transitionDuration = duration;
-            rPage.ontransitionend = null;
         } else if (status == AnimatedPageStatus.pop) {
             cPage.style.transform = `translate(${rRect.width}px, 0px)`;
-            cPage.getBoundingClientRect(); // reflowed
+            HTMLElementUtil.reflow(cPage);
             cPage.style.transform = "translate(0px, 0px)";
             cPage.style.transitionProperty = "opacity, transform";
             cPage.style.transitionDuration = duration;
@@ -113,7 +115,7 @@ export function AnimatedPage({children, controller, duration, opacityEffect = fa
             }
 
             rPage.style.transform = "translate(0px, 0px)";
-            rPage.getBoundingClientRect(); // reflowed
+            HTMLElementUtil.reflow(rPage);
             rPage.style.transform = `translate(${cRect.width}px, 0px)`;
             rPage.style.transitionProperty = "opacity, transform";
             rPage.style.transitionDuration = duration;
