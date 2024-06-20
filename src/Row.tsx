@@ -1,4 +1,5 @@
 import { CSSProperties, ReactNode } from "react";
+import { Scrollable } from "./Scrollable";
 
 export interface RowProperties extends Omit<CSSProperties, "display" | "flexDirection" | "flexWrap" | "gap" | "alignItems" | "alignContent" | "justifyContent"> {
     className?: string,
@@ -37,10 +38,6 @@ export function Row(p: RowProperties) {
         flexWrap: p.wrap != null ? "wrap" : undefined,
         gap: p.gap,
     } as CSSProperties};
-
-    if (p.wrap && p.scrollable) {
-        throw new Error("wrap and scrollable.");
-    }
 
     // BOTTOM RELATED
     if (p.bottomCenter) {
@@ -111,7 +108,9 @@ export function Row(p: RowProperties) {
         style.justifyContent = "space-evenly";
     }
 
-    return (
-        <div className={p.className} style={style}>{p.children}</div>
-    )
+    const content = (
+        <div className={p.className} style={style} children={p.children} />
+    );
+
+    return p.scrollable ? <Scrollable.Horizontal children={content} /> : content;
 }

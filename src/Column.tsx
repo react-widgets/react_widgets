@@ -1,4 +1,5 @@
 import { CSSProperties, ReactNode } from "react";
+import { Scrollable } from "./Scrollable";
 
 export interface ColumnProperties extends Omit<CSSProperties, "display" | "flexDirection" | "flexWrap" | "gap" | "alignItems" | "alignContent" | "justifyContent"> {
     className?: string,
@@ -6,6 +7,7 @@ export interface ColumnProperties extends Omit<CSSProperties, "display" | "flexD
     gap?: string,
     reverse?: any,
     wrap?: any,
+    scrollable?: any,
 
     bottomCenter?: any,
     bottomLeft?: any,
@@ -114,7 +116,9 @@ export function Column(p: ColumnProperties) {
         style.justifyContent = "space-evenly";
     }
 
-    return (
+    const content = (
         <div className={p.className} style={style}>{p.children}</div>
     )
+
+    return p.scrollable ? <Scrollable.Vertical children={content} /> : content;
 }
