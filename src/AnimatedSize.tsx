@@ -52,10 +52,10 @@ export function AnimatedSize({children, duration, timingFunction}: {
              || Math.round(size.height) != wrapperInner.offsetHeight) {
                 return;
             }
-            
+
             upperSizeRef.current = size;
 
-            wrapper.style.width = `${lowerSizeRef.current.width}px`;
+            wrapper.style.width  = `${lowerSizeRef.current.width}px`;
             wrapper.style.height = `${lowerSizeRef.current.height}px`;
 
             wrapperInner.getBoundingClientRect(); // reflowed

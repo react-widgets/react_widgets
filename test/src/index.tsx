@@ -9,17 +9,23 @@ import { Text, TextType } from "../../src/Text"
 import { AnimatedSize } from "../../src/AnimatedSize";
 import { AnimatedPage, AnimatedPageController } from "../../src/AnimatedPage";
 import { createRoot } from "react-dom/client";
-import { useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 
 export default function RootPage() {
     const [message, setMessage] = useState("hello world");
+    const ref = useRef<HTMLDivElement>(null);
+
+    useLayoutEffect(() => {
+        const element = ref.current;
+        element.style.animation = "test 10s";
+    }, []);
 
     return (
         <Column centerLeft>
             <button onClick={() => setMessage(p => p + " hello world")}>Expand</button>
             <Box backgroundColor="red" padding="15px" maxWidth="400px">
                 <AnimatedSize duration="0.5s">
-                    <div>{message}</div>
+                    <div ref={ref}>{message}</div>
                 </AnimatedSize>
             </Box>
         </Column>
