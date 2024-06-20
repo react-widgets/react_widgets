@@ -1,7 +1,8 @@
-import { ReactNode, useLayoutEffect, useRef } from "react";
+import { MutableRefObject, ReactNode, useLayoutEffect, useRef } from "react";
 import { ClipBox } from "./ClipBox";
 
-export function AnimatedSize({children, duration, timingFunction}: {
+export function AnimatedSize({scaleRefer, children, duration, timingFunction}: {
+    scaleRefer?: MutableRefObject<HTMLElement>
     children: ReactNode,
     duration: string,
     timingFunction?: string,
@@ -9,21 +10,41 @@ export function AnimatedSize({children, duration, timingFunction}: {
     const wrapperRef = useRef<HTMLDivElement>(null);
     const lowerSizeRef = useRef<{width: number, height: number}>(null);
     const upperSizeRef = useRef<{width: number, height: number}>(null);
+    const previousSize = useRef<{width: number, height: number}>(null);
+
+    /**
+     * Returns a unique size of the given element by calculating
+     * for a scale degree.
+     */
+    const measureSize = (target: HTMLElement): {width: number, height: number} => {
+        const paintedSize = target.getBoundingClientRect();
+        const scaleX = target.clientWidth / paintedSize.width;
+        const scaleY = target.clientHeight / paintedSize.height;
+        const tolerance = 0.3;
+
+        return {
+            width: paintedSize.width * scaleX + tolerance,
+            height: paintedSize.height * scaleY + tolerance
+        };
+    }
+
+    /** Call the function to trigger a reflow of the given element. */
+    const reflow = (target: HTMLElement) => {
+        target.getBoundingClientRect();
+    }
 
     useLayoutEffect(() => {
         const wrapper = wrapperRef.current;
         const wrapperInner = wrapper.firstElementChild as HTMLElement;
 
-        const rect = wrapperInner.getBoundingClientRect();
-        const size = {
-            width: rect.width,
-            height: rect.height
+        const size = measureSize(wrapperInner);
+        {
+            lowerSizeRef.current = size;
+            upperSizeRef.current = size;
         }
 
-        lowerSizeRef.current = size;
-        upperSizeRef.current = size;
-
-        // Called when a child is reflowed and added or removed, or the style changes.
+        // Called when a child is reflowed and added or removed,
+        // or the style changes.
         const observer1 = new MutationObserver(() => {
             {
                 const a = wrapperInner.firstElementChild.getBoundingClientRect();
@@ -40,38 +61,23 @@ export function AnimatedSize({children, duration, timingFunction}: {
             wrapperInner.style.minWidth = null;
             wrapperInner.style.minHeight = null;
 
-            const rect = wrapperInner.getBoundingClientRect(); // reflowed
-            const size = {
-                width: rect.width,
-                height: rect.height
-            }
-
-            // If the printed size is different from the unique size,
-            // the exact size cannot be calculated.
-            if (Math.round(size.width)  != wrapperInner.offsetWidth
-             || Math.round(size.height) != wrapperInner.offsetHeight) {
-                return;
-            }
+            const size = measureSize(wrapperInner);
 
             upperSizeRef.current = size;
 
-            wrapper.style.width  = `${lowerSizeRef.current.width}px`;
+            wrapper.style.width = `${lowerSizeRef.current.width}px`;
             wrapper.style.height = `${lowerSizeRef.current.height}px`;
 
-            wrapperInner.getBoundingClientRect(); // reflowed
+            reflow(wrapperInner);
 
-            wrapper.style.width  = `${size.width}px`;
+            wrapper.style.width = `${size.width}px`;
             wrapper.style.height = `${size.height}px`;
             wrapperInner.style.minWidth = `${size.width}px`;
             wrapperInner.style.minHeight = `${size.height}px`;
         });
 
         const observer2 = new ResizeObserver(() => {
-            const rect = wrapper.getBoundingClientRect();
-            lowerSizeRef.current = {
-                width: rect.width,
-                height: rect.height
-            }
+            lowerSizeRef.current = measureSize(wrapper);
         });
 
         observer2.observe(wrapper, {});

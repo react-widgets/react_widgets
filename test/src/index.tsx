@@ -1,3 +1,4 @@
+/*
 import { Column } from "../../src/Column";
 import { Row } from "../../src/Row";
 import { Grid } from "../../src/Grid";
@@ -13,26 +14,30 @@ import { useLayoutEffect, useRef, useState } from "react";
 
 export default function RootPage() {
     const [message, setMessage] = useState("hello world");
-    const ref = useRef<HTMLDivElement>(null);
+    const ref1 = useRef<HTMLDivElement>(null);
+    const ref2 = useRef<HTMLDivElement>(null);
 
     useLayoutEffect(() => {
-        const element = ref.current;
-        element.style.animation = "test 10s";
+        const element = ref2.current;
+        element.style.animation = "test 1s";
     }, []);
 
     return (
         <Column centerLeft>
             <button onClick={() => setMessage(p => p + " hello world")}>Expand</button>
-            <Box backgroundColor="red" padding="15px" maxWidth="400px">
-                <AnimatedSize duration="0.5s">
-                    <div ref={ref}>{message}</div>
-                </AnimatedSize>
-            </Box>
+            <div ref={ref2}>
+                <Box refer={ref1} backgroundColor="red" maxWidth="400px" padding="15px">
+                    <AnimatedSize scaleRefer={ref2} duration="0.5s">
+                        <div>{message}</div>
+                    </AnimatedSize>
+                </Box>
+            </div>
         </Column>
     )
 }
 
 createRoot(document.getElementById("renderer")).render(<RootPage />);
+*/
 
 
 
@@ -46,8 +51,6 @@ createRoot(document.getElementById("renderer")).render(<RootPage />);
 
 
 
-
-/*
 import { Column } from "../../src/Column";
 import { Row } from "../../src/Row";
 import { Grid } from "../../src/Grid";
@@ -103,4 +106,3 @@ function Items() {
 }
 
 createRoot(document.getElementById("renderer")).render(<RootPage />);
-*/
