@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useEffect, useLayoutEffect, useState } from "react";
 
 // Signature for a factory function of a react-node about display size.
 export type SizedBuilder = (width: number, height: number) => ReactNode;
@@ -14,13 +14,13 @@ export function SizeBuilder({builder}: {
     const [size, setSize] = useState(getSize());
 
     // Called when the window display size changes.
-    useEffect(() => {
+    useLayoutEffect(() => {
         const handleResize = () => setSize(getSize());
         window.addEventListener("resize", handleResize);
         return () => {
             window.removeEventListener("resize", handleResize);
         };
-    });
+    }, []);
 
     return <>{builder(size.width, size.height)}</>;
 }
