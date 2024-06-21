@@ -50,7 +50,7 @@ createRoot(document.getElementById("renderer")).render(<RootPage />);
 
 
 
-
+/*
 import { Column } from "../../src/Column";
 import { Row } from "../../src/Row";
 import { Grid } from "../../src/Grid";
@@ -102,6 +102,56 @@ function Items() {
                 items.map((value, i) => <h1 key={i}>Hello world {value}</h1>)
             }
         </Column>
+    )
+}
+
+createRoot(document.getElementById("renderer")).render(<RootPage />);
+*/
+
+
+
+
+
+
+
+
+
+
+import { Column } from "../../src/Column";
+import { Row } from "../../src/Row";
+import { Grid } from "../../src/Grid";
+import { Box } from "../../src/Box";
+import { Scrollable } from "../../src/Scrollable";
+import { Constraint, ConstraintBuilder } from "../../src/ConstraintBuilder";
+import { SizeBuilder } from "../../src/SizeBuilder";
+import { Text, TextType } from "../../src/Text";
+import { Expanded } from "../../src/Expanded";
+import { AnimatedSize } from "../../src/AnimatedSize";
+import { AnimatedPage, AnimatedPageController } from "../../src/AnimatedPage";
+import { createRoot } from "react-dom/client";
+import { useRef, useState } from "react";
+
+export default function RootPage() {
+    return (
+        <Row height="100%">
+            <Box width="300px" height="100%" backgroundColor="red" />
+            <Expanded>
+                <Scrollable.Horizontal>
+                    <Row>
+                        <button>hello world</button>
+                        <button>hello world</button>
+                        <button>hello world</button>
+                        <button>hello world</button>
+                        <button>hello world</button>
+                        <button>hello world</button>
+                        <button>hello world</button>
+                        <button>hello world</button>
+                        <button>hello world</button>
+                        <button>hello world</button>
+                    </Row>
+                </Scrollable.Horizontal>
+            </Expanded>
+        </Row>
     )
 }
 

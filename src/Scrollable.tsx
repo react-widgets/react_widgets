@@ -2,26 +2,31 @@ import { CSSProperties, ReactNode } from "react";
 
 export namespace Scrollable {
     export function Horizontal(p: {
-        children?: ReactNode,
+        children?: JSX.Element,
         center?: any,
         right?: any,
     }) {
         const style: CSSProperties = {
             display: "flex",
             width: "100%",
-            justifyContent: p.center ? "center": p.right ? "right" : null,
             overflowX: "auto"
+        }
+
+        const innerStyle: CSSProperties = {
+            flexShrink: 0,
+            marginLeft: p.center != null || p.right != null ? "auto" : undefined,
+            marginRight: p.center != null ? "auto" : undefined,
         }
 
         return (
             <div style={style}>
-                <div style={{flexShrink: 0}}>{p.children}</div>    
+                <div style={innerStyle}>{p.children}</div>    
             </div>
         )
     }
 
     export function Vertical(p: {
-        children: ReactNode,
+        children: JSX.Element,
     }) {
         const style: CSSProperties = {
             display: "flex",
