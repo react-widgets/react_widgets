@@ -1,4 +1,6 @@
 import { CSSProperties, ReactNode } from "react";
+import { Column } from "./Column";
+import { Box } from "./Box";
 
 export namespace Scrollable {
     export function Horizontal(p: {
@@ -25,7 +27,7 @@ export namespace Scrollable {
         )
     }
 
-    export function Vertical(p: {
+    export function Vertical({children}: {
         children: JSX.Element,
     }) {
         const style: CSSProperties = {
@@ -36,8 +38,18 @@ export namespace Scrollable {
 
         return (
             <div style={style}>
-                <div style={{width: "100%", height: "100%", maxHeight: "max-content"}}>{p.children}</div>    
+                <div style={{width: "100%", height: "100%", maxHeight: "max-content"}}>{children}</div>    
             </div>
+        )
+    }
+
+    export function VerticalConnection({children}: {
+        children: JSX.Element
+    }) {
+        return (
+            <Box height="100%" overflowY="auto">
+                <Box height="max-content">{children}</Box>
+            </Box>
         )
     }
 }

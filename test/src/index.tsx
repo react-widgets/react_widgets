@@ -1,4 +1,3 @@
-/*
 import { Column } from "../../src/Column";
 import { Row } from "../../src/Row";
 import { Grid } from "../../src/Grid";
@@ -37,7 +36,7 @@ export default function RootPage() {
 }
 
 createRoot(document.getElementById("renderer")).render(<RootPage />);
-*/
+
 
 
 
@@ -116,7 +115,7 @@ createRoot(document.getElementById("renderer")).render(<RootPage />);
 
 
 
-
+/*
 import { Column } from "../../src/Column";
 import { Row } from "../../src/Row";
 import { Grid } from "../../src/Grid";
@@ -136,23 +135,28 @@ export default function RootPage() {
         <Row height="100%">
             <Box width="300px" height="100%" backgroundColor="red" />
             <Expanded>
-                <Scrollable.Horizontal>
-                    <Row>
-                        <button>hello world</button>
-                        <button>hello world</button>
-                        <button>hello world</button>
-                        <button>hello world</button>
-                        <button>hello world</button>
-                        <button>hello world</button>
-                        <button>hello world</button>
-                        <button>hello world</button>
-                        <button>hello world</button>
-                        <button>hello world</button>
-                    </Row>
-                </Scrollable.Horizontal>
+                <Box display="flex" justifyContent="center" justifyItems="center">
+                    <Box backgroundColor="red" padding="15px" borderRadius="15px">
+                        <Scrollable.VerticalConnection>
+                            <Column>
+                                <button>hello world</button>
+                                <button>hello world</button>
+                                <button>hello world</button>
+                                <button>hello world</button>
+                                <button>hello world</button>
+                                <button>hello world</button>
+                                <button>hello world</button>
+                                <button>hello world</button>
+                                <button>hello world</button>
+                                <button>hello world</button>
+                            </Column>
+                        </Scrollable.VerticalConnection>
+                    </Box>
+                </Box>
             </Expanded>
         </Row>
     )
 }
 
 createRoot(document.getElementById("renderer")).render(<RootPage />);
+*/

@@ -42,7 +42,7 @@ export function AnimatedSize({scaleRefer, children, duration, timingFunction}: {
         // or the style changes.
         const observer1 = new MutationObserver(() => {
             {
-                const a = wrapperInner.firstElementChild.getBoundingClientRect();
+                const a = measureSize(wrapperInner.firstElementChild as HTMLElement);
                 const b = upperSizeRef.current;
 
                 // The measured size must be different from the previous size.
@@ -56,7 +56,7 @@ export function AnimatedSize({scaleRefer, children, duration, timingFunction}: {
             wrapperInner.style.minWidth = null;
             wrapperInner.style.minHeight = null;
 
-            const size = measureSize(wrapperInner);
+            const size = measureSize(wrapperInner); // reflowed
 
             upperSizeRef.current = size;
 
