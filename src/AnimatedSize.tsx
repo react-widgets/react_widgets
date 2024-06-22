@@ -2,11 +2,11 @@ import { MutableRefObject, ReactNode, useLayoutEffect, useRef } from "react";
 import { ClipBox } from "./ClipBox";
 import { HTMLElementUtil } from "./utils/html";
 
-export function AnimatedSize({scaleRefer, children, duration, timingFunction}: {
-    scaleRefer?: MutableRefObject<HTMLElement>
+export function AnimatedSize({children, duration, timingFunction, sizeTolerance}: {
     children: ReactNode,
     duration: string,
     timingFunction?: string,
+    sizeTolerance?: number,
 }) {
     const wrapperRef = useRef<HTMLDivElement>(null);
     const lowerSizeRef = useRef<{width: number, height: number}>(null);
@@ -20,7 +20,7 @@ export function AnimatedSize({scaleRefer, children, duration, timingFunction}: {
         const paintedSize = target.getBoundingClientRect();
         const scaleX = target.clientWidth / paintedSize.width;
         const scaleY = target.clientHeight / paintedSize.height;
-        const tolerance = 0.3;
+        const tolerance = sizeTolerance ?? 0.3;
 
         return {
             width: paintedSize.width * scaleX + tolerance,

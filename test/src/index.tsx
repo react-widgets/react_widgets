@@ -26,7 +26,7 @@ export default function RootPage() {
             <button onClick={() => setMessage(p => p + " hello world")}>Expand</button>
             <div ref={ref2}>
                 <Box refer={ref1} backgroundColor="red" maxWidth="400px" padding="15px">
-                    <AnimatedSize scaleRefer={ref2} duration="0.5s">
+                    <AnimatedSize duration="0.5s">
                         <div>{message}</div>
                     </AnimatedSize>
                 </Box>
