@@ -1,4 +1,4 @@
-import { MutableRefObject, ReactNode, useLayoutEffect, useRef } from "react";
+import { ReactNode, useLayoutEffect, useRef } from "react";
 import { ClipBox } from "./ClipBox";
 import { HTMLElementUtil } from "./utils/html";
 
