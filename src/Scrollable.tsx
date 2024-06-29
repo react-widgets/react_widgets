@@ -42,14 +42,4 @@ export namespace Scrollable {
             </div>
         )
     }
-
-    export function VerticalConnection({children}: {
-        children: JSX.Element
-    }) {
-        return (
-            <Box height="100%" overflowY="auto">
-                <Box height="max-content">{children}</Box>
-            </Box>
-        )
-    }
 }

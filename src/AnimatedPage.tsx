@@ -135,7 +135,7 @@ export function AnimatedPage({children, controller, duration, opacityEffect = fa
                 if (pages.length == 1) isCurrentPage = true;
 
                 return (
-                    <AnimatedPagePlace
+                    <AnimatedPageSliver
                         key={i}
                         refer={isCurrentPage ? cpRef : rpRef}
                         ghost={isCurrentPage == false}
@@ -147,7 +147,7 @@ export function AnimatedPage({children, controller, duration, opacityEffect = fa
     )
 }
 
-function AnimatedPagePlace({refer, ghost, children}: {
+function AnimatedPageSliver({refer, ghost, children}: {
     refer: React.MutableRefObject<HTMLDivElement>,
     ghost: boolean,
     children: ReactNode,
