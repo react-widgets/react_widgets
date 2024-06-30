@@ -1,4 +1,5 @@
 import { CSSProperties, ReactNode } from "react";
+import { FlexOmit } from "./types";
 
 export enum TextType {
     h1,
@@ -12,7 +13,7 @@ export enum TextType {
     span,
 }
 
-export interface TextProperties extends Omit<CSSProperties, "display" | "webkitBoxOrient" | "webkitLineClamp" | "overflow"> {
+export interface TextProperties extends FlexOmit<CSSProperties, "display" | "webkitBoxOrient" | "webkitLineClamp" | "overflow"> {
     children: ReactNode,
     type?: TextType,
     maxLine?: number,

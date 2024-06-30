@@ -1,7 +1,8 @@
 import { CSSProperties, ReactNode } from "react";
 import { Scrollable } from "./Scrollable";
+import { FlexOmit } from "./types";
 
-export interface ColumnProperties extends Omit<CSSProperties, "display" | "flexDirection" | "flexWrap" | "gap" | "alignItems" | "alignContent" | "justifyContent"> {
+export interface ColumnProperties extends FlexOmit<CSSProperties, "display" | "flexDirection" | "flexWrap" | "gap" | "alignItems" | "alignContent" | "justifyContent"> {
     className?: string,
     children?: ReactNode,
     gap?: string,
