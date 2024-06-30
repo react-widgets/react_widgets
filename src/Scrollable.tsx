@@ -1,6 +1,4 @@
-import { CSSProperties, ReactNode } from "react";
-import { Column } from "./Column";
-import { Box } from "./Box";
+import { CSSProperties } from "react";
 
 export namespace Scrollable {
     export function Horizontal(p: {
