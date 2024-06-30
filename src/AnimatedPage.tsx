@@ -3,11 +3,19 @@ import { AnimatedSize } from "./AnimatedSize";
 import { Row } from "./Row";
 import { Box } from "./Box";
 import { HTMLElementUtil } from "./utils/html";
+import { CurvesUnit } from "./types";
 
 export type AnimatedPageListener = (event: AnimatedPageEvent) => void;
 
+export enum AnimatedPageStatus {
+    none,
+    push,
+    pop,
+    clear,
+}
+
 export interface AnimatedPageEvent {
-    type: "push" | "pop" | "clear";
+    type: keyof typeof AnimatedPageStatus;
     target?: ReactNode;
 }
 
@@ -42,22 +50,16 @@ export class AnimatedPageController {
     }
 }
 
-export enum AnimatedPageStatus {
-    none,
-    push,
-    pop,
-    clear,
-}
-
-export function AnimatedPage({children, controller, duration, opacityEffect = false, maxWidth}: {
+/** See also: This widget is wrapped in an `AnimatedSize`. */
+export function AnimatedPage({children, controller, duration, curve, maxWidth}: {
     children: ReactNode,
     controller: AnimatedPageController,
     duration: string,
-    opacityEffect?: boolean,
+    curve?: CurvesUnit,
     maxWidth?: string
 }) {
-    const cpRef = useRef<HTMLDivElement>(null); // is current page.
-    const rpRef = useRef<HTMLDivElement>(null); // is reference page.
+    const cpRef = useRef<HTMLDivElement>(null); // is fade-in page.
+    const rpRef = useRef<HTMLDivElement>(null); // is fade-out page.
     const [pages, setPages] = useState<ReactNode[]>([children]);
     const [status, setStatus] = useState(AnimatedPageStatus.none);
 
@@ -97,18 +99,21 @@ export function AnimatedPage({children, controller, duration, opacityEffect = fa
             cPage.style.transform = "translate(0px, 0px)";
             cPage.style.transitionProperty = "opacity, transform";
             cPage.style.transitionDuration = duration;
+            cPage.style.transitionTimingFunction = curve;
 
             rPage.style.transform = "translate(0px, 0px)";
             HTMLElementUtil.reflow(rPage);
             rPage.style.transform = `translate(-${cRect.width - (cRect.width - rRect.width)}px, 0px)`;
             rPage.style.transitionProperty = "opacity, transform";
             rPage.style.transitionDuration = duration;
+            rPage.style.transitionTimingFunction = curve;
         } else if (status == AnimatedPageStatus.pop) {
             cPage.style.transform = `translate(${rRect.width}px, 0px)`;
             HTMLElementUtil.reflow(cPage);
             cPage.style.transform = "translate(0px, 0px)";
             cPage.style.transitionProperty = "opacity, transform";
             cPage.style.transitionDuration = duration;
+            cPage.style.transitionTimingFunction = curve;
             cPage.ontransitionend = () => {
                 cPage.ontransitionend = null;
                 setPages(pages.splice(0, pages.length - 1));
@@ -119,13 +124,14 @@ export function AnimatedPage({children, controller, duration, opacityEffect = fa
             rPage.style.transform = `translate(${cRect.width}px, 0px)`;
             rPage.style.transitionProperty = "opacity, transform";
             rPage.style.transitionDuration = duration;
+            rPage.style.transitionTimingFunction = curve;
         } else {
             cPage?.removeAttribute("style");
         }
     }, [status]);
 
     return (
-        <AnimatedSize duration={duration}>
+        <AnimatedSize duration={duration} curve={curve}>
             <Row position="relative" children={pages.map((page, i) => {
                 let isCurrentPage = (status == AnimatedPageStatus.push)
                     ? i == pages.length - 1

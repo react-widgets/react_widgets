@@ -1,11 +1,12 @@
 import { ReactNode, useLayoutEffect, useRef } from "react";
 import { ClipBox } from "./ClipBox";
 import { HTMLElementUtil } from "./utils/html";
+import { CurvesUnit } from "./types";
 
-export function AnimatedSize({children, duration, timingFunction, sizeTolerance}: {
+export function AnimatedSize({children, duration, curve, sizeTolerance}: {
     children: ReactNode,
     duration: string,
-    timingFunction?: string,
+    curve?: CurvesUnit,
     sizeTolerance?: number,
 }) {
     const wrapperRef = useRef<HTMLDivElement>(null);
@@ -94,7 +95,7 @@ export function AnimatedSize({children, duration, timingFunction, sizeTolerance}
             refer={wrapperRef}
             transitionProperty="width, height"
             transitionDuration={duration}
-            transitionTimingFunction={timingFunction}
+            transitionTimingFunction={curve}
         >
             <div>{children}</div>
         </ClipBox>

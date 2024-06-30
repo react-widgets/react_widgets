@@ -13,11 +13,17 @@ export enum TextType {
     span,
 }
 
+export enum TextAlignment {
+    left = "left",
+    center = "center",
+    right = "end"
+}
+
 export interface TextProperties extends FlexOmit<CSSProperties, "display" | "WebkitBoxOrient" | "WebkitLineClamp" | "overflow"> {
     children: ReactNode,
     type?: TextType,
     maxLine?: number,
-    center?: any,
+    alignment?: TextAlignment,
 
     [key: string]: any;
 }
@@ -27,7 +33,7 @@ export function Text(p: TextProperties) {
         display: "-webkit-box",
         webkitBoxOrient: "vertical",
         webkitLineClamp: p.maxLine,
-        textAlign: p.center ? "center" : undefined,
+        textAlign: p.alignment,
         overflow: "hidden"
     } as CSSProperties}
 

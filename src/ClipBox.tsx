@@ -10,10 +10,12 @@ export interface ClipBoxProperties extends FlexOmit<CSSProperties, "display" | "
 }
 
 export function ClipBox(p: ClipBoxProperties) {
-    const style = {...p, ...{
+    const style = {...{
         display: "flex",
-        overflow: "hidden"
-    } as CSSProperties}
+        overflow: "hidden",
+        flexShrink: 0,
+        boxSizing: "border-box"
+    } as CSSProperties, ...p};
 
     return (
         <div

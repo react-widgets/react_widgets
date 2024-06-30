@@ -11,6 +11,7 @@ import { AnimatedPage, AnimatedPageController } from "../../src/AnimatedPage";
 import { createRoot } from "react-dom/client";
 import { useLayoutEffect, useRef, useState } from "react";
 
+/*
 export default function RootPage() {
     const [message, setMessage] = useState("hello world");
     const ref1 = useRef<HTMLDivElement>(null);
@@ -36,6 +37,7 @@ export default function RootPage() {
 }
 
 createRoot(document.getElementById("renderer")).render(<RootPage />);
+*/
 
 
 
@@ -49,19 +51,9 @@ createRoot(document.getElementById("renderer")).render(<RootPage />);
 
 
 
-/*
-import { Column } from "../../src/Column";
-import { Row } from "../../src/Row";
-import { Grid } from "../../src/Grid";
-import { Box } from "../../src/Box";
-import { Scrollable } from "../../src/Scrollable";
-import { Constraint, ConstraintBuilder } from "../../src/ConstraintBuilder";
-import { SizeBuilder } from "../../src/SizeBuilder"
-import { Text, TextType } from "../../src/Text"
-import { AnimatedSize } from "../../src/AnimatedSize";
-import { AnimatedPage, AnimatedPageController } from "../../src/AnimatedPage";
-import { createRoot } from "react-dom/client";
-import { useRef, useState } from "react";
+
+
+
 
 export default function RootPage() {
     const controllerRef = useRef(new AnimatedPageController());
@@ -105,8 +97,6 @@ function Items() {
 }
 
 createRoot(document.getElementById("renderer")).render(<RootPage />);
-*/
-
 
 
 

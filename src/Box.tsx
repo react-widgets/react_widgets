@@ -10,7 +10,10 @@ export interface BoxProperties extends CSSProperties {
 }
 
 export function Box(p: BoxProperties) {
-    const style = {...{flexShrink: 0} as CSSProperties, ...p};
+    const style = {
+        ...{flexShrink: 0, boxSizing: "border-box"} as CSSProperties,
+        ...p
+    };
 
     return (
         <div
