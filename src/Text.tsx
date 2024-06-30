@@ -13,7 +13,7 @@ export enum TextType {
     span,
 }
 
-export interface TextProperties extends FlexOmit<CSSProperties, "display" | "webkitBoxOrient" | "webkitLineClamp" | "overflow"> {
+export interface TextProperties extends FlexOmit<CSSProperties, "display" | "WebkitBoxOrient" | "WebkitLineClamp" | "overflow"> {
     children: ReactNode,
     type?: TextType,
     maxLine?: number,
