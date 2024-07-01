@@ -8,6 +8,7 @@ import { SizeBuilder } from "../../src/SizeBuilder"
 import { Text, TextType } from "../../src/Text"
 import { AnimatedSize } from "../../src/AnimatedSize";
 import { AnimatedPage, AnimatedPageController } from "../../src/AnimatedPage";
+import { TabNavigation } from "../../src/TabNavigation";
 import { createRoot } from "react-dom/client";
 import { useLayoutEffect, useRef, useState } from "react";
 
@@ -46,6 +47,21 @@ createRoot(document.getElementById("renderer")).render(<RootPage />);
 
 
 
+export default function RootPage() {
+    const [index, setIndex] = useState(0);
+
+    return (
+        <TabNavigation.Horizontal index={index} duration="0.3s" style={{width: "100%"}}>
+            <div onClick={() => setIndex(0)} style={{padding: "15px"}}>Navigate 1</div>
+            <div onClick={() => setIndex(1)} style={{padding: "15px"}}>Navigate 2</div>
+            <div onClick={() => setIndex(2)} style={{padding: "15px"}}>Navigate 3</div>
+            <div onClick={() => setIndex(3)} style={{padding: "15px"}}>4</div>
+            <div onClick={() => setIndex(4)} style={{padding: "15px"}}>Nav 5</div>
+        </TabNavigation.Horizontal>
+    )
+}
+
+createRoot(document.getElementById("renderer")).render(<RootPage />);
 
 
 
@@ -55,6 +71,7 @@ createRoot(document.getElementById("renderer")).render(<RootPage />);
 
 
 
+/*
 export default function RootPage() {
     const controllerRef = useRef(new AnimatedPageController());
     const controller = controllerRef.current;
@@ -97,6 +114,8 @@ function Items() {
 }
 
 createRoot(document.getElementById("renderer")).render(<RootPage />);
+*/
+
 
 
 

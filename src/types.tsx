@@ -7,11 +7,20 @@ export type FlexOmit<T, K extends keyof T> = {
     [P in keyof T as Exclude<P, K>]: T[P]
 };
 
+export type AbsoluteSizeUnit = "cm" | "mm" | "Q" | "in" | "pc" | "pt" | "px"
+export type RelativeSizeUnit = "em" | "ex" | "ch" | "rem" | "lh" | "rlh" | "vw" | "vh" | "vmin" | "vmax" | "vmax" | "vb" | "vi" | "svm" | "svh" | "lvw" | "lvh" | "dvw" | "dvh";
+
 /** Signature for the union type that is returning the mostly used pixel values. */
-export type PixelsUnit = "3px" | "5px" | "10px" | "15px" | "20px" | "30px" | "40px" | "50px" | "100px";
+export type SizeUnit = string | "var()" | AbsoluteSizeUnit | RelativeSizeUnit;
+
+/**
+ * Signature for the union type that is returning the mostly used
+ * animation duration values.
+ */
+export type DurationUnit = string | "var()" | "s" | "ms";
 
 /**
  * Signature for the union type that is returning the linear bezier
  * curve form.
  */
-export type CurvesUnit = "cubic-bezier(0, 0, 1, 1)";
+export type CurvesUnit = string | "var()" | "cubic-bezier(0, 0, 1, 1)";

@@ -1,11 +1,11 @@
 import { CSSProperties, ReactNode } from "react";
 import { Scrollable } from "./Scrollable";
-import { FlexOmit, PixelsUnit } from "./types";
+import { FlexOmit, SizeUnit } from "./types";
 
 export interface RowProperties extends FlexOmit<CSSProperties, "display" | "flexDirection" | "flexWrap" | "gap" | "alignItems" | "alignContent" | "justifyContent"> {
     className?: string,
     children?: ReactNode,
-    gap?: PixelsUnit,
+    gap?: SizeUnit,
     reverse?: any,
     wrap?: any,
     scrollable?: any,

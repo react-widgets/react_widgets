@@ -1,10 +1,10 @@
 import { CSSProperties, ReactNode } from "react";
-import { FlexOmit, PixelsUnit } from "./types";
+import { FlexOmit, SizeUnit } from "./types";
 
 export interface GridProperties extends FlexOmit<CSSProperties, "display" | "gridTemplateColumns" | "padding" | "margin"> {
     children?: ReactNode,
     rowCount: number,
-    gap?: PixelsUnit,
+    gap?: SizeUnit,
     verticalGap?: string,
     horizontalGap?: string,
     padding?: string,

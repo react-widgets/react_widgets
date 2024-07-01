@@ -31,8 +31,8 @@ export interface TextProperties extends FlexOmit<CSSProperties, "display" | "Web
 export function Text(p: TextProperties) {
     const style: CSSProperties = {...p, ...{
         display: "-webkit-box",
-        webkitBoxOrient: "vertical",
-        webkitLineClamp: p.maxLine,
+        WebkitBoxOrient: "vertical",
+        WebkitLineClamp: p.maxLine,
         textAlign: p.alignment,
         overflow: "hidden"
     } as CSSProperties}
