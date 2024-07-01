@@ -1,6 +1,7 @@
 import { ReactNode, useLayoutEffect, useRef } from "react";
-import { CurvesUnit, DurationUnit } from "./types";
+import { CurvesUnit, DurationUnit, SizeUnit } from "./types";
 import { Box } from "./Box";
+import { Row } from "./Row";
 
 export namespace TabNavigation {
     export interface Style {
@@ -17,14 +18,14 @@ export namespace TabNavigation {
         thickness: "3px",
     };
 
-    export function Horizontal({children, index, style, duration, curve}: {
+    export function Horizontal({children, index, style, duration, curve, gap}: {
         children: ReactNode,
         index: number,
         style?: Style
         duration: DurationUnit,
         curve?: CurvesUnit,
+        gap?: SizeUnit
     }) {
-        const indexRef = useRef<number>(index);
         const wrapperRef = useRef<HTMLDivElement>(null);
         const rawStyle = {
             ...defualtStyle,
@@ -54,11 +55,7 @@ export namespace TabNavigation {
 
         return (
             <Box refer={wrapperRef}>
-                <Box
-                    refer={wrapperRef}
-                    display="flex"
-                    children={children}
-                />
+                <Row gap={gap} children={children} />
                 <Box transitionDuration={duration} transitionProperty="margin, width">
                     <Box
                         width={rawStyle.width}
