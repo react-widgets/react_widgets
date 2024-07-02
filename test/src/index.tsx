@@ -51,13 +51,17 @@ export default function RootPage() {
     const [index, setIndex] = useState(0);
 
     return (
-        <TabNavigation.Horizontal index={index} duration="0.3s" style={{width: "100%"}}>
-            <div onClick={() => setIndex(0)} style={{padding: "15px"}}>Navigate 1</div>
-            <div onClick={() => setIndex(1)} style={{padding: "15px"}}>Navigate 2</div>
-            <div onClick={() => setIndex(2)} style={{padding: "15px"}}>Navigate 3</div>
-            <div onClick={() => setIndex(3)} style={{padding: "15px"}}>4</div>
-            <div onClick={() => setIndex(4)} style={{padding: "15px"}}>Nav 5</div>
-        </TabNavigation.Horizontal>
+        <Scrollable.Horizontal center>
+            <TabNavigation.Horizontal index={index} duration="0.3s" style={{width: "100%"}}>
+                <div onClick={() => setIndex(0)} style={{padding: "15px"}}>Navigate 1</div>
+                <div onClick={() => setIndex(1)} style={{padding: "15px"}}>Navigate 2</div>
+                <div onClick={() => setIndex(2)} style={{padding: "15px"}}>Navigate 3</div>
+                <div onClick={() => setIndex(3)} style={{padding: "15px"}}>Navigate 4</div>
+                <div onClick={() => setIndex(4)} style={{padding: "15px"}}>Navigate 5</div>
+                <div onClick={() => setIndex(5)} style={{padding: "15px"}}>Navigate 6</div>
+                <div onClick={() => setIndex(6)} style={{padding: "15px"}}>Navigate 7</div>
+            </TabNavigation.Horizontal>
+        </Scrollable.Horizontal>
     )
 }
 
