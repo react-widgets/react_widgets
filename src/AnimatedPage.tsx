@@ -61,7 +61,7 @@ export function AnimatedPage({children, controller, duration, curve, maxWidth}: 
     const cpRef = useRef<HTMLDivElement>(null); // is fade-in page.
     const rpRef = useRef<HTMLDivElement>(null); // is fade-out page.
     const [pages, setPages] = useState<ReactNode[]>([children]);
-    const [status, setStatus] = useState(AnimatedPageStatus.none);
+    const [status, setStatus] = useState<AnimatedPageStatus>(AnimatedPageStatus.none);
 
     useLayoutEffect(() => { // init state.
         let listener: AnimatedPageListener;
@@ -114,9 +114,15 @@ export function AnimatedPage({children, controller, duration, curve, maxWidth}: 
             cPage.style.transitionProperty = "opacity, transform";
             cPage.style.transitionDuration = duration;
             cPage.style.transitionTimingFunction = curve;
+
+            // Ignore events about transition life-cycle that occur to child elements.
+            for (const child of cPage.children) {
+                (child as HTMLElement).ontransitionend = event => event.stopPropagation();
+            }
+            
             cPage.ontransitionend = () => {
                 cPage.ontransitionend = null;
-                setPages(pages.splice(0, pages.length - 1));
+                setPages((pages.pop(), pages));
             }
 
             rPage.style.transform = "translate(0px, 0px)";

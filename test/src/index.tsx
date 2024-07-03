@@ -47,7 +47,7 @@ createRoot(document.getElementById("renderer")).render(<RootPage />);
 
 
 
-
+/*
 export default function RootPage() {
     const [index, setIndex] = useState(0);
 
@@ -67,6 +67,7 @@ export default function RootPage() {
 }
 
 createRoot(document.getElementById("renderer")).render(<RootPage />);
+*/
 
 
 
@@ -74,9 +75,6 @@ createRoot(document.getElementById("renderer")).render(<RootPage />);
 
 
 
-
-
-/*
 export default function RootPage() {
     const controllerRef = useRef(new AnimatedPageController());
     const controller = controllerRef.current;
@@ -90,7 +88,7 @@ export default function RootPage() {
                         <h1>hello 2</h1>
                         <h1>hello 3</h1>
                     </Column>
-                ))
+                ));
             }}>Push Page</button>
             <button onClick={() => controller.pop()}>Pop Page</button>
             <Box backgroundColor="red" borderRadius="15px" overflow="hidden">
@@ -119,7 +117,7 @@ function Items() {
 }
 
 createRoot(document.getElementById("renderer")).render(<RootPage />);
-*/
+
 
 
 
