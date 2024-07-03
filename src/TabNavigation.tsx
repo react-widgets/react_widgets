@@ -8,19 +8,19 @@ export namespace TabNavigation {
         backgroundColor?: string,
         borderRadius?: string
         width?: string,
-        thickness?: string,
+        thickness?: string
     }
 
     export const defualtStyle: Style = {
         backgroundColor: "black",
         borderRadius: undefined,
         width: "100%",
-        thickness: "3px",
+        thickness: "3px"
     };
 
     export function Horizontal({children, index, style, duration, curve, gap}: {
         children: ReactNode,
-        index: number,
+        index?: number,
         style?: Style
         duration: DurationUnit,
         curve?: CurvesUnit,
@@ -36,6 +36,8 @@ export namespace TabNavigation {
         console.assert(index != Infinity, "The index of TabNavigation cannot be infinity.");
 
         useLayoutEffect(() => {
+            if (index == null) return;
+            
             const wrapper = wrapperRef.current;
             const wrapperBody = wrapper.firstElementChild as HTMLElement;
             const wrapperLine = wrapper.lastElementChild as HTMLElement;
@@ -59,9 +61,11 @@ export namespace TabNavigation {
                 <Box transitionDuration={duration} transitionProperty="margin, width">
                     <Box
                         width={rawStyle.width}
-                        height={rawStyle.thickness}
+                        height={index != null ? rawStyle.thickness : 0}
                         backgroundColor={rawStyle.backgroundColor}
                         borderRadius={rawStyle.borderRadius}
+                        transitionDuration={duration}
+                        transitionProperty="height"
                         margin="0 auto"
                     />
                 </Box>

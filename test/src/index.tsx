@@ -60,6 +60,7 @@ export default function RootPage() {
                 <div onClick={() => setIndex(4)} style={{padding: "15px"}}>Navigate 5</div>
                 <div onClick={() => setIndex(5)} style={{padding: "15px"}}>Navigate 6</div>
                 <div onClick={() => setIndex(6)} style={{padding: "15px"}}>Navigate 7</div>
+                <div onClick={() => setIndex(null)} style={{padding: "15px"}}>Null</div>
             </TabNavigation.Horizontal>
         </Scrollable.Horizontal>
     )
