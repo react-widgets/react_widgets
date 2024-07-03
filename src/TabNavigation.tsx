@@ -2,6 +2,7 @@ import { ReactNode, useLayoutEffect, useRef } from "react";
 import { CurvesUnit, DurationUnit, SizeUnit } from "./types";
 import { Box } from "./Box";
 import { Row } from "./Row";
+import { Column } from "./Column";
 
 export namespace TabNavigation {
     export interface Style {
@@ -13,10 +14,24 @@ export namespace TabNavigation {
 
     export const defualtStyle: Style = {
         backgroundColor: "black",
-        borderRadius: undefined,
         width: "100%",
         thickness: "3px"
     };
+
+    function getItemByIndex(children: HTMLCollection, index: number) {
+        const length = children.length;
+
+        if (index > length) {
+            throw new Error(`The index of TabNavigation is overflowed. (given: ${index} > length: ${length})`);
+        }
+
+        let ignoreCount = 0;
+        for (let i = 0; i <= index; i++) {
+            if (children[i + ignoreCount].className == "ignore") ignoreCount++;
+        }
+
+        return children[index + ignoreCount];
+    }
 
     export function Horizontal({children, index, style, duration, curve, gap}: {
         children: ReactNode,
@@ -37,24 +52,12 @@ export namespace TabNavigation {
 
         useLayoutEffect(() => {
             if (index == null) return;
-            
+
             const wrapper = wrapperRef.current;
             const wrapperBody = wrapper.firstElementChild as HTMLElement;
             const wrapperLine = wrapper.lastElementChild as HTMLElement;
-            const children = wrapperBody.children;
-            const length = children.length - 1;
 
-            if (index > length) {
-                throw new Error(`The index of TabNavigation is overflowed. (given: ${index} > length: ${length})`);
-            }
-
-            let ignoreCount = 0;
-
-            for (let i = 0; i <= index; i++) {
-                if (children[i + ignoreCount].className == "ignore") ignoreCount++;
-            }
-
-            let current = children[index + ignoreCount];
+            const current = getItemByIndex(wrapperBody.children, index);
 
             const bodyRect = wrapperBody.getBoundingClientRect();
             const itemRect = current.getBoundingClientRect();
@@ -66,7 +69,7 @@ export namespace TabNavigation {
         return (
             <Box refer={wrapperRef}>
                 <Row gap={gap} children={children} />
-                <Box transitionDuration={duration} transitionProperty="margin, width">
+                <Box transitionDuration={duration} transitionProperty="margin, width" transitionTimingFunction={curve}>
                     <Box
                         width={rawStyle.width}
                         height={index != null ? rawStyle.thickness : 0}
@@ -74,9 +77,67 @@ export namespace TabNavigation {
                         borderRadius={rawStyle.borderRadius}
                         transitionDuration={duration}
                         transitionProperty="height"
+                        transitionTimingFunction={curve}
                         margin="0 auto"
                     />
                 </Box>
+            </Box>
+        )
+    }
+
+    export function Vertical({children, index, style, duration, curve, gap}: {
+        children: ReactNode,
+        index?: number,
+        style?: Style
+        duration: DurationUnit,
+        curve?: CurvesUnit,
+        gap?: SizeUnit
+    }) {
+        const wrapperRef = useRef<HTMLDivElement>(null);
+        const rawStyle = {
+            ...defualtStyle,
+            ...style
+        }
+
+        console.assert(index >= 0, "The index of TabNavigation cannot be negative.");
+        console.assert(index != Infinity, "The index of TabNavigation cannot be infinity.");
+
+        useLayoutEffect(() => {
+            if (index == null) return;
+
+            const wrapper = wrapperRef.current;
+            const wrapperBody = wrapper.lastElementChild as HTMLElement;
+            const wrapperLine = wrapper.firstElementChild as HTMLElement;
+
+            const current = getItemByIndex(wrapperBody.children, index);
+
+            const bodyRect = wrapperBody.getBoundingClientRect();
+            const itemRect = current.getBoundingClientRect();
+
+            wrapperLine.style.height = `${itemRect.height}px`;
+            wrapperLine.style.marginTop = `${itemRect.top - bodyRect.top}px`;
+        }, [index]);
+
+        return (
+            <Box display="flex" refer={wrapperRef}>
+                <Box
+                    display="flex"
+                    alignItems="center"
+                    transitionDuration={duration}
+                    transitionProperty="margin, height"
+                    transitionTimingFunction={curve}
+                >
+                    <Box
+                        width={index != null ? rawStyle.thickness : 0}
+                        height={rawStyle.width}
+                        backgroundColor={rawStyle.backgroundColor}
+                        borderRadius={rawStyle.borderRadius}
+                        transitionDuration={duration}
+                        transitionProperty="width"
+                        transitionTimingFunction={curve}
+                    />
+                </Box>
+                <Column gap={gap} children={children} />
             </Box>
         )
     }
