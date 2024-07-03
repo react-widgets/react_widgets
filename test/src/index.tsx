@@ -52,7 +52,7 @@ export default function RootPage() {
     const [index, setIndex] = useState(0);
 
     return (
-        <TabNavigation.Horizontal index={index} duration="0.3s">
+        <TabNavigation.Horizontal index={index} duration="0.3s" style={{width: "100%"}}>
             <div onClick={() => setIndex(0)} style={{padding: "15px"}}>Navigate 1</div>
             <div onClick={() => setIndex(1)} style={{padding: "15px"}}>Navigate 2</div>
             <div onClick={() => setIndex(2)} style={{padding: "15px"}}>Navigate 3</div>

@@ -18,9 +18,12 @@ export namespace TabNavigation {
         thickness: "3px"
     };
 
+    /**
+     * Returns the element of navigation item corresponding given index
+     * by consider the ignore element.
+     */
     function getItemByIndex(children: HTMLCollection, index: number) {
         const length = children.length;
-
         if (index > length) {
             throw new Error(`The index of TabNavigation is overflowed. (given: ${index} > length: ${length})`);
         }
