@@ -20,7 +20,7 @@ export namespace TabNavigation {
 
     /**
      * Returns the element of navigation item corresponding given index
-     * by consider the ignore element.
+     * by considering the ignore element.
      */
     function getItemByIndex(children: HTMLCollection, index: number) {
         const length = children.length;
