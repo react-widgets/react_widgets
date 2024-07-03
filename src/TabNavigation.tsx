@@ -51,9 +51,7 @@ export namespace TabNavigation {
             let ignoreCount = 0;
 
             for (let i = 0; i <= index; i++) {
-                const child = children[i + ignoreCount];
-                if (child.className == "ignore=auto"
-                 || child.className == "ignore=TabNavigation") ignoreCount++;
+                if (children[i + ignoreCount].className == "ignore") ignoreCount++;
             }
 
             let current = children[index + ignoreCount];

@@ -1,10 +1,9 @@
 import { ReactNode } from "react";
 
-export function Ignore({target = "auto", children}: {
-    target?: "auto" | "TabNavigation", // The name of target component.
+export function Ignore({children}: {
     children: ReactNode,
 }) {
     return (
-        <div className={`ignore=${target}`} children={children} />
+        <div className="ignore" children={children} />
     )
 }
