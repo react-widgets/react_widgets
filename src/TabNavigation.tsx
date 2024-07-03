@@ -41,13 +41,23 @@ export namespace TabNavigation {
             const wrapper = wrapperRef.current;
             const wrapperBody = wrapper.firstElementChild as HTMLElement;
             const wrapperLine = wrapper.lastElementChild as HTMLElement;
-            const length = wrapperBody.children.length - 1;
+            const children = wrapperBody.children;
+            const length = children.length - 1;
 
             if (index > length) {
                 throw new Error(`The index of TabNavigation is overflowed. (given: ${index} > length: ${length})`);
             }
 
-            const current  = wrapperBody.children[index];
+            let ignoreCount = 0;
+
+            for (let i = 0; i <= index; i++) {
+                const child = children[i + ignoreCount];
+                if (child.className == "ignore=auto"
+                 || child.className == "ignore=TabNavigation") ignoreCount++;
+            }
+
+            let current = children[index + ignoreCount];
+
             const bodyRect = wrapperBody.getBoundingClientRect();
             const itemRect = current.getBoundingClientRect();
 

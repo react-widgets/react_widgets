@@ -9,6 +9,7 @@ import { Text, TextType } from "../../src/Text"
 import { AnimatedSize } from "../../src/AnimatedSize";
 import { AnimatedPage, AnimatedPageController } from "../../src/AnimatedPage";
 import { TabNavigation } from "../../src/TabNavigation";
+import { Ignore } from "../../src/Ignore";
 import { createRoot } from "react-dom/client";
 import { useLayoutEffect, useRef, useState } from "react";
 
@@ -57,6 +58,7 @@ export default function RootPage() {
                 <div onClick={() => setIndex(1)} style={{padding: "15px"}}>Navigate 2</div>
                 <div onClick={() => setIndex(2)} style={{padding: "15px"}}>Navigate 3</div>
                 <div onClick={() => setIndex(3)} style={{padding: "15px"}}>Navigate 4</div>
+                <Ignore><div>Ignore</div></Ignore>
                 <div onClick={() => setIndex(4)} style={{padding: "15px"}}>Navigate 5</div>
                 <div onClick={() => setIndex(5)} style={{padding: "15px"}}>Navigate 6</div>
                 <div onClick={() => setIndex(6)} style={{padding: "15px"}}>Navigate 7</div>
