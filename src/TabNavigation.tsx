@@ -59,7 +59,6 @@ export namespace TabNavigation {
             const wrapper = wrapperRef.current;
             const wrapperBody = wrapper.firstElementChild as HTMLElement;
             const wrapperLine = wrapper.lastElementChild as HTMLElement;
-
             const current = getItemByIndex(wrapperBody.children, index);
 
             const bodyRect = wrapperBody.getBoundingClientRect();
@@ -111,7 +110,6 @@ export namespace TabNavigation {
             const wrapper = wrapperRef.current;
             const wrapperBody = wrapper.lastElementChild as HTMLElement;
             const wrapperLine = wrapper.firstElementChild as HTMLElement;
-
             const current = getItemByIndex(wrapperBody.children, index);
 
             const bodyRect = wrapperBody.getBoundingClientRect();
