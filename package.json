@@ -12,7 +12,9 @@
     "url": "https://github.com/MTtankkeo/react_widgets.git"
   },
   "keywords": [
-    "react"
+    "react",
+    "template",
+    "widget"
   ],
   "author": "Dev Ttangkong",
   "license": "Apache-2.0",

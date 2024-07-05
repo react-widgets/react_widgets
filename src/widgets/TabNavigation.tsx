@@ -1,5 +1,5 @@
 import { ReactNode, useLayoutEffect, useRef } from "react";
-import { CurvesUnit, DurationUnit, SizeUnit } from "./types";
+import { CurvesUnit, DurationUnit, SizeUnit } from "../types";
 import { Box } from "./Box";
 import { Row } from "./Row";
 import { Column } from "./Column";

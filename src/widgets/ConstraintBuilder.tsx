@@ -4,8 +4,6 @@ import { SizeBuilder } from "./SizeBuilder";
 /** Signature for a factory function of a react-node about constraint. */
 export type ConstraintsBuilder<T> = (value: T) => ReactNode;
 
-export type ConstraintList = "";
-
 export class Constraint<T = number> {
     constructor(
         public min: number,

@@ -1,5 +1,5 @@
 import { CSSProperties, ReactNode } from "react";
-import { FlexOmit } from "./types";
+import { FlexOmit } from "../types";
 
 export enum TextType {
     h1,

@@ -2,8 +2,8 @@ import { ReactNode, useLayoutEffect, useRef, useState } from "react";
 import { AnimatedSize } from "./AnimatedSize";
 import { Row } from "./Row";
 import { Box } from "./Box";
-import { HTMLElementUtil } from "./utils/html";
-import { CurvesUnit } from "./types";
+import { HTMLElementUtil } from "../utils/html";
+import { CurvesUnit } from "../types";
 
 export type AnimatedPageListener = (event: AnimatedPageEvent) => void;
 
