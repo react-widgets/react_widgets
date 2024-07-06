@@ -11,13 +11,20 @@ import { AnimatedPage, AnimatedPageController } from "../../src/widgets/Animated
 import { TabNavigation } from "../../src/widgets/TabNavigation";
 import { Expanded } from "../../src/widgets/Expanded";
 import { Ignore } from "../../src/widgets/Ignore";
+import { AnimatedFoldable } from "../../src/widgets/AnimatedFoldable";
 import { createRoot } from "react-dom/client";
 import { useLayoutEffect, useRef, useState } from "react";
 
 export default function RootPage() {
+    const [ visible, setVisible ] = useState(true);
+
     return (
         <Row width="100%" height="100%">
-            <Box width="200px" height="100%" backgroundColor="gray">Sidebar</Box>
+            <Column height="100%" backgroundColor="gray" padding="15px">
+                <AnimatedFoldable.Horizontal visible={visible} duration="0.5s">
+                    <button onClick={() => setVisible(!visible)}>나는냐 애니메이션 접이식 박스다</button>
+                </AnimatedFoldable.Horizontal>
+            </Column>
             <Column width="100%" height="100%">
                 <Box width="100%" height="100px" backgroundColor="red" />
                 <Scrollable.Vertical>
@@ -25,7 +32,7 @@ export default function RootPage() {
                         <Box height="150px" backgroundColor="orange">AppBar</Box>
                         <Box position="sticky" top="0px" padding="15px" backgroundColor="blue">Sticky</Box>
                         <Column>
-                            {Array.from({length: 100}).map(i => <Text>sdfsdfsd</Text>)}
+                            {Array.from({length: 100}).map((_, i) => <Text key={i}>sdfsdfsd</Text>)}
                         </Column>
                     </Column>
                 </Scrollable.Vertical>

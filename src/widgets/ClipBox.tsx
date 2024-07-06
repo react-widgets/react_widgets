@@ -1,5 +1,5 @@
 import { CSSProperties, ReactNode, Ref } from "react";
-import { FlexOmit } from "./types";
+import { FlexOmit } from "../types";
 
 export interface ClipBoxProperties extends FlexOmit<CSSProperties, "display" | "overflow"> {
     refer?: Ref<HTMLDivElement>,
