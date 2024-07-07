@@ -6,14 +6,16 @@ import { HTMLElementUtil } from "../utils/html";
 export namespace AnimatedFoldable {
     export type StyleCSSProperties = FlexOmit<CSSProperties,
           "width"
+        | "maxWidth"
+        | "minWidth"
         | "transitionDuration"
         | "transitionProperty"
         | "transitionTimingFunction"
     >
     
     export interface Style {
-        start: StyleCSSProperties
-        end  : StyleCSSProperties
+        start: StyleCSSProperties;
+        end  : StyleCSSProperties;
     }
 
     export function Horizontal({visible, duration, curve, children}: {
