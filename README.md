@@ -1,4 +1,8 @@
-# React Widgets
+<div align="center">
+    <img src="https://github.com/user-attachments/assets/4941bce6-d972-475a-8ee6-4dbfb451e054">
+    <h1>React Widgets</h1>
+</div>
+
 This is package that provides templates that can significantly reduce CSS development works in a react development environment.
 
 > Consider integrating not only business logic but also design logic into script code.
