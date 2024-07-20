@@ -21,7 +21,7 @@ export function Expanded({children}: {
 }
 
 export namespace Expanded {
-    export function ExpandedWidth({children}: {
+    export function Horizontal({children}: {
         children: ReactNode
     }) {
         return (
@@ -29,7 +29,7 @@ export namespace Expanded {
         )
     }
     
-    export function ExpandedHeight({children}: {
+    export function Vertical({children}: {
         children: ReactNode
     }) {
         return (
