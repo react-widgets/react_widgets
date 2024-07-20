@@ -20,7 +20,7 @@ export default function RootPage() {
 
     return (
         <Row size="100%">
-            <Column height="100%" backgroundColor="gray" padding="15px">
+            <Column height="100%" backgroundColor="gray" padding="15px" boxSizing="border-box">
                 <button onClick={() => setVisible(!visible)}>접기</button>
                 <AnimatedFoldable.Horizontal visible={visible} duration="0.5s">
                     <button onClick={() => setVisible(!visible)}>나는냐 애니메이션 접이식 박스다</button>
