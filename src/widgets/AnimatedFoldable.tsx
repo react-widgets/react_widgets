@@ -4,22 +4,29 @@ import { Box } from "./Box";
 import { HTMLElementUtil } from "../utils/html";
 
 export namespace AnimatedFoldable {
+    export type Overflow = "visible" | "hidden" | "clip" | "scroll" | "auto";
+
+    export type BehaviorCallback = (
+        parent: HTMLElement,
+        child: HTMLElement,
+        start: DOMRect,
+        unset: DOMRect
+    ) => void;
+
     export type StyleCSSProperties = FlexOmit<CSSProperties,
-          "width"
-        | "maxWidth"
-        | "minWidth"
-        | "transitionDuration"
         | "transitionProperty"
+        | "transitionDuration"
         | "transitionTimingFunction"
     >
     
-    export interface Style {
-        start: StyleCSSProperties;
-        end  : StyleCSSProperties;
+    export interface HorizontalStyle {
+        start: FlexOmit<StyleCSSProperties, "width" | "minWidth" | "maxWidth">;
+        end  : FlexOmit<StyleCSSProperties, "width" | "minWidth" | "maxWidth">;
     }
 
-    export function Horizontal({visible, duration, curve, children}: {
+    export function Horizontal({visible, overflow = "hidden", duration, curve, children}: {
         visible: boolean,
+        overflow?: Overflow,
         duration: DurationUnit,
         curve?: CurvesUnit,
         children: ReactNode
@@ -28,46 +35,43 @@ export namespace AnimatedFoldable {
         const wrapperRef = useRef<HTMLDivElement>(null);
 
         useLayoutEffect(() => {
-            const wrapper = wrapperRef.current;
-            const wrapperChild = wrapper.firstElementChild as HTMLElement;
-            const startRect = wrapper.getBoundingClientRect();
+            const outer = wrapperRef.current;
+            const inner = outer.firstElementChild as HTMLElement;
+            const startRect = outer.getBoundingClientRect();
 
-            wrapperChild.ontransitionend = event => {
+            inner.ontransitionend = event => {
                 event.stopPropagation();
             }
             
             if (visible == visibleRef.current) {
-                wrapper.style.width = visible ? null : "0px";
-                wrapperChild.style.width = `${startRect.width}px`;
+                outer.style.width = visible ? null : "0px";
+                inner.style.width = `${startRect.width}px`;
             } else {
-                wrapper.style.width = null;
-                wrapperChild.style.width = null;
+                outer.style.width = null;
+                inner.style.width = null;
+                const unsetRect = outer.getBoundingClientRect();
 
                 if (visible) {
-                    const endRect = wrapper.getBoundingClientRect();
+                    outer.style.width = `${startRect.width}px`;
+                    inner.style.width = `${startRect.width}px`;
 
-                    wrapper.style.width = `${startRect.width}px`;
-                    wrapperChild.style.width = `${startRect.width}px`;
-
-                    HTMLElementUtil.reflow(wrapper);
+                    HTMLElementUtil.reflow(outer);
     
-                    wrapper.style.width = `${endRect.width}px`;
-                    wrapper.ontransitionend = () => {
-                        wrapper.style.width = null;
-                        wrapperChild.style.width = null;
+                    outer.style.width = `${unsetRect.width}px`;
+                    outer.ontransitionend = () => {
+                        outer.style.width = null;
+                        inner.style.width = null;
                     }
                     
-                    wrapperChild.style.width = `${endRect.width}px`;
+                    inner.style.width = `${unsetRect.width}px`;
                 } else {
-                    const unsetRect = wrapper.getBoundingClientRect();
-
-                    wrapper.style.width = `${startRect.width}px`;
-                    wrapperChild.style.width = `${unsetRect.width}px`;
+                    outer.style.width = `${startRect.width}px`;
+                    inner.style.width = `${unsetRect.width}px`;
     
-                    HTMLElementUtil.reflow(wrapper);
+                    HTMLElementUtil.reflow(outer);
     
-                    wrapper.style.width = `0px`;
-                    wrapper.ontransitionend = null;
+                    outer.style.width = `0px`;
+                    outer.ontransitionend = null;
                 }
             }
 
@@ -77,7 +81,74 @@ export namespace AnimatedFoldable {
         return (
             <Box
                 refer={wrapperRef}
+                overflow={overflow}
                 transitionProperty="width"
+                transitionDuration={duration}
+                transitionTimingFunction={curve}
+                children={<div>{children}</div>}
+            />
+        )
+    }
+
+    export function Vertical({visible, overflow = "hidden", duration, curve, children}: {
+        visible: boolean,
+        overflow?: Overflow,
+        duration: DurationUnit,
+        curve?: CurvesUnit,
+        children: ReactNode
+    }) {
+        const visibleRef = useRef<boolean>(visible);
+        const wrapperRef = useRef<HTMLDivElement>(null);
+
+        useLayoutEffect(() => {
+            const outer = wrapperRef.current;
+            const inner = outer.firstElementChild as HTMLElement;
+            const startRect = outer.getBoundingClientRect();
+
+            inner.ontransitionend = event => {
+                event.stopPropagation();
+            }
+            
+            if (visible == visibleRef.current) {
+                outer.style.height = visible ? null : "0px";
+                inner.style.height = `${startRect.height}px`;
+            } else {
+                outer.style.height = null;
+                inner.style.height = null;
+                const unsetRect = outer.getBoundingClientRect();
+
+                if (visible) {
+                    outer.style.height = `${startRect.height}px`;
+                    inner.style.height = `${startRect.height}px`;
+
+                    HTMLElementUtil.reflow(outer);
+    
+                    outer.style.height = `${unsetRect.height}px`;
+                    outer.ontransitionend = () => {
+                        outer.style.height = null;
+                        inner.style.height = null;
+                    }
+                    
+                    inner.style.height = `${unsetRect.height}px`;
+                } else {
+                    outer.style.height = `${startRect.height}px`;
+                    inner.style.height = `${unsetRect.height}px`;
+    
+                    HTMLElementUtil.reflow(outer);
+    
+                    outer.style.height = `0px`;
+                    outer.ontransitionend = null;
+                }
+            }
+
+            visibleRef.current = visible;
+        }, [visible]);
+
+        return (
+            <Box
+                refer={wrapperRef}
+                overflow={overflow}
+                transitionProperty="height"
                 transitionDuration={duration}
                 transitionTimingFunction={curve}
                 children={<div>{children}</div>}

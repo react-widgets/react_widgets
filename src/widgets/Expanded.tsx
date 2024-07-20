@@ -20,28 +20,20 @@ export function Expanded({children}: {
     )
 }
 
-export function ExpandedWidth({children}: {
-    children: ReactNode
-}) {
-    const style: CSSProperties = {
-        width: "100%",
-        overflow: "hidden"
+export namespace Expanded {
+    export function ExpandedWidth({children}: {
+        children: ReactNode
+    }) {
+        return (
+            <div style={{width: "100%", overflow: "hidden"}}>{children}</div>
+        )
     }
-
-    return (
-        <div style={style}>{children}</div>
-    )
-}
-
-export function ExpandedHeight({children}: {
-    children: ReactNode
-}) {
-    const style: CSSProperties = {
-        height: "100%",
-        overflow: "hidden"
+    
+    export function ExpandedHeight({children}: {
+        children: ReactNode
+    }) {
+        return (
+            <div style={{height: "100%", overflow: "hidden"}}>{children}</div>
+        )
     }
-
-    return (
-        <div style={style}>{children}</div>
-    )
 }

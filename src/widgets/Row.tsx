@@ -8,6 +8,7 @@ export interface RowProperties extends FlexOmit<CSSProperties, "display" | "flex
     gap?: SizeUnit,
     reverse?: any,
     wrap?: any,
+    size?: SizeUnit,
     scrollable?: any,
 
     bottomCenter?: any,
@@ -39,6 +40,13 @@ export function Row(p: RowProperties) {
         flexWrap: p.wrap != null ? "wrap" : undefined,
         gap: p.gap,
     } as CSSProperties};
+
+    if (p.size) {
+        console.assert(p.width != null, "The width cannot be defined when defining the size.");
+        console.assert(p.height != null, "The height cannot be defined when defining the size.");
+        style.width = p.size;
+        style.height = p.size;
+    }
 
     // BOTTOM RELATED
     if (p.bottomCenter) {

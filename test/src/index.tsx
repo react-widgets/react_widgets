@@ -19,13 +19,17 @@ export default function RootPage() {
     const [ visible, setVisible ] = useState(true);
 
     return (
-        <Row width="100%" height="100%">
+        <Row size="100%">
             <Column height="100%" backgroundColor="gray" padding="15px">
+                <button onClick={() => setVisible(!visible)}>접기</button>
                 <AnimatedFoldable.Horizontal visible={visible} duration="0.5s">
                     <button onClick={() => setVisible(!visible)}>나는냐 애니메이션 접이식 박스다</button>
                 </AnimatedFoldable.Horizontal>
+                <AnimatedFoldable.Vertical visible={visible} duration="0.5s">
+                    <button onClick={() => setVisible(!visible)}>나는냐 애니메이션 접이식 박스다</button>
+                </AnimatedFoldable.Vertical>
             </Column>
-            <Column width="100%" height="100%">
+            <Column size="100%">
                 <Box width="100%" height="100px" backgroundColor="red" />
                 <Scrollable.Vertical>
                     <Column>
