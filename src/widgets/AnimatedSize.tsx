@@ -35,7 +35,7 @@ export function AnimatedSize({children, duration, curve, sizeTolerance}: {
         const inner = outer.firstElementChild as HTMLElement;
 
         const size = measureSize(inner);
-        {
+        { // defining initial measured size about width and height.
             lowerSizeRef.current = size;
             upperSizeRef.current = size;
         }
