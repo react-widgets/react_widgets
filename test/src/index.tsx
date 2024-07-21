@@ -21,25 +21,24 @@ export default function RootPage() {
     return (
         <Row size="100%">
             <Column height="100%" backgroundColor="gray" padding="15px" boxSizing="border-box">
-                <button onClick={() => setVisible(!visible)}>접기</button>
-                <AnimatedFoldable.Horizontal visible={visible} duration="0.5s">
-                    <button onClick={() => setVisible(!visible)}>나는냐 애니메이션 접이식 박스다</button>
-                </AnimatedFoldable.Horizontal>
-                <AnimatedFoldable.Vertical visible={visible} duration="0.5s">
-                    <button onClick={() => setVisible(!visible)}>나는냐 애니메이션 접이식 박스다</button>
-                </AnimatedFoldable.Vertical>
+                <Row>
+                    <button onClick={() => setVisible(!visible)}>Close/Open</button>
+                    <AnimatedFoldable.Horizontal visible={visible} duration="0.5s">
+                        <button onClick={() => setVisible(!visible)}>
+                            <h1>AnimatedFoldable</h1>
+                        </button>
+                    </AnimatedFoldable.Horizontal>
+                </Row>
             </Column>
             <Column size="100%">
                 <Box width="100%" height="100px" backgroundColor="red" />
-                <Scrollable.Vertical>
+                <Column scrollable>
+                    <Box height="150px" backgroundColor="orange">AppBar</Box>
+                    <Box position="sticky" top="0px" padding="15px" backgroundColor="blue">Sticky</Box>
                     <Column>
-                        <Box height="150px" backgroundColor="orange">AppBar</Box>
-                        <Box position="sticky" top="0px" padding="15px" backgroundColor="blue">Sticky</Box>
-                        <Column>
-                            {Array.from({length: 100}).map((_, i) => <Text key={i}>sdfsdfsd</Text>)}
-                        </Column>
+                        {Array.from({length: 100}).map((_, i) => <Text key={i}>sdfsdfsd</Text>)}
                     </Column>
-                </Scrollable.Vertical>
+                </Column>
             </Column>
         </Row>
     )

@@ -12,7 +12,11 @@ return <Box backgroundColor="red">hello world</Box>
 ```
 
 ```tsx
-return <Row gap="15px">...</Row>
+return <Row scrollable gap="15px">...</Row>
+// OR
+// <Scrollable.Horizontal>
+//     <Row gap="15px">...</Row>
+// </Scrollable.Horizontal>
 ```
 
 ## How to make responsive grid?

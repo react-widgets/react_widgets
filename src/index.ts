@@ -5,7 +5,7 @@ export { ClipBox, ClipBoxProperties }  from "./widgets/ClipBox";
 export { Column, ColumnProperties } from "./widgets/Column";
 export { Row, RowProperties } from "./widgets/Row";
 export { ConstraintBuilder, Constraint, ConstraintsBuilder } from "./widgets/ConstraintBuilder";
-export { Expanded, ExpandedWidth, ExpandedHeight } from "./widgets/Expanded";
+export { Expanded } from "./widgets/Expanded";
 export { Grid, GridProperties } from "./widgets/Grid";
 export { Ignore } from "./widgets/Ignore";
 export { Image, ImageProperties } from "./widgets/Image";
