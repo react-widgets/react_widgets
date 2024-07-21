@@ -1,6 +1,14 @@
 <div align="center">
     <img src="https://github.com/user-attachments/assets/f871aa60-9eec-4f27-9be7-784b9a4a2065">
     <h1>React Widgets</h1>
+    <table>
+        <thead>
+          <tr>
+            <th>Version</th>
+            <th>v0.0.0-dev1</th>
+          </tr>
+        </tbody>
+    </table>
 </div>
 
 This is package that provides templates that can significantly reduce CSS development works in a react development environment.

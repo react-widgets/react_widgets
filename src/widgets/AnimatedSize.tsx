@@ -1,7 +1,7 @@
 import { ReactNode, useLayoutEffect, useRef } from "react";
 import { ClipBox } from "./ClipBox";
 import { HTMLElementUtil } from "../utils/html";
-import { CurvesUnit } from "../types";
+import { CurvesUnit, MeasuredSize } from "../types";
 import { useMeasuredSizeConnectionRef } from "../hooks/useMeasuredSizeConnectionRef";
 
 export interface AnimatedSizeOption {
@@ -17,14 +17,14 @@ export function AnimatedSize({children, duration, curve, sizeTolerance}: {
 }) {
     const wrapperRef = useRef<HTMLDivElement>(null);
     const measuredRef = useMeasuredSizeConnectionRef(wrapperRef);
-    const lowerSizeRef = useRef<{width: number, height: number}>(null);
-    const upperSizeRef = useRef<{width: number, height: number}>(null);
+    const lowerSizeRef = useRef<MeasuredSize>(null);
+    const upperSizeRef = useRef<MeasuredSize>(null);
 
     /**
      * Returns a unique size of the given element by calculating
      * for a scale degree.
      */
-    const measureSize = (target: HTMLElement): {width: number, height: number} => {
+    const measureSize = (target: HTMLElement): MeasuredSize => {
         return measuredRef.current
             ? HTMLElementUtil.measureSizeByConnection(measuredRef)
             : HTMLElementUtil.measureSize(target, sizeTolerance);
