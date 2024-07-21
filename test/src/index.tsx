@@ -12,34 +12,23 @@ import { TabNavigation } from "../../src/widgets/TabNavigation";
 import { Expanded } from "../../src/widgets/Expanded";
 import { Ignore } from "../../src/widgets/Ignore";
 import { AnimatedFoldable } from "../../src/widgets/AnimatedFoldable";
+import { MeasuredSizeConnection } from "../../src/widgets/MeasuredSizeConnection";
 import { createRoot } from "react-dom/client";
 import { useLayoutEffect, useRef, useState } from "react";
 
 export default function RootPage() {
-    const [ visible, setVisible ] = useState(true);
+    const [ items, setItems ] = useState([1, 2, 3]);
 
     return (
-        <Row size="100%">
-            <Column height="100%" backgroundColor="gray" padding="15px" boxSizing="border-box">
-                <Row>
-                    <button onClick={() => setVisible(!visible)}>Close/Open</button>
-                    <AnimatedFoldable.Horizontal visible={visible} duration="0.5s">
-                        <button onClick={() => setVisible(!visible)}>
-                            <h1>AnimatedFoldable</h1>
-                        </button>
-                    </AnimatedFoldable.Horizontal>
-                </Row>
-            </Column>
-            <Column size="100%">
-                <Box width="100%" height="100px" backgroundColor="red" />
-                <Column scrollable>
-                    <Box height="150px" backgroundColor="orange">AppBar</Box>
-                    <Box position="sticky" top="0px" padding="15px" backgroundColor="blue">Sticky</Box>
-                    <Column>
-                        {Array.from({length: 100}).map((_, i) => <Text key={i}>sdfsdfsd</Text>)}
-                    </Column>
-                </Column>
-            </Column>
+        <Row>
+            <button onClick={() => setItems(it => [...it, 3])}></button>
+            <MeasuredSizeConnection>
+                <Box backgroundColor="red">
+                    <AnimatedSize duration="0.5s">
+                        <div>{items.map((_, i) => <h3 key={i}>hello world {i}</h3>)}</div>
+                    </AnimatedSize>
+                </Box>
+            </MeasuredSizeConnection>
         </Row>
     )
 }

@@ -24,3 +24,5 @@ export type DurationUnit = string | "var()" | "s" | "ms";
  * curve form.
  */
 export type CurvesUnit = string | "var()" | "cubic-bezier(0, 0, 1, 1)";
+
+export type MeasuredSize = {width: number, height: number};

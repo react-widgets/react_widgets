@@ -2,6 +2,12 @@ import { ReactNode, useLayoutEffect, useRef } from "react";
 import { ClipBox } from "./ClipBox";
 import { HTMLElementUtil } from "../utils/html";
 import { CurvesUnit } from "../types";
+import { useMeasuredSizeConnectionRef } from "../hooks/useMeasuredSizeConnectionRef";
+
+export interface AnimatedSizeOption {
+    autoMeasureUniqueSize: boolean,
+    sizeTolerance: number,
+}
 
 export function AnimatedSize({children, duration, curve, sizeTolerance}: {
     children: ReactNode,
@@ -10,6 +16,7 @@ export function AnimatedSize({children, duration, curve, sizeTolerance}: {
     sizeTolerance?: number,
 }) {
     const wrapperRef = useRef<HTMLDivElement>(null);
+    const measuredRef = useMeasuredSizeConnectionRef(wrapperRef);
     const lowerSizeRef = useRef<{width: number, height: number}>(null);
     const upperSizeRef = useRef<{width: number, height: number}>(null);
 
@@ -18,32 +25,30 @@ export function AnimatedSize({children, duration, curve, sizeTolerance}: {
      * for a scale degree.
      */
     const measureSize = (target: HTMLElement): {width: number, height: number} => {
-        const paintedSize = target.getBoundingClientRect();
-        const scaleX = target.clientWidth / paintedSize.width;
-        const scaleY = target.clientHeight / paintedSize.height;
-        const tolerance = sizeTolerance ?? 0.3;
-
-        return {
-            width: paintedSize.width * scaleX + tolerance,
-            height: paintedSize.height * scaleY + tolerance
-        };
+        return measuredRef.current
+            ? HTMLElementUtil.measureSizeByConnection(measuredRef)
+            : HTMLElementUtil.measureSize(target, sizeTolerance);
     }
 
     useLayoutEffect(() => {
-        const wrapper = wrapperRef.current;
-        const wrapperInner = wrapper.firstElementChild as HTMLElement;
+        const outer = wrapperRef.current;
+        const inner = outer.firstElementChild as HTMLElement;
 
-        const size = measureSize(wrapperInner);
+        const size = measureSize(inner);
         {
             lowerSizeRef.current = size;
             upperSizeRef.current = size;
+        }
+
+        (inner.firstChild as HTMLElement).ontransitionend = event => {
+            event.stopPropagation();
         }
 
         // Called when a child is reflowed and added or removed,
         // or the style changes.
         const observer1 = new MutationObserver(() => {
             {
-                const a = measureSize(wrapperInner.firstElementChild as HTMLElement);
+                const a = measureSize(inner.firstElementChild as HTMLElement);
                 const b = upperSizeRef.current;
 
                 // The measured size must be different from the previous size.
@@ -52,32 +57,39 @@ export function AnimatedSize({children, duration, curve, sizeTolerance}: {
                 }
             }
 
-            wrapper.style.width = null;
-            wrapper.style.height = null;
-            wrapperInner.style.minWidth = null;
-            wrapperInner.style.minHeight = null;
+            outer.style.width = null;
+            outer.style.height = null;
+            inner.style.minWidth = null;
+            inner.style.minHeight = null;
 
-            const size = measureSize(wrapperInner); // reflowed
+            const size = measureSize(inner); // reflowed
 
             upperSizeRef.current = size;
 
-            wrapper.style.width = `${lowerSizeRef.current.width}px`;
-            wrapper.style.height = `${lowerSizeRef.current.height}px`;
+            outer.style.width = `${lowerSizeRef.current.width}px`;
+            outer.style.height = `${lowerSizeRef.current.height}px`;
 
-            HTMLElementUtil.reflow(wrapperInner);
+            HTMLElementUtil.reflow(inner);
 
-            wrapper.style.width = `${size.width}px`;
-            wrapper.style.height = `${size.height}px`;
-            wrapperInner.style.minWidth = `${size.width}px`;
-            wrapperInner.style.minHeight = `${size.height}px`;
+            outer.style.width = `${size.width}px`;
+            outer.style.height = `${size.height}px`;
+            outer.ontransitionend = () => {
+                outer.style.width = null;
+                outer.style.height = null;
+                inner.style.minWidth = null;
+                inner.style.minHeight = null;
+            }
+
+            inner.style.minWidth = `${size.width}px`;
+            inner.style.minHeight = `${size.height}px`;
         });
 
         const observer2 = new ResizeObserver(() => {
-            lowerSizeRef.current = measureSize(wrapper);
+            lowerSizeRef.current = measureSize(outer);
         });
 
-        observer2.observe(wrapper, {});
-        observer1.observe(wrapperInner.firstChild, {
+        observer2.observe(outer, {});
+        observer1.observe(inner.firstChild, {
             attributes: true,
             childList: true,
             subtree: true,
