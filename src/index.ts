@@ -20,7 +20,7 @@ export { Text, TextProperties, TextAlignment } from "./widgets/Text";
 addEventListener("DOMContentLoaded", () => {
     const option = ReactWidgets.REACT_WIDGETS_OPTION;
 
-    if (option != null) return;
+    if (option == null) return;
     if (option.useStrict) {
         const sheet = new CSSStyleSheet();
         sheet.insertRule("div { flex-shrink: 0; }");
