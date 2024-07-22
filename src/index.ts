@@ -18,9 +18,13 @@ export { TabNavigation } from "./widgets/TabNavigation";
 export { Text, TextProperties, TextAlignment } from "./widgets/Text";
 
 addEventListener("DOMContentLoaded", () => {
-    const option = ReactWidgets.REACT_WIDGETS_OPTION;
+    let defult: ReactWidgets.Option = {useStrict: true}; // default
+    let option: ReactWidgets.Option = ReactWidgets.REACT_WIDGETS_OPTION;
 
-    if (option == null) return;
+    if (option == null) {
+        option = {...defult, ...option};
+    }
+
     if (option.useStrict) {
         const sheet = new CSSStyleSheet();
         sheet.insertRule("div { flex-shrink: 0; }");
