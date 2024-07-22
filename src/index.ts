@@ -1,3 +1,6 @@
+import { ReactWidgets } from "./types";
+
+export { ReactWidgets } from "./types";
 export { AnimatedPage, AnimatedPageController, AnimatedPageStatus, AnimatedPageListener, AnimatedPageEvent } from "./widgets/AnimatedPage";
 export { AnimatedSize } from "./widgets/AnimatedSize";
 export { Box, BoxProperties } from "./widgets/Box";
@@ -13,3 +16,15 @@ export { Scrollable } from "./widgets/Scrollable";
 export { SizeBuilder, SizedBuilder } from "./widgets/SizeBuilder";
 export { TabNavigation } from "./widgets/TabNavigation";
 export { Text, TextProperties, TextAlignment } from "./widgets/Text";
+
+addEventListener("DOMContentLoaded", () => {
+    const option = ReactWidgets.REACT_WIDGETS_OPTION;
+
+    if (option != null) return;
+    if (option.useStrict) {
+        const sheet = new CSSStyleSheet();
+        sheet.insertRule("div { flex-shrink: 0; }");
+
+        document.adoptedStyleSheets = [sheet];
+    }
+});

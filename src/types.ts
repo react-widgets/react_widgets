@@ -26,3 +26,13 @@ export type DurationUnit = string | "var()" | "s" | "ms";
 export type CurvesUnit = string | "var()" | "cubic-bezier(0, 0, 1, 1)";
 
 export type MeasuredSize = {width: number, height: number};
+
+export declare module ReactWidgets {
+    /** Statically-defined react-widgets package of the option. */
+    export const REACT_WIDGETS_OPTION: Option;
+
+    export interface Option {
+        /** Whether to define the default value of the `flex-shrink` for all elements as 0. */
+        useStrict: boolean,
+    }
+}
