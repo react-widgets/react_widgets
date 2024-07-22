@@ -1,8 +1,8 @@
 import { CSSProperties, ReactNode } from "react";
 import { Scrollable } from "./Scrollable";
-import { FlexOmit, SizeUnit } from "../types";
+import { DeepOmit, SizeUnit } from "../types";
 
-export interface RowProperties extends FlexOmit<CSSProperties, "display" | "flexDirection" | "flexWrap" | "gap" | "alignItems" | "alignContent" | "justifyContent"> {
+export interface RowProperties extends DeepOmit<CSSProperties, "display" | "flexDirection" | "flexWrap" | "gap" | "alignItems" | "alignContent" | "justifyContent"> {
     className?: string,
     children?: ReactNode,
     gap?: SizeUnit,

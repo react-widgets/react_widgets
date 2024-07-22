@@ -1,7 +1,7 @@
 import { CSSProperties, ReactNode } from "react";
-import { FlexOmit, SizeUnit } from "../types";
+import { DeepOmit, SizeUnit } from "../types";
 
-export interface GridProperties extends FlexOmit<CSSProperties, "display" | "gridTemplateColumns" | "padding" | "margin"> {
+export interface GridProperties extends DeepOmit<CSSProperties, "display" | "gridTemplateColumns" | "padding" | "margin"> {
     children?: ReactNode,
     rowCount: number,
     gap?: SizeUnit,

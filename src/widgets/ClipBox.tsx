@@ -1,7 +1,7 @@
 import { CSSProperties, ReactNode, Ref } from "react";
-import { FlexOmit } from "../types";
+import { DeepOmit } from "../types";
 
-export interface ClipBoxProperties extends FlexOmit<CSSProperties, "display" | "overflow"> {
+export interface ClipBoxProperties extends DeepOmit<CSSProperties, "display" | "overflow"> {
     refer?: Ref<HTMLDivElement>,
     className?: string,
     children: ReactNode,

@@ -1,5 +1,5 @@
 import { CSSProperties, ReactNode, useLayoutEffect, useRef } from "react";
-import { CurvesUnit, DurationUnit, FlexOmit } from "../types";
+import { CurvesUnit, DurationUnit, DeepOmit } from "../types";
 import { Box } from "./Box";
 import { HTMLElementUtil } from "../utils/html";
 
@@ -13,15 +13,15 @@ export namespace AnimatedFoldable {
         unset: DOMRect
     ) => void;
 
-    export type StyleCSSProperties = FlexOmit<CSSProperties,
+    export type StyleCSSProperties = DeepOmit<CSSProperties,
         | "transitionProperty"
         | "transitionDuration"
         | "transitionTimingFunction"
     >
     
     export interface HorizontalStyle {
-        start: FlexOmit<StyleCSSProperties, "width" | "minWidth" | "maxWidth">;
-        end  : FlexOmit<StyleCSSProperties, "width" | "minWidth" | "maxWidth">;
+        start: DeepOmit<StyleCSSProperties, "width" | "minWidth" | "maxWidth">;
+        end  : DeepOmit<StyleCSSProperties, "width" | "minWidth" | "maxWidth">;
     }
 
     export function Horizontal({visible, overflow = "hidden", duration, curve, children}: {

@@ -1,5 +1,5 @@
 import { CSSProperties, ReactNode } from "react";
-import { FlexOmit } from "../types";
+import { DeepOmit } from "../types";
 
 export enum TextType {
     h1,
@@ -19,7 +19,7 @@ export enum TextAlignment {
     right = "end"
 }
 
-export interface TextProperties extends FlexOmit<CSSProperties, "display" | "WebkitBoxOrient" | "WebkitLineClamp" | "overflow"> {
+export interface TextProperties extends DeepOmit<CSSProperties, "display" | "WebkitBoxOrient" | "WebkitLineClamp" | "overflow"> {
     children: ReactNode,
     type?: TextType,
     maxLine?: number,
