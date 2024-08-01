@@ -24,7 +24,7 @@ export function ConstraintBuilder<T>({constraints, builder}: {
     );
 
     return (
-        <SizeBuilder builder={(width, _) => {
+        <SizeBuilder.Viewport builder={(width, _) => {
             // Find the constraint value that matches the current window size.
             const value = constraints.find(e => e.min <= width && e.max >= width)?.value;
             if (value == null) {
