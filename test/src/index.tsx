@@ -15,8 +15,9 @@ import { AnimatedFoldable } from "../../src/widgets/AnimatedFoldable";
 import { MeasuredSizeConnection } from "../../src/widgets/MeasuredSizeConnection";
 import { createRoot } from "react-dom/client";
 import { useLayoutEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 
-export default function RootPage() {
+export default function App() {
     const [ items, setItems ] = useState([1, 2, 3]);
 
     return (
@@ -33,4 +34,4 @@ export default function RootPage() {
     )
 }
 
-createRoot(document.getElementById("renderer")).render(<RootPage />);
+createRoot(document.getElementById("renderer")).render(<App />);

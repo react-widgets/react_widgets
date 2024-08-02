@@ -17,7 +17,7 @@ export namespace SizeBuilder {
      * it is a specific situation.
      */
     export function Viewport({builder}: Properties) {
-        // Returns a current window inner relative display size object,
+        // Returns current window inner relative display size object,
         // i.e. this value not the display size.
         const getSize = () => {
             return { width: window.innerWidth, height: window.innerHeight };
@@ -38,11 +38,7 @@ export namespace SizeBuilder {
     }
 
     // TODO: Need to develop a SizeBuilder that returns the size of the parent widget.
-<<<<<<< HEAD
     export function Parent({builder}: Properties) {
-
+        
     }
 }
-=======
-}
->>>>>>> 71f24750f9d88f1cd8da6bd72a8b4c968e59ea0e
