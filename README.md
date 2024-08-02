@@ -1,5 +1,5 @@
 <div align="center">
-    <img src="https://github.com/user-attachments/assets/a2b0ba95-1e8f-410c-845e-07e35e19ad93">
+    <img src="https://github.com/user-attachments/assets/f576cb2c-a1e1-4f54-af04-64cd17284282">
     <h1>React Widgets</h1>
     <table>
         <thead>
