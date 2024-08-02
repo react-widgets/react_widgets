@@ -1,9 +1,13 @@
 import { ReactNode, useLayoutEffect, useState } from "react";
 
-// Signature for a factory function of a react-node about display size.
+/** Signature for a factory function of a react-node about display size. */
 export type SizedBuilder = (width: number, height: number) => ReactNode;
 
 export namespace SizeBuilder {
+    /**
+     * Signature for the object that is defining required properties
+     * in about `SizeBuilder` foundation.
+     */
     export type Properties = {builder: SizedBuilder};
 
     /**
@@ -34,4 +38,7 @@ export namespace SizeBuilder {
     }
 
     // TODO: Need to develop a SizeBuilder that returns the size of the parent widget.
+    export function Parent({builder}: Properties) {
+
+    }
 }

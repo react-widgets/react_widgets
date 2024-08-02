@@ -20,6 +20,9 @@ export function AnimatedSize({children, duration, curve, sizeTolerance}: {
     const lowerSizeRef = useRef<MeasuredSize>(null);
     const upperSizeRef = useRef<MeasuredSize>(null);
 
+    const getOuter = () => wrapperRef.current;
+    const getInner = () => getOuter().firstElementChild as HTMLElement;
+
     /**
      * Returns a unique size of the given element by calculating
      * for a scale degree.
@@ -31,48 +34,51 @@ export function AnimatedSize({children, duration, curve, sizeTolerance}: {
     }
 
     useLayoutEffect(() => {
-        const outer = wrapperRef.current;
-        const inner = outer.firstElementChild as HTMLElement;
+        const innerSize = measureSize(getInner());
 
-        const size = measureSize(inner);
-        { // defining initial measured size about width and height.
-            lowerSizeRef.current = size;
-            upperSizeRef.current = size;
+        { // Defines initial measured size about width and height.
+            lowerSizeRef.current = innerSize;
+            upperSizeRef.current = innerSize;
         }
+    }, [])
+
+    useLayoutEffect(() => {
+        const outer = getOuter();
+        const inner = getInner();
 
         (inner.firstChild as HTMLElement).ontransitionend = event => {
             event.stopPropagation();
         }
 
-        // Called when a child is reflowed and added or removed,
-        // or the style changes.
-        const observer1 = new MutationObserver(() => {
-            {
-                const a = measureSize(inner.firstElementChild as HTMLElement);
-                const b = upperSizeRef.current;
-
-                // The measured size must be different from the previous size.
-                if (a.width == b.width && a.height == b.height) {
-                    return;
-                }
-            }
-
+        // Animates because the children elements has changed,
+        // i.e. This can be thought that the sub-tree elements has size can be changed.
+        //
+        // See Also, using MutationObserver to detect changes in the size
+        // of child elements is not considered a best practice in React.
+        {
             outer.style.width = null;
             outer.style.height = null;
             inner.style.minWidth = null;
             inner.style.minHeight = null;
 
-            const size = measureSize(inner); // reflowed
+            const lowerSize = lowerSizeRef.current;
+            const upperSize = measureSize(inner); // reflowed
 
-            upperSizeRef.current = size;
+            // Is not the children in this element has resized.
+            if (lowerSize.width  == upperSize.width
+             && lowerSize.height == upperSize.height) {
+                return;
+            }
 
-            outer.style.width = `${lowerSizeRef.current.width}px`;
-            outer.style.height = `${lowerSizeRef.current.height}px`;
+            upperSizeRef.current = upperSize;
+
+            outer.style.width = `${lowerSize.width}px`;
+            outer.style.height = `${lowerSize.height}px`;
 
             HTMLElementUtil.reflow(inner);
 
-            outer.style.width = `${size.width}px`;
-            outer.style.height = `${size.height}px`;
+            outer.style.width = `${upperSize.width}px`;
+            outer.style.height = `${upperSize.height}px`;
             outer.ontransitionend = () => {
                 outer.style.width = null;
                 outer.style.height = null;
@@ -80,27 +86,18 @@ export function AnimatedSize({children, duration, curve, sizeTolerance}: {
                 inner.style.minHeight = null;
             }
 
-            inner.style.minWidth = `${size.width}px`;
-            inner.style.minHeight = `${size.height}px`;
-        });
+            inner.style.minWidth = `${upperSize.width}px`;
+            inner.style.minHeight = `${upperSize.height}px`;
+        }
 
-        const observer2 = new ResizeObserver(() => {
+        const observer = new ResizeObserver(() => {
             lowerSizeRef.current = measureSize(outer);
         });
 
-        observer2.observe(outer, {});
-        observer1.observe(inner.firstChild, {
-            attributes: true,
-            childList: true,
-            subtree: true,
-            characterData: true
-        });
+        observer.observe(outer, {box: "device-pixel-content-box"});
 
-        return () => {
-            observer1.disconnect();
-            observer2.disconnect();
-        }
-    }, []);
+        return () => observer.disconnect();
+    }, [children]);
 
     return (
         <ClipBox
