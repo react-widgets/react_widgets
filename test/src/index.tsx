@@ -14,6 +14,7 @@ import { Ignore } from "../../src/widgets/Ignore";
 import { AnimatedFoldable } from "../../src/widgets/AnimatedFoldable";
 import { MeasuredSizeConnection } from "../../src/widgets/MeasuredSizeConnection";
 import { ReactWidgets } from "../../src/types";
+import { ReactWidgetsBinding } from "../../src/modules/ReactWidgetsBinding";
 import { createRoot } from "react-dom/client";
 import { useLayoutEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
