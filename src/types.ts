@@ -25,14 +25,27 @@ export type DurationUnit = string | "var()" | "s" | "ms";
  */
 export type CurvesUnit = string | "var()" | "cubic-bezier(0, 0, 1, 1)";
 
+/** Signature for the interface of a measured size about width, height. */
 export type MeasuredSize = {width: number, height: number};
 
-export declare module ReactWidgets {
+export namespace ReactWidgets {
     /** Statically-defined react-widgets package of the option. */
-    export const REACT_WIDGETS_OPTION: Option;
+    export let REACT_WIDGETS_OPTION: Partial<Option> = {};
 
     export interface Option {
-        /** Whether to define the default value of the `flex-shrink` for all elements as 0. */
+        /**
+         * Whether to define the default value of the `flex-shrink` for all elements as 0.
+         * And default value is true.
+         */
         useStrict: boolean,
+
+        /**
+         * Whether to correct measurement errors in react_widgets when the transform scale is not 1
+         * in measuring target element, as accurate size measurement is not possible in that case.
+         * 
+         * And default value is true.
+         * See Also, We can use `MeasuredSizeConnection` component to resolve these issues.
+         */
+        useMeasureScale: boolean
     }
 }

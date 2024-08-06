@@ -1,5 +1,6 @@
 import { MutableRefObject } from "react";
 import { MeasuredSize } from "../types";
+import { ReactWidgetsBinding } from "../modules/ReactWidgetsBinding";
 
 export class HTMLElementUtil { 
     /** Call the function to trigger a reflow of the given element. */
@@ -13,6 +14,12 @@ export class HTMLElementUtil {
      */
     static measureSize(target: HTMLElement, tolerance?: number): MeasuredSize {
         const paintedSize = target.getBoundingClientRect();
+
+        // Please refer to ReactWidgets.Option in ../types for details.
+        if (!ReactWidgetsBinding.instance.optionValueOf("useMeasureScale")) {
+            return paintedSize;
+        }
+
         const scaleX = target.clientWidth / paintedSize.width;
         const scaleY = target.clientHeight / paintedSize.height;
         const tolerancePx = tolerance ?? 0.3;

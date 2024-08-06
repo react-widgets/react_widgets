@@ -13,11 +13,7 @@ export enum TextType {
     span,
 }
 
-export enum TextAlignment {
-    left = "left",
-    center = "center",
-    right = "end"
-}
+export type TextAlignment = "left" |"center" | "end";
 
 export interface TextProperties extends DeepOmit<CSSProperties, "display" | "WebkitBoxOrient" | "WebkitLineClamp" | "overflow"> {
     children: ReactNode,

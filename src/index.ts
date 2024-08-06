@@ -1,4 +1,4 @@
-import { ReactWidgets } from "./types";
+import { ReactWidgetsBinding } from "./modules/ReactWidgetsBinding";
 
 export { ReactWidgets } from "./types";
 export { AnimatedPage, AnimatedPageController, AnimatedPageStatus, AnimatedPageListener, AnimatedPageEvent } from "./widgets/AnimatedPage";
@@ -11,24 +11,9 @@ export { ConstraintBuilder, Constraint, ConstraintsBuilder } from "./widgets/Con
 export { Expanded } from "./widgets/Expanded";
 export { Grid, GridProperties } from "./widgets/Grid";
 export { Ignore } from "./widgets/Ignore";
-export { Image, ImageProperties } from "./widgets/Image";
 export { Scrollable } from "./widgets/Scrollable";
 export { SizeBuilder, SizedBuilder } from "./widgets/SizeBuilder";
 export { TabNavigation } from "./widgets/TabNavigation";
 export { Text, TextProperties, TextAlignment } from "./widgets/Text";
 
-addEventListener("DOMContentLoaded", () => {
-    let defult: ReactWidgets.Option = {useStrict: true}; // default
-    let option: ReactWidgets.Option = ReactWidgets.REACT_WIDGETS_OPTION;
-
-    if (option == null) {
-        option = {...defult, ...option};
-    }
-
-    if (option.useStrict) {
-        const sheet = new CSSStyleSheet();
-        sheet.insertRule("div { flex-shrink: 0; }");
-
-        document.adoptedStyleSheets = [sheet];
-    }
-});
+addEventListener("DOMContentLoaded", ReactWidgetsBinding.instance.initialize);

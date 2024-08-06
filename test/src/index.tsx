@@ -13,6 +13,7 @@ import { Expanded } from "../../src/widgets/Expanded";
 import { Ignore } from "../../src/widgets/Ignore";
 import { AnimatedFoldable } from "../../src/widgets/AnimatedFoldable";
 import { MeasuredSizeConnection } from "../../src/widgets/MeasuredSizeConnection";
+import { ReactWidgets } from "../../src/types";
 import { createRoot } from "react-dom/client";
 import { useLayoutEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
@@ -23,13 +24,11 @@ export default function App() {
     return (
         <Row>
             <button onClick={() => setItems(it => [...it, 3])}></button>
-            <MeasuredSizeConnection>
-                <Box backgroundColor="red">
-                    <AnimatedSize duration="0.5s">
-                        <div>{items.map((_, i) => <h3 key={i}>hello world {i}</h3>)}</div>
-                    </AnimatedSize>
-                </Box>
-            </MeasuredSizeConnection>
+            <Box backgroundColor="red">
+                <AnimatedSize duration="0.5s">
+                    <div>{items.map((_, i) => <h3 key={i}>hello world {i}</h3>)}</div>
+                </AnimatedSize>
+            </Box>
         </Row>
     )
 }
