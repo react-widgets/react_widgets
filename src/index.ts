@@ -1,7 +1,7 @@
 import { ReactWidgetsBinding } from "./modules/ReactWidgetsBinding";
 
 export { ReactWidgets } from "./types";
-export { AnimatedPage, AnimatedPageController, AnimatedPageStatus, AnimatedPageListener, AnimatedPageEvent } from "./widgets/AnimatedPage";
+export { AnimatedPage } from "./widgets/AnimatedPage";
 export { AnimatedSize } from "./widgets/AnimatedSize";
 export { Box, BoxProperties } from "./widgets/Box";
 export { ClipBox, ClipBoxProperties }  from "./widgets/ClipBox";

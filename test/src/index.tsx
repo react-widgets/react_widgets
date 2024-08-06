@@ -7,7 +7,8 @@ import { Constraint, ConstraintBuilder } from "../../src/widgets/ConstraintBuild
 import { SizeBuilder } from "../../src/widgets/SizeBuilder"
 import { Text, TextType } from "../../src/widgets/Text"
 import { AnimatedSize } from "../../src/widgets/AnimatedSize";
-import { AnimatedPage, AnimatedPageController } from "../../src/widgets/AnimatedPage";
+import { AnimatedPage } from "../../src/widgets/AnimatedPage";
+import { AnimatedReplace } from "../../src/widgets/AnimatedReplace";
 import { TabNavigation } from "../../src/widgets/TabNavigation";
 import { Expanded } from "../../src/widgets/Expanded";
 import { Ignore } from "../../src/widgets/Ignore";
@@ -23,14 +24,12 @@ export default function App() {
     const [ items, setItems ] = useState([1, 2, 3]);
 
     return (
-        <Row>
-            <button onClick={() => setItems(it => [...it, 3])}></button>
-            <Box backgroundColor="red">
-                <AnimatedSize duration="0.5s">
-                    <div>{items.map((_, i) => <h3 key={i}>hello world {i}</h3>)}</div>
-                </AnimatedSize>
-            </Box>
-        </Row>
+        <Column>
+            <AnimatedReplace index={0} duration="5s">
+                <div>1</div>
+                <div>2</div>
+            </AnimatedReplace>
+        </Column>
     )
 }
 
