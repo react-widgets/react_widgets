@@ -1,24 +1,22 @@
-import { ReactNode } from "react";
+import { useLayoutEffect, useRef } from "react";
 import { DurationUnit } from "../types"
-
-export type AnimatedReplaceIndexedBuilder = (index: number) => ReactNode;
 
 export function AnimatedReplace({index, duration, children}: {
     index: number,
     duration: DurationUnit,
     children: JSX.Element[]
 }) {
-    return (
-        <AnimatedReplace.Builder index={index} duration={duration} builder={(i) => children[i]} />
-    )
-}
+    const itemCount = children.length;
+    const wrapperRef = useRef<HTMLDivElement>(null);
+    
+    console.assert(index >= 0, "A value of [index] cannot be negative.");
+    console.assert(index < itemCount, "A value of [index] cannot be bigger than a given item-count.");
 
-export namespace AnimatedReplace {
-    export function Builder({index, duration, builder}: {
-        index: number,
-        duration: DurationUnit,
-        builder: AnimatedReplaceIndexedBuilder,
-    }) {
-        return builder(index);
-    }
+    useLayoutEffect(() => {
+        const wrapper = wrapperRef.current;
+
+        console.log(wrapper);
+    }, [index]);
+
+    return <div ref={wrapperRef}>{children}</div>;
 }

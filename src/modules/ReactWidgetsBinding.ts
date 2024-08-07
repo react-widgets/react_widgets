@@ -23,7 +23,6 @@ export class ReactWidgetsBinding {
     }
     
     initialize() {
-        console.log("sdfsdfsdfsdfsf");
         if (this.optionValueOf("useStrict")) {
             const sheet = new CSSStyleSheet();
             sheet.insertRule("div { flex-shrink: 0; }");

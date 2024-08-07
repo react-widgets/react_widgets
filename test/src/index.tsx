@@ -25,9 +25,9 @@ export default function App() {
 
     return (
         <Column>
-            <AnimatedReplace index={0} duration="5s">
-                <div>1</div>
-                <div>2</div>
+            <AnimatedReplace index={1} duration="5s">
+                <div>Hello World 1</div>
+                <div>Hello World 2</div>
             </AnimatedReplace>
         </Column>
     )
