@@ -22,25 +22,21 @@ import { useLayoutEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 
 export default function App() {
-    const [ items, setItems ] = useState([1, 2, 3]);
-    const appbar: AppBar = {
-        alignment: AppBarAlignment.scroll,
-        component: (
-            <Box padding="15px" backgroundColor="red">
-                <h1>AppBar </h1>
-                <h2>AppBar Description 1</h2>
-                <h2>AppBar Description 2</h2>
-                <h2>AppBar Description 3</h2>
-            </Box>
-        )
-    }
+    const [index, setIndex] = useState(0);
 
     return (
-        <AppBarConnection appbars={[appbar]}>
-            <Column padding="15px">
-                {Array.from({length: 100}).map((_, i) => <h1 key={i}>Hello World {i}</h1>)}
-            </Column>
-        </AppBarConnection>
+        <Column>
+            <Row>
+                <button onClick={() => setIndex(0)}>go 1</button>
+                <button onClick={() => setIndex(1)}>go 2</button>
+                <button onClick={() => setIndex(2)}>go 3</button>
+            </Row>
+            <AnimatedReplace.Horizontal index={index} duration="1s">
+                <div>Hello World 1</div>
+                <div>Hello World 12</div>
+                <div>Hello World 123</div>
+            </AnimatedReplace.Horizontal>
+        </Column>
     )
 }
 

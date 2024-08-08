@@ -46,6 +46,6 @@ export namespace ReactWidgets {
          * And default value is true.
          * See Also, We can use `MeasuredSizeConnection` component to resolve these issues.
          */
-        useMeasureScale: boolean
+        useMeasureScale: boolean,
     }
 }

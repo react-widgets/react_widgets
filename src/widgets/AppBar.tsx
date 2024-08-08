@@ -63,7 +63,7 @@ export function AppBarConnection({appbars, children}: {
     useEffect(() => {
         const position = appbarPositionRef.current;
 
-        window.addEventListener("scroll", event => {
+        window.addEventListener("scroll", () => {
             const oldOffset = scrollOffsetRef.current;
             const newOffset = window.scrollY;
             const relOffset = newOffset - oldOffset;
