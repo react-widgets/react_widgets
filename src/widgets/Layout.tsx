@@ -13,7 +13,7 @@ export function Layout({before, behind, children}: {
     useLayoutEffect(() => {
         const element = wrapperRef.current as HTMLElement;
 
-        // Removes the styles properties of a wrapper for layout target element,
+        // Removes the style properties of a wrapper for layout target element,
         // To measure the exact size of an element.
         element.removeAttribute("style");
 
