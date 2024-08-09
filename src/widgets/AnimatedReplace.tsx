@@ -19,20 +19,20 @@ export namespace AnimatedReplace {
             const children = Array.from(wrapper.children) as HTMLElement[];
             const active = children[index];
             const others = children.filter((_: HTMLElement, i: number) => i != index);
-    
+
             for (let i = 0; i < children.length; i++) {
                 children[i].style.minWidth = "max-content";
             }
-    
+
             wrapper.style.removeProperty("width");
             wrapper.style.removeProperty("height"); 
-    
+
             const activeRect = active.getBoundingClientRect();
-    
+
             wrapper.style.width = `${activeRect.width}px`;
             wrapper.style.height = `${activeRect.height}px`;
         }, [index]);
-    
+
         return (
             <Box
                 refer={wrapperRef}

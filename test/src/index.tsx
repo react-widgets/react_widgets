@@ -15,6 +15,7 @@ import { Ignore } from "../../src/widgets/Ignore";
 import { AnimatedFoldable } from "../../src/widgets/AnimatedFoldable";
 import { MeasuredSizeConnection } from "../../src/widgets/MeasuredSizeConnection";
 import { AppBar, AppBarAlignment, AppBarConnection } from "../../src/widgets/AppBar";
+import { Layout } from "../../src/widgets/Layout";
 import { ReactWidgets } from "../../src/types";
 import { ReactWidgetsBinding } from "../../src/modules/ReactWidgetsBinding";
 import { createRoot } from "react-dom/client";
@@ -25,18 +26,9 @@ export default function App() {
     const [index, setIndex] = useState(0);
 
     return (
-        <Column>
-            <Row>
-                <button onClick={() => setIndex(0)}>go 1</button>
-                <button onClick={() => setIndex(1)}>go 2</button>
-                <button onClick={() => setIndex(2)}>go 3</button>
-            </Row>
-            <AnimatedReplace.Horizontal index={index} duration="1s">
-                <div>Hello World 1</div>
-                <div>Hello World 12</div>
-                <div>Hello World 123</div>
-            </AnimatedReplace.Horizontal>
-        </Column>
+        <Layout before={(size, element) => console.log(size, element)}>
+            <div>hello world</div>
+        </Layout>
     )
 }
 

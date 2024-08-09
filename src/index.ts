@@ -13,6 +13,8 @@ export { ConstraintBuilder, Constraint, ConstraintsBuilder } from "./widgets/Con
 export { Expanded } from "./widgets/Expanded";
 export { Grid, GridProperties } from "./widgets/Grid";
 export { Ignore } from "./widgets/Ignore";
+export { MeasuredSizeConnection } from "./widgets/MeasuredSizeConnection";
+export { Layout } from "./widgets/Layout";
 export { Scrollable } from "./widgets/Scrollable";
 export { SizeBuilder, SizedBuilder } from "./widgets/SizeBuilder";
 export { TabNavigation } from "./widgets/TabNavigation";
