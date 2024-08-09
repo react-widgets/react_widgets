@@ -12,8 +12,10 @@ export function Layout({before, behind, children}: {
 
     useLayoutEffect(() => {
         const element = wrapperRef.current as HTMLElement;
-        element.style.removeProperty("width");
-        element.style.removeProperty("height");
+
+        // Removes the styles properties of a wrapper for layout target element,
+        // To measure the exact size of an element.
+        element.removeAttribute("style");
 
         if (before) {
             const rect = element.getBoundingClientRect();
