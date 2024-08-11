@@ -11,7 +11,7 @@
     </table>
 </div>
 
-This is package that provides templates that can significantly reduce CSS development works in a react development environment.
+This package provides templates that significantly reduce CSS development work in a React environment, while enhancing readability and maintainability by consolidating style definitions. It fosters a more suitable development environment for Declarative UI.
 
 > Consider integrating not only business logic but also design logic into script code.
 
