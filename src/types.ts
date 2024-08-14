@@ -38,14 +38,5 @@ export namespace ReactWidgets {
          * And default value is true.
          */
         useStrict: boolean,
-
-        /**
-         * Whether to correct measurement errors in react_widgets when the transform scale is not 1
-         * in measuring target element, as accurate size measurement is not possible in that case.
-         * 
-         * And default value is true.
-         * See Also, We can use `MeasuredSizeConnection` component to resolve these issues.
-         */
-        useMeasureScale: boolean,
     }
 }

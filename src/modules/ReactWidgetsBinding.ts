@@ -10,7 +10,6 @@ export class ReactWidgetsBinding {
 
     static default: ReactWidgets.Option = {
         useStrict: true,
-        useMeasureScale: true
     }
 
     /** Sets the current react-widgets option values. */
