@@ -13,7 +13,6 @@ import { TabNavigation } from "../../src/widgets/TabNavigation";
 import { Expanded } from "../../src/widgets/Expanded";
 import { Ignore } from "../../src/widgets/Ignore";
 import { AnimatedFoldable } from "../../src/widgets/AnimatedFoldable";
-import { MeasuredSizeConnection } from "../../src/widgets/MeasuredSizeConnection";
 import { AppBar, AppBarAlignment, AppBarConnection } from "../../src/widgets/AppBar";
 import { Layout } from "../../src/widgets/Layout";
 import { ReactWidgets } from "../../src/types";
@@ -23,12 +22,21 @@ import { useLayoutEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 
 export default function App() {
-    const [index, setIndex] = useState(0);
+    const [count, setCount] = useState(1);
 
     return (
-        <Layout before={(size, element) => console.log(size, element)}>
-            <div>hello world</div>
-        </Layout>
+        <Column center>
+            <button onClick={() => setCount(count + 1)}>Count {count}</button>
+            <Box backgroundColor="red">
+                <AnimatedSize duration="0.5s">
+                    <Column>{
+                        Array.from({length: count}).map((_, index) => {
+                            return (<div>hello world {index}</div>);
+                        })
+                    }</Column>
+                </AnimatedSize>
+            </Box>
+        </Column>
     )
 }
 
