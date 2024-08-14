@@ -7,10 +7,7 @@ export class ElementUtil {
         target.getBoundingClientRect();
     }
 
-    /**
-     * Returns a unique size of the given element by calculating
-     * for a scale degree.
-     */
+    /** Gets a intrinsic size of the given html element. */
     static measureSize(target: HTMLElement): MeasuredSize {
         const computedStyle = getComputedStyle(target);
         return {
