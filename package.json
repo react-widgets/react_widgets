@@ -2,29 +2,31 @@
   "name": "react-widgets",
   "version": "1.0.0",
   "description": "This is package that provides templates that can significantly reduce CSS development works in a react development environment.",
-  "main": "index.js",
+  "author": "Dev Ttangkong",
+  "license": "Apache-2.0",
+  "repository": "https://github.com/MTtankkeo/react_widgets",
+  "bugs": "https://github.com/MTtankkeo/react_widgets/issues",
+  "main": "dist/index.umd.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/types",
+  "type": "module",
   "scripts": {
-    "build": "",
-    "watch": ""
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/MTtankkeo/react_widgets.git"
+    "build": "rollup -c",
+    "watch": "rollup -c -w"
   },
   "keywords": [
     "react",
     "template",
     "widget"
   ],
-  "author": "Dev Ttangkong",
-  "license": "Apache-2.0",
-  "bugs": {
-    "url": "https://github.com/MTtankkeo/react_widgets/issues"
-  },
-  "homepage": "https://github.com/MTtankkeo/react_widgets#readme",
   "devDependencies": {
+    "@rollup/plugin-terser": "^0.4.4",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.2.24",
+    "rollup": "^4.20.0",
+    "rollup-cli": "^1.0.9",
+    "rollup-plugin-typescript2": "^0.36.0",
+    "terser": "^5.31.6",
     "typescript": "^5.5.2"
   },
   "peerDependencies": {

@@ -1,0 +1,31 @@
+import { CSSProperties, ReactNode } from "react";
+import { DeepOmit, SizeUnit } from "../types";
+export interface ColumnProperties extends DeepOmit<CSSProperties, "display" | "flexDirection" | "flexWrap" | "gap" | "alignItems" | "alignContent" | "justifyContent"> {
+    className?: string;
+    children?: ReactNode;
+    gap?: SizeUnit;
+    reverse?: any;
+    wrap?: any;
+    size?: SizeUnit;
+    scrollable?: any;
+    bottomCenter?: any;
+    bottomLeft?: any;
+    bottomRight?: any;
+    center?: any;
+    centerLeft?: any;
+    centerRight?: any;
+    topCenter?: any;
+    topLeft?: any;
+    topRight?: any;
+    spaceBetweenLeft?: any;
+    spaceBetweenCenter?: any;
+    spaceBetweenRight?: any;
+    spaceAroundLeft?: any;
+    spaceAroundCenter?: any;
+    spaceAroundRight?: any;
+    spaceEvenlyLeft?: any;
+    spaceEvenlyCenter?: any;
+    spaceEvenlyRight?: any;
+    [key: string]: any;
+}
+export declare function Column(p: ColumnProperties): import("react/jsx-runtime").JSX.Element;

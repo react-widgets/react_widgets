@@ -1,12 +1,10 @@
-import { ReactWidgetsBinding } from "./modules/ReactWidgetsBinding";
-
 export { ReactWidgets } from "./types";
 export { AnimatedFoldable } from "./widgets/AnimatedFoldable";
 export { AnimatedReplace } from "./widgets/AnimatedReplace";
 export { AnimatedPage } from "./widgets/AnimatedPage";
 export { AnimatedSize } from "./widgets/AnimatedSize";
 export { Box, BoxProperties } from "./widgets/Box";
-export { ClipBox, ClipBoxProperties }  from "./widgets/ClipBox";
+export { ClipBox, ClipBoxProperties } from "./widgets/ClipBox";
 export { Column, ColumnProperties } from "./widgets/Column";
 export { Row, RowProperties } from "./widgets/Row";
 export { ConstraintBuilder, Constraint, ConstraintsBuilder } from "./widgets/ConstraintBuilder";
@@ -18,5 +16,3 @@ export { Scrollable } from "./widgets/Scrollable";
 export { SizeBuilder, SizedBuilder } from "./widgets/SizeBuilder";
 export { TabNavigation } from "./widgets/TabNavigation";
 export { Text, TextProperties, TextAlignment } from "./widgets/Text";
-
-addEventListener("DOMContentLoaded", ReactWidgetsBinding.instance.initialize);

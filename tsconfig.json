@@ -8,6 +8,8 @@
         "jsxImportSource": "react",
         "allowJs": true,
         "allowSyntheticDefaultImports": true,
-        "moduleResolution": "Node"
+        "moduleResolution": "Node",
+        "declaration": true,
+        "declarationDir": "./dist/types"
     }
 }
