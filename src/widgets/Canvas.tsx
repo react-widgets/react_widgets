@@ -5,7 +5,7 @@ import { ElementUtil } from "../utils/element";
 export type CanvasDrawCallback<T extends RenderingContext> = (context: T) => void;
 
 export class CanvasController<T extends RenderingContext> {
-
+    // TODO: later
 }
 
 export namespace Canvas {
@@ -34,7 +34,7 @@ export namespace Canvas {
         controller: CanvasController<T>
     }) {
         const canvasRef = useRef<HTMLCanvasElement>(null);
-    
+
         useLayoutEffect(() => {
             const canvas = canvasRef.current;
     
