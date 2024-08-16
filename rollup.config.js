@@ -28,8 +28,8 @@ export default {
             name: "ReactWidgets",
             globals: {
                 "react": "React",
+                "react/jsx-runtime": "React",
                 "react-dom": "ReactDOM",
-                "react/jsx-runtime": "jsxRuntime"
             }
         },
     ]
