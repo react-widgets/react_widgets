@@ -12,8 +12,25 @@ const plugins = [
 export default {
     plugins: plugins,
     input: "src/index.ts",
+    external: ["react", "react-dom", "react/jsx-runtime"],
     output: [
-        { file: "dist/index.esm.js", format: "esm", sourcemap: true, name: "AnimJS" },
-        { file: "dist/index.umd.js", format: "umd", sourcemap: true, name: "AnimJS" },
+        // Is ESM format
+        {
+            file: "dist/index.esm.js",
+            format: "esm",
+            sourcemap: true
+        },
+        // Is UMD format
+        {
+            file: "dist/index.umd.js",
+            format: "umd",
+            sourcemap: true,
+            name: "ReactWidgets",
+            globals: {
+                "react": "React",
+                "react-dom": "ReactDOM",
+                "react/jsx-runtime": "jsxRuntime"
+            }
+        },
     ]
 }
