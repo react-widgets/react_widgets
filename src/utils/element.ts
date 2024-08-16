@@ -1,4 +1,3 @@
-import { MutableRefObject } from "react";
 import { MeasuredSize } from "../types";
 
 export class ElementUtil { 
@@ -14,9 +13,5 @@ export class ElementUtil {
             width: parseFloat(computedStyle.width),
             height: parseFloat(computedStyle.height)
         };
-    }
-
-    static measureSizeByConnection(ref: MutableRefObject<HTMLDivElement>): MeasuredSize {
-        return ref.current.getBoundingClientRect(); // .measured_size_connection
     }
 }
