@@ -6,7 +6,7 @@ export { AnimatedReplace } from "./widgets/AnimatedReplace";
 export { AnimatedPage } from "./widgets/AnimatedPage";
 export { AnimatedSize } from "./widgets/AnimatedSize";
 export { Box, BoxProperties } from "./widgets/Box";
-export { Canvas } from "./widgets/Canvas";
+export { Canvas, CanvasController, CanvasDrawCallback } from "./widgets/Canvas";
 export { ClipBox, ClipBoxProperties }  from "./widgets/ClipBox";
 export { Column, ColumnProperties } from "./widgets/Column";
 export { Row, RowProperties } from "./widgets/Row";
@@ -20,4 +20,4 @@ export { SizeBuilder, SizedBuilder } from "./widgets/SizeBuilder";
 export { TabNavigation } from "./widgets/TabNavigation";
 export { Text, TextProperties, TextAlignment } from "./widgets/Text";
 
-addEventListener("DOMContentLoaded", ReactWidgetsBinding.instance.initialize);
+addEventListener("DOMContentLoaded", () => ReactWidgetsBinding.instance.initialize());

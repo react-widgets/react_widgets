@@ -4,7 +4,7 @@ export { AnimatedReplace } from "./widgets/AnimatedReplace";
 export { AnimatedPage } from "./widgets/AnimatedPage";
 export { AnimatedSize } from "./widgets/AnimatedSize";
 export { Box, BoxProperties } from "./widgets/Box";
-export { Canvas } from "./widgets/Canvas";
+export { Canvas, CanvasController, CanvasDrawCallback } from "./widgets/Canvas";
 export { ClipBox, ClipBoxProperties } from "./widgets/ClipBox";
 export { Column, ColumnProperties } from "./widgets/Column";
 export { Row, RowProperties } from "./widgets/Row";

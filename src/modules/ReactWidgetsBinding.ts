@@ -20,7 +20,7 @@ export class ReactWidgetsBinding {
     optionValueOf(name: keyof ReactWidgets.Option) {
         return ReactWidgets.REACT_WIDGETS_OPTION[name] ?? ReactWidgetsBinding.default[name];
     }
-    
+
     initialize() {
         if (this.optionValueOf("useStrict")) {
             const sheet = new CSSStyleSheet();
