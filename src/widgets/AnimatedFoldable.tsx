@@ -45,7 +45,6 @@ export namespace AnimatedFoldable {
             
             if (visible == visibleRef.current) {
                 outer.style.width = visible ? null : "0px";
-                inner.style.width = `${startSize.width}px`;
             } else {
                 outer.style.width = null;
                 inner.style.width = null;
@@ -111,7 +110,6 @@ export namespace AnimatedFoldable {
             
             if (visible == visibleRef.current) {
                 outer.style.height = visible ? null : "0px";
-                inner.style.height = `${startSize.height}px`;
             } else {
                 outer.style.height = null;
                 inner.style.height = null;
