@@ -36,3 +36,17 @@ export function Text(p: TextProperties) {
         default: return <div style={style}>{p.children}</div>
     }
 }
+
+export namespace Text {
+    type P = DeepOmit<TextProperties, "type">;
+
+    export function h1(p: P) { p = {...p, ...{type: "h1"}}; return <Text {...p} /> }
+    export function h2(p: P) { p = {...p, ...{type: "h2"}}; return <Text {...p} /> }
+    export function h3(p: P) { p = {...p, ...{type: "h3"}}; return <Text {...p} /> }
+    export function h4(p: P) { p = {...p, ...{type: "h4"}}; return <Text {...p} /> }
+    export function h5(p: P) { p = {...p, ...{type: "h5"}}; return <Text {...p} /> }
+    export function h6(p: P) { p = {...p, ...{type: "h6"}}; return <Text {...p} /> }
+    export function a(p: P) { p = {...p, ...{type: "a"}}; return <Text {...p} /> }
+    export function p(p: P) { p = {...p, ...{type: "p"}}; return <Text {...p} /> }
+    export function span(p: P) { p = {...p, ...{type: "span"}}; return <Text {...p} /> }
+}
