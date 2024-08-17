@@ -10,3 +10,16 @@ export interface TextProperties extends DeepOmit<CSSProperties, "display" | "Web
     [key: string]: any;
 }
 export declare function Text(p: TextProperties): import("react/jsx-runtime").JSX.Element;
+export declare namespace Text {
+    type P = DeepOmit<TextProperties, "type">;
+    export function h1(p: P): import("react/jsx-runtime").JSX.Element;
+    export function h2(p: P): import("react/jsx-runtime").JSX.Element;
+    export function h3(p: P): import("react/jsx-runtime").JSX.Element;
+    export function h4(p: P): import("react/jsx-runtime").JSX.Element;
+    export function h5(p: P): import("react/jsx-runtime").JSX.Element;
+    export function h6(p: P): import("react/jsx-runtime").JSX.Element;
+    export function a(p: P): import("react/jsx-runtime").JSX.Element;
+    export function p(p: P): import("react/jsx-runtime").JSX.Element;
+    export function span(p: P): import("react/jsx-runtime").JSX.Element;
+    export {};
+}
