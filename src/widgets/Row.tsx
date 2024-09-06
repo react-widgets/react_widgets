@@ -120,7 +120,6 @@ export function Row(p: RowProperties) {
     }
 
     const content = (
-        /** @ts-ignore */
         <widget-row className={p.className} style={style} children={p.children} />
     );
 

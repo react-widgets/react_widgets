@@ -1,19 +1,22 @@
-import { AnimatedFoldable, Column, Grid, Row } from "react-widgets";
-import { useState } from "react";
+import { ReactWidgets, Row, Scrollable } from "react-widgets";
 import { createRoot } from "react-dom/client";
 
-export default function App() {
-    const [visible, setVisible] = useState(true);
+ReactWidgets.REACT_WIDGETS_OPTION = {
+    useStrict: true
+}
 
+export default function App() {
     return (
-        <Grid rowCount={3}>
-            <div>1</div>
-            <div>1</div>
-            <div>1</div>
-            <div>1</div>
-            <div>1</div>
-            <div>1</div>
-        </Grid>
+        <Scrollable.Horizontal>
+            <Row align="center">
+                <div>1</div>
+                <div>1</div>
+                <div>1</div>
+                <div>1</div>
+                <div>1</div>
+                <div>1</div>
+            </Row>
+        </Scrollable.Horizontal>
     )
 }
 

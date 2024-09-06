@@ -1,5 +1,10 @@
 import { CSSProperties } from "react";
 
+export class ScrollableVerticalElement extends HTMLElement {}
+export class ScrollableHorzontalElement extends HTMLElement {}
+
+customElements.define("scrollable-vertical", ScrollableVerticalElement);
+
 export namespace Scrollable {
     export function Horizontal(p: {
         children?: JSX.Element,
@@ -29,17 +34,10 @@ export namespace Scrollable {
     export function Vertical({children}: {
         children: JSX.Element,
     }) {
-        const style: CSSProperties = {
-            display: "flex",
-            height: "100%",
-            flexShrink: "1",
-            overflowY: "auto"
-        }
-
         return (
-            <div style={style}>
+            <scrollable-vertical>
                 <div style={{width: "100%", height: "max-content"}}>{children}</div>    
-            </div>
+            </scrollable-vertical>
         )
     }
 }
