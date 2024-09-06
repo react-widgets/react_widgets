@@ -41,7 +41,7 @@ export function Row(p: RowProperties) {
         gap: p.gap,
     } as CSSProperties};
 
-    if (p.size) {
+    if (p.size != null) {
         console.assert(p.width != null, "The width cannot be defined when defining the size.");
         console.assert(p.height != null, "The height cannot be defined when defining the size.");
         style.width = p.size;
