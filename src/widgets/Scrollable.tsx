@@ -9,6 +9,7 @@ export namespace Scrollable {
         const style: CSSProperties = {
             display: "flex",
             width: "100%",
+            flexShrink: "1",
             overflowX: "auto"
         }
 
@@ -31,6 +32,7 @@ export namespace Scrollable {
         const style: CSSProperties = {
             display: "flex",
             height: "100%",
+            flexShrink: "1",
             overflowY: "auto"
         }
 
