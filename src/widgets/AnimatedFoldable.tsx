@@ -24,10 +24,11 @@ export namespace AnimatedFoldable {
         end  : DeepOmit<StyleCSSProperties, "width" | "minWidth" | "maxWidth">;
     }
 
-    export function Horizontal({visible, overflow = "hidden", duration, curve, children}: {
+    export function Horizontal({visible, overflow = "hidden", duration, opacity = false, curve, children}: {
         visible: boolean,
         overflow?: Overflow,
         duration: DurationUnit,
+        opacity?: boolean,
         curve?: CurvesUnit,
         children: ReactNode
     }) {
@@ -49,6 +50,11 @@ export namespace AnimatedFoldable {
                 outer.style.width = null;
                 inner.style.width = null;
                 const unsetSize = ElementUtil.measureSize(outer);
+
+                if (opacity) {
+                    visible ? outer.style.opacity = "1"
+                            : outer.style.opacity = "0";
+                }
 
                 if (visible) {
                     outer.style.width = `${startSize.width}px`;
@@ -81,7 +87,7 @@ export namespace AnimatedFoldable {
             <Box
                 refer={wrapperRef}
                 overflow={overflow}
-                transitionProperty="width"
+                transitionProperty={opacity ? "width, opacity" : "width"}
                 transitionDuration={duration}
                 transitionTimingFunction={curve}
                 children={<div>{children}</div>}
@@ -89,10 +95,11 @@ export namespace AnimatedFoldable {
         )
     }
 
-    export function Vertical({visible, overflow = "hidden", duration, curve, children}: {
+    export function Vertical({visible, overflow = "hidden", duration, opacity = false, curve, children}: {
         visible: boolean,
         overflow?: Overflow,
         duration: DurationUnit,
+        opacity?: boolean,
         curve?: CurvesUnit,
         children: ReactNode
     }) {
@@ -114,6 +121,11 @@ export namespace AnimatedFoldable {
                 outer.style.height = null;
                 inner.style.height = null;
                 const unsetSize = ElementUtil.measureSize(outer);
+
+                if (opacity) {
+                    visible ? outer.style.opacity = "1"
+                            : outer.style.opacity = "0";
+                }
 
                 if (visible) {
                     outer.style.height = `${startSize.height}px`;
@@ -146,7 +158,7 @@ export namespace AnimatedFoldable {
             <Box
                 refer={wrapperRef}
                 overflow={overflow}
-                transitionProperty="height"
+                transitionProperty={opacity ? "height, opacity" : "height"}
                 transitionDuration={duration}
                 transitionTimingFunction={curve}
                 children={<div>{children}</div>}
