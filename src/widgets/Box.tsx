@@ -18,8 +18,8 @@ export function Box(p: BoxProperties) {
     };
 
     if (p.size) {
-        console.assert(p.width != null, "The width cannot be defined when defining the size.");
-        console.assert(p.height != null, "The height cannot be defined when defining the size.");
+        console.assert(p.width == null, "The width cannot be defined when defining the size.");
+        console.assert(p.height == null, "The height cannot be defined when defining the size.");
         style.width = p.size;
         style.height = p.size;
     }
