@@ -44,17 +44,17 @@ export namespace AnimatedFoldable {
                 event.stopPropagation();
             }
 
-            if (opacity) {
-                visible ? outer.style.opacity = "1"
-                        : outer.style.opacity = "0";
-            }
-
             if (visible == visibleRef.current) {
                 outer.style.width = visible ? null : "0px";
             } else {
                 outer.style.width = null;
                 inner.style.width = null;
                 const unsetSize = ElementUtil.measureSize(outer);
+
+                if (opacity) {
+                    visible ? outer.style.opacity = "1"
+                            : outer.style.opacity = "0";
+                }
 
                 if (visible) {
                     outer.style.width = `${startSize.width}px`;
@@ -86,6 +86,7 @@ export namespace AnimatedFoldable {
         return (
             <Box
                 refer={wrapperRef}
+                opacity={opacity ? visible ? "1" : "0" : undefined}
                 overflow={overflow}
                 transitionProperty={opacity ? "width, opacity" : "width"}
                 transitionDuration={duration}
@@ -115,17 +116,17 @@ export namespace AnimatedFoldable {
                 event.stopPropagation();
             }
 
-            if (opacity) {
-                visible ? outer.style.opacity = "1"
-                        : outer.style.opacity = "0";
-            }
-
             if (visible == visibleRef.current) {
                 outer.style.height = visible ? null : "0px";
             } else {
                 outer.style.height = null;
                 inner.style.height = null;
                 const unsetSize = ElementUtil.measureSize(outer);
+
+                if (opacity) {
+                    visible ? outer.style.opacity = "1"
+                            : outer.style.opacity = "0";
+                }
 
                 if (visible) {
                     outer.style.height = `${startSize.height}px`;
@@ -157,6 +158,7 @@ export namespace AnimatedFoldable {
         return (
             <Box
                 refer={wrapperRef}
+                opacity={opacity ? visible ? "1" : "0" : undefined}
                 overflow={overflow}
                 transitionProperty={opacity ? "height, opacity" : "height"}
                 transitionDuration={duration}
