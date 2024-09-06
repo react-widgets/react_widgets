@@ -1,7 +1,7 @@
 import { ReactNode, useLayoutEffect, useRef } from "react";
-import { ClipBox } from "./ClipBox";
 import { CurvesUnit, MeasuredSize } from "../types";
 import { ElementUtil } from "../utils/element";
+import { Box } from "./Box";
 
 export interface AnimatedSizeOption {
     autoMeasureUniqueSize: boolean,
@@ -88,13 +88,14 @@ export function AnimatedSize({children, duration, curve, sizeTolerance}: {
     }, [children]);
 
     return (
-        <ClipBox
+        <Box
             refer={wrapperRef}
+            overflow="hidden"
             transitionProperty="width, height"
             transitionDuration={duration}
             transitionTimingFunction={curve}
         >
             <div>{children}</div>
-        </ClipBox>
+        </Box>
     )
 }

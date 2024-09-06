@@ -5,13 +5,9 @@ import { ElementUtil } from "../utils/element";
 
 export namespace AnimatedFoldable {
     export type Overflow = "visible" | "hidden" | "clip" | "scroll" | "auto";
-
-    export type BehaviorCallback = (
-        parent: HTMLElement,
-        child: HTMLElement,
-        start: DOMRect,
-        unset: DOMRect
-    ) => void;
+    export type Transition = {
+        opacity: boolean;
+    }
 
     export type StyleCSSProperties = DeepOmit<CSSProperties,
         | "transitionProperty"
@@ -24,16 +20,17 @@ export namespace AnimatedFoldable {
         end  : DeepOmit<StyleCSSProperties, "width" | "minWidth" | "maxWidth">;
     }
 
-    export function Horizontal({visible, overflow = "hidden", duration, opacity = false, curve, children}: {
+    export function Horizontal({visible, overflow = "hidden", duration, transition = {opacity: false}, curve, children}: {
         visible: boolean,
         overflow?: Overflow,
+        transition?: Transition,
         duration: DurationUnit,
-        opacity?: boolean,
         curve?: CurvesUnit,
         children: ReactNode
     }) {
         const visibleRef = useRef<boolean>(visible);
         const wrapperRef = useRef<HTMLDivElement>(null);
+        const opacity = transition?.opacity ?? false;
 
         useLayoutEffect(() => {
             const outer = wrapperRef.current;
@@ -96,16 +93,17 @@ export namespace AnimatedFoldable {
         )
     }
 
-    export function Vertical({visible, overflow = "hidden", duration, opacity = false, curve, children}: {
+    export function Vertical({visible, overflow = "hidden", duration, transition = {opacity: false}, curve, children}: {
         visible: boolean,
         overflow?: Overflow,
+        transition?: Transition,
         duration: DurationUnit,
-        opacity?: boolean,
         curve?: CurvesUnit,
         children: ReactNode
     }) {
         const visibleRef = useRef<boolean>(visible);
         const wrapperRef = useRef<HTMLDivElement>(null);
+        const opacity = transition?.opacity ?? false;
 
         useLayoutEffect(() => {
             const outer = wrapperRef.current;

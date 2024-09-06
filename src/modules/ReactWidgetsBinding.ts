@@ -24,9 +24,21 @@ export class ReactWidgetsBinding {
     initialize() {
         if (this.optionValueOf("useStrict")) {
             const sheet = new CSSStyleSheet();
-            sheet.insertRule("div { flex-shrink: 0; }");
-    
+            sheet.insertRule('* { flex-shrink: 0; boxSizing: border-box; }');
+
             document.adoptedStyleSheets = [sheet];
         }
+
+        this.initializeStyleSheet();
+    }
+
+    /** Initializes a required style sheet on the document. */
+    initializeStyleSheet() {
+        const sheet = new CSSStyleSheet();
+        sheet.insertRule('widget-row { display: flex; flex-direction: row; }');
+        sheet.insertRule('widget-column { display: flex; flex-direction: column; }');
+        sheet.insertRule('widget-grid { display: grid; }');
+
+        document.adoptedStyleSheets = [sheet];
     }
 }

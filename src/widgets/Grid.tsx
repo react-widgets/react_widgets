@@ -15,7 +15,6 @@ export interface GridProperties extends DeepOmit<CSSProperties, "display" | "gri
 
 export function Grid(p: GridProperties) {
     const style: CSSProperties = {...p, ...{ // given style + automatic and required style
-        display: "grid",
         gridTemplateColumns: Array.from({length: p.rowCount}, () => "1fr").join(" "),
         padding: p.padding,
         margin: p.margin,
@@ -30,6 +29,7 @@ export function Grid(p: GridProperties) {
     }
 
     return (
-        <div style={style}>{p.children}</div>
+        /** @ts-ignore */
+        <widget-grid style={style} children={p.children} />
     )
 }

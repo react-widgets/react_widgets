@@ -1,43 +1,45 @@
-import { CSSProperties, ReactNode } from "react";
+import { Children, CSSProperties, ReactNode } from "react";
 import { Scrollable } from "./Scrollable";
 import { DeepOmit, SizeUnit } from "../types";
 
+export type ColumnAlignment =
+    | "bottomCenter"
+    | "bottomLeft"
+    | "bottomRight"
+    | "center"
+    | "centerLeft"
+    | "centerRight"
+    | "topCenter"
+    | "topLeft"
+    | "topRight"
+    | "spaceBetweenLeft"
+    | "spaceBetweenCenter"
+    | "spaceBetweenRight"
+    | "spaceAroundLeft"
+    | "spaceAroundCenter"
+    | "spaceAroundRight"
+    | "spaceEvenlyLeft"
+    | "spaceEvenlyCenter"
+    | "spaceEvenlyRight";
+
 export interface ColumnProperties extends DeepOmit<CSSProperties, "display" | "flexDirection" | "flexWrap" | "gap" | "alignItems" | "alignContent" | "justifyContent"> {
-    className?: string,
-    children?: ReactNode,
-    gap?: SizeUnit,
-    reverse?: any,
-    wrap?: any,
-    size?: SizeUnit,
-    scrollable?: any,
+    className?: string;
+    children?: ReactNode;
+    gap?: SizeUnit;
+    reverse?: any;
+    wrap?: any;
+    size?: SizeUnit;
+    scrollable?: any;
+    align?: ColumnAlignment;
 
-    bottomCenter?: any,
-    bottomLeft?: any,
-    bottomRight?: any,
-    center?: any,
-    centerLeft?: any,
-    centerRight?: any,
-    topCenter?: any,
-    topLeft?: any,
-    topRight?: any,
-    spaceBetweenLeft?: any,
-    spaceBetweenCenter?: any,
-    spaceBetweenRight?: any,
-    spaceAroundLeft?: any,
-    spaceAroundCenter?: any,
-    spaceAroundRight?: any,
-    spaceEvenlyLeft?: any,
-    spaceEvenlyCenter?: any,
-    spaceEvenlyRight?: any,
-
-    [key: string]: any
+    [key: string]: any;
 }
 
 export function Column(p: ColumnProperties) {
+    const align = p.align;
     const style: CSSProperties = {...p, ...{
-        display: "flex",
-        flexDirection: p.reverse != null ? "column-reverse" : "column",
-        flexWrap: p.wrap != null ? "wrap" : undefined,
+        flexDirection: p.reverse ? "column-reverse" : undefined,
+        flexWrap: p.wrap ? "wrap" : undefined,
         gap: p.gap,
     } as CSSProperties};
 
@@ -49,84 +51,85 @@ export function Column(p: ColumnProperties) {
     }
 
     // BOTTOM RELATED
-    if (p.bottomCenter) {
+    if (align == "bottomCenter") {
         style.alignItems = "center";
         style.alignContent = "center",
         style.justifyContent = "end";
-    } else if (p.bottomLeft) {
+    } else if (align == "bottomLeft") {
         style.alignItems = "start";
         style.alignContent = "start";
         style.justifyContent = "end";
-    } else if (p.bottomRight) {
+    } else if (align == "bottomRight") {
         style.alignItems = "end";
         style.alignContent = "end";
         style.justifyContent = "end";
     } else
 
     // CENTER RELATED
-    if (p.center) {
+    if (align == "center") {
         style.alignItems = "center";
         style.alignContent = "center";
         style.justifyContent = "center";
-    } else if (p.centerLeft) {
+    } else if (align == "centerLeft") {
         style.alignItems = "start";
         style.alignContent = "start";
         style.justifyContent = "center";
-    } else if (p.centerRight) {
+    } else if (align == "centerRight") {
         style.alignItems = "end";
         style.alignContent = "end";
         style.justifyContent = "center";
     } else
 
     // TOP RELATED
-    if (p.topCenter) {
+    if (align == "topCenter") {
         style.alignItems = "center";
         style.alignContent = "center";
-    } else if (p.topLeft) {
+    } else if (align == "topLeft") {
         style.alignItems = "left";
         style.alignContent = "left";
-    } else if (p.topRight) {
+    } else if (align == "topRight") {
         style.alignItems = "right";
         style.alignContent = "right";
     } else
 
     // SPACE BETWEEN
-    if (p.spaceBetweenLeft) {
+    if (align == "spaceBetweenLeft") {
         style.justifyContent = "space-between";
-    } else if (p.spaceBetweenCenter) {
+    } else if (align == "spaceBetweenCenter") {
         style.alignContent = "center";
         style.justifyContent = "space-between";
-    } else if (p.spaceBetweenRight) {
+    } else if (align == "spaceBetweenRight") {
         style.alignContent = "end";
         style.justifyContent = "space-between";
     } else
 
     // SPACE AROUND
-    if (p.spaceAroundLeft) {
+    if (align == "spaceAroundLeft") {
         style.justifyContent = "space-between";
-    } else if (p.spaceAroundCenter) {
+    } else if (align == "spaceAroundCenter") {
         style.alignContent = "center";
         style.justifyContent = "space-around";
-    } else if (p.spaceAroundRight) {
+    } else if (align == "spaceAroundRight") {
         style.alignContent = "end";
         style.justifyContent = "space-around";
     } else
 
     // SPACE AROUND
-    if (p.spaceEvenlyLeft) {
+    if (align == "spaceEvenlyLeft") {
         style.justifyContent = "space-evenly";
-    } else if (p.spaceEvenlyCenter) {
+    } else if (align == "spaceEvenlyCenter") {
         style.alignItems = "center";
         style.alignContent = "center";
         style.justifyContent = "space-evenly";
-    } else if (p.spaceEvenlyRight) {
+    } else if (align == "spaceEvenlyRight") {
         style.alignItems = "end";
         style.alignContent = "end";
         style.justifyContent = "space-evenly";
     }
 
     const content = (
-        <div className={p.className} style={style}>{p.children}</div>
+        /** @ts-ignore */
+        <widget-column className={p.className} style={style} children={p.children} />
     )
 
     return p.scrollable ? <Scrollable.Vertical children={content} /> : content;

@@ -8,4 +8,6 @@ export declare class ReactWidgetsBinding {
     set currentOption(value: Partial<ReactWidgets.Option>);
     optionValueOf(name: keyof ReactWidgets.Option): boolean;
     initialize(): void;
+    /** Initializes a required style sheet on the document. */
+    initializeStyleSheet(): void;
 }

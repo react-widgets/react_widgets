@@ -2,6 +2,26 @@ import { CSSProperties, ReactNode } from "react";
 import { Scrollable } from "./Scrollable";
 import { DeepOmit, SizeUnit } from "../types";
 
+export type RowAlignment =
+    | "bottomCenter"
+    | "bottomLeft"
+    | "bottomRight"
+    | "bottomSpaceBetween"
+    | "bottomSpaceAround"
+    | "bottomSpaceEvenly"
+    | "center"
+    | "centerLeft"
+    | "centerRight"
+    | "centerSpaceBetween"
+    | "centerSpaceAround"
+    | "centerSpaceEvenly"
+    | "topCenter"
+    | "topLeft"
+    | "topRight"
+    | "topSpaceBetween"
+    | "topSpaceAround"
+    | "topSpaceEvenly"
+
 export interface RowProperties extends DeepOmit<CSSProperties, "display" | "flexDirection" | "flexWrap" | "gap" | "alignItems" | "alignContent" | "justifyContent"> {
     className?: string,
     children?: ReactNode,
@@ -10,34 +30,16 @@ export interface RowProperties extends DeepOmit<CSSProperties, "display" | "flex
     wrap?: any,
     size?: SizeUnit,
     scrollable?: any,
-
-    bottomCenter?: any,
-    bottomLeft?: any,
-    bottomRight?: any,
-    bottomSpaceBetween?: any,
-    bottomSpaceAround?: any,
-    bottomSpaceEvenly?: any,
-    center?: any,
-    centerLeft?: any,
-    centerRight?: any,
-    centerSpaceBetween?: any,
-    centerSpaceAround?: any,
-    centerSpaceEvenly?: any,
-    topCenter?: any,
-    topLeft?: any,
-    topRight?: any,
-    topSpaceBetween?: any,
-    topSpaceAround?: any,
-    topSpaceEvenly?: any,
+    align?: RowAlignment;
 
     [key: string]: any;
 }
 
 export function Row(p: RowProperties) {
+    const align = p.align;
     const style: CSSProperties = {...p, ...{
-        display: "flex",
-        flexDirection: p.reverse != null ? "row-reverse" : "row",
-        flexWrap: p.wrap != null ? "wrap" : undefined,
+        flexDirection: p.reverse ? "row-reverse" : undefined,
+        flexWrap: p.wrap ? "wrap" : undefined,
         gap: p.gap,
     } as CSSProperties};
 
@@ -49,76 +51,77 @@ export function Row(p: RowProperties) {
     }
 
     // BOTTOM RELATED
-    if (p.bottomCenter) {
+    if (align == "bottomCenter") {
         style.alignItems = "end";
         style.alignContent = "end",
         style.justifyContent = "center";
-    } else if (p.bottomLeft) {
+    } else if (align == "bottomLeft") {
         style.alignItems = "end";
         style.alignContent = "end";
         style.justifyContent = "left";
-    } else if (p.bottomRight) {
+    } else if (align == "bottomRight") {
         style.alignItems = "end";
         style.alignContent = "end";
         style.justifyContent = "right";
-    } else if (p.bottomSpaceBetween) {
+    } else if (align == "bottomSpaceBetween") {
         style.alignItems = "end";
         style.alignContent = "end";
         style.justifyContent = "space-between";
-    } else if (p.bottomSpaceAround) {
+    } else if (align == "bottomSpaceAround") {
         style.alignItems = "end";
         style.alignContent = "end";
         style.justifyContent = "space-around";
-    } else if (p.bottomSpaceEvenly) {
+    } else if (align == "bottomSpaceEvenly") {
         style.alignItems = "end";
         style.alignContent = "end";
         style.justifyContent = "space-evenly";
     } else
 
     // CENTER RELATED
-    if (p.center) {
+    if (align == "center") {
         style.alignItems = "center";
         style.alignContent = "center";
         style.justifyContent = "center";
-    } else if (p.centerLeft) {
+    } else if (align == "centerLeft") {
         style.alignItems = "center";
         style.alignContent = "center";
         style.justifyContent = "left";
-    } else if (p.centerRight) {
+    } else if (align == "centerRight") {
         style.alignItems = "center";
         style.alignContent = "center";
         style.justifyContent = "right";
-    } else if (p.centerSpaceBetween) {
+    } else if (align == "centerSpaceBetween") {
         style.alignItems = "center";
         style.alignContent = "center";
         style.justifyContent = "space-between";
-    } else if (p.centerSpaceAround) {
+    } else if (align == "centerSpaceAround") {
         style.alignItems = "center";
         style.alignContent = "center";
         style.justifyContent = "space-around";
-    } else if (p.centerSpaceEvenly) {
+    } else if (align == "centerSpaceEvenly") {
         style.alignItems = "center";
         style.alignContent = "center";
         style.justifyContent = "space-evenly";
     } else
 
     // TOP RELATED
-    if (p.topCenter) {
+    if (align == "topCenter") {
         style.justifyContent = "center";
-    } else if (p.topLeft) {
+    } else if (align == "topLeft") {
         style.justifyContent = "left";
-    } else if (p.topRight) {
+    } else if (align == "topRight") {
         style.justifyContent = "right";
-    } else if (p.topSpaceBetween) {
+    } else if (align == "topSpaceBetween") {
         style.justifyContent = "space-between";
-    } else if (p.topSpaceAround) {
+    } else if (align == "topSpaceAround") {
         style.justifyContent = "space-around";
-    } else if (p.topSpaceEvenly) {
+    } else if (align == "topSpaceEvenly") {
         style.justifyContent = "space-evenly";
     }
 
     const content = (
-        <div className={p.className} style={style} children={p.children} />
+        /** @ts-ignore */
+        <widget-row className={p.className} style={style} children={p.children} />
     );
 
     return p.scrollable ? <Scrollable.Horizontal children={content} /> : content;

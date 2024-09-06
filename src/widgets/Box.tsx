@@ -12,10 +12,7 @@ export interface BoxProperties extends CSSProperties {
 }
 
 export function Box(p: BoxProperties) {
-    const style = {
-        ...{flexShrink: 0, boxSizing: "border-box"} as CSSProperties,
-        ...p
-    };
+    const style = p as CSSProperties;
 
     if (p.size) {
         console.assert(p.width == null, "The width cannot be defined when defining the size.");
