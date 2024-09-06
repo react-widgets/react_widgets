@@ -43,18 +43,18 @@ export namespace AnimatedFoldable {
             inner.ontransitionend = event => {
                 event.stopPropagation();
             }
-            
+
+            if (opacity) {
+                visible ? outer.style.opacity = "1"
+                        : outer.style.opacity = "0";
+            }
+
             if (visible == visibleRef.current) {
                 outer.style.width = visible ? null : "0px";
             } else {
                 outer.style.width = null;
                 inner.style.width = null;
                 const unsetSize = ElementUtil.measureSize(outer);
-
-                if (opacity) {
-                    visible ? outer.style.opacity = "1"
-                            : outer.style.opacity = "0";
-                }
 
                 if (visible) {
                     outer.style.width = `${startSize.width}px`;
@@ -114,18 +114,18 @@ export namespace AnimatedFoldable {
             inner.ontransitionend = event => {
                 event.stopPropagation();
             }
-            
+
+            if (opacity) {
+                visible ? outer.style.opacity = "1"
+                        : outer.style.opacity = "0";
+            }
+
             if (visible == visibleRef.current) {
                 outer.style.height = visible ? null : "0px";
             } else {
                 outer.style.height = null;
                 inner.style.height = null;
                 const unsetSize = ElementUtil.measureSize(outer);
-
-                if (opacity) {
-                    visible ? outer.style.opacity = "1"
-                            : outer.style.opacity = "0";
-                }
 
                 if (visible) {
                     outer.style.height = `${startSize.height}px`;
