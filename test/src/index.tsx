@@ -1,4 +1,4 @@
-import { ReactWidgets, Row, Scrollable } from "react-widgets";
+import { Box, Column, ReactWidgets, Row, Scrollable } from "react-widgets";
 import { createRoot } from "react-dom/client";
 
 ReactWidgets.REACT_WIDGETS_OPTION = {
@@ -7,16 +7,23 @@ ReactWidgets.REACT_WIDGETS_OPTION = {
 
 export default function App() {
     return (
-        <Scrollable.Horizontal>
-            <Row align="center">
-                <div>1</div>
-                <div>1</div>
-                <div>1</div>
-                <div>1</div>
-                <div>1</div>
-                <div>1</div>
-            </Row>
-        </Scrollable.Horizontal>
+        <Row>
+            <Box>hello world</Box>
+            <Scrollable.Horizontal>
+                <Row gap="10px">
+                    <h1>1sdfsdfs</h1>
+                    <h1>1sdfsdfs</h1>
+                    <h1>1sdfsdfs</h1>
+                    <h1>1sdfsdfs</h1>
+                    <h1>1sdfsdfs</h1>
+                    <h1>1sdfsdfs</h1>
+                    <h1>1sdfsdfs</h1>
+                    <h1>1sdfsdfs</h1>
+                    <h1>1sdfsdfs</h1>
+                    <h1>1sdfsdfs</h1>
+                </Row>
+            </Scrollable.Horizontal>
+        </Row>
     )
 }
 

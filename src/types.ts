@@ -1,5 +1,4 @@
 import { HTMLAttributes, RefAttributes } from "react";
-import { ScrollableHorzontalElement, ScrollableVerticalElement } from "./widgets/Scrollable";
 
 /**
  * Signature for the type to overcome the limitations of the existing 
@@ -51,8 +50,8 @@ declare module "react/jsx-runtime" {
         interface IntrinsicElements {
             "widget-row": JSXCustomElement<HTMLDivElement>;
             "widget-column": JSXCustomElement<HTMLDivElement>;
-            "scrollable-vertical": JSXCustomElement<ScrollableVerticalElement>;
-            "scrollable-horizontal": JSXCustomElement<ScrollableHorzontalElement>;
+            "scrollable-vertical": JSXCustomElement<HTMLDivElement>;
+            "scrollable-horizontal": JSXCustomElement<HTMLDivElement>;
         }
     }
 }

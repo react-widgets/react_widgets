@@ -127,10 +127,5 @@ export function Column(p: ColumnProperties) {
         style.justifyContent = "space-evenly";
     }
 
-    const content = (
-        /** @ts-ignore */
-        <widget-column className={p.className} style={style} children={p.children} />
-    )
-
-    return p.scrollable ? <Scrollable.Vertical children={content} /> : content;
+    return <widget-column className={p.className} style={style} children={p.children} />
 }

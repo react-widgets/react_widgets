@@ -29,7 +29,6 @@ export interface RowProperties extends DeepOmit<CSSProperties, "display" | "flex
     reverse?: any,
     wrap?: any,
     size?: SizeUnit,
-    scrollable?: any,
     align?: RowAlignment;
 
     [key: string]: any;
@@ -119,9 +118,5 @@ export function Row(p: RowProperties) {
         style.justifyContent = "space-evenly";
     }
 
-    const content = (
-        <widget-row className={p.className} style={style} children={p.children} />
-    );
-
-    return p.scrollable ? <Scrollable.Horizontal children={content} /> : content;
+    return <widget-row className={p.className} style={style} children={p.children} />
 }

@@ -1,3 +1,4 @@
+import { HTMLAttributes, RefAttributes } from "react";
 /**
  * Signature for the type to overcome the limitations of the existing
  * typescript utility type `Omit`.
@@ -35,3 +36,16 @@ export declare namespace ReactWidgets {
         useStrict: boolean;
     }
 }
+/** Signature for the types that defines a component of React. */
+type JSXCustomElement<T extends HTMLElement> = HTMLAttributes<T> & RefAttributes<T>;
+declare module "react/jsx-runtime" {
+    namespace JSX {
+        interface IntrinsicElements {
+            "widget-row": JSXCustomElement<HTMLDivElement>;
+            "widget-column": JSXCustomElement<HTMLDivElement>;
+            "scrollable-vertical": JSXCustomElement<HTMLDivElement>;
+            "scrollable-horizontal": JSXCustomElement<HTMLDivElement>;
+        }
+    }
+}
+export {};

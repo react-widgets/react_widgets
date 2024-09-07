@@ -22,23 +22,46 @@ export class ReactWidgetsBinding {
     }
 
     initialize() {
-        if (this.optionValueOf("useStrict")) {
-            const sheet = new CSSStyleSheet();
-            sheet.insertRule('* { flex-shrink: 0; boxSizing: border-box; }');
+        const sheet = new CSSStyleSheet();
 
-            document.adoptedStyleSheets = [sheet];
+        if (this.optionValueOf("useStrict")) {
+            sheet.insertRule('div { flex-shrink: 0; boxSizing: border-box; }');
         }
 
-        this.initializeStyleSheet();
+        this.initializeStyleSheet(sheet);
     }
 
     /** Initializes a required style sheet on the document. */
-    initializeStyleSheet() {
-        const sheet = new CSSStyleSheet();
+    initializeStyleSheet(sheet: CSSStyleSheet) {
         sheet.insertRule('widget-row { display: flex; flex-direction: row; }');
         sheet.insertRule('widget-column { display: flex; flex-direction: column; }');
         sheet.insertRule('widget-grid { display: grid; }');
 
-        document.adoptedStyleSheets = [sheet];
+        { // About an <scrollable-vertical> element.
+            sheet.insertRule(`
+                scrollable-vertical {
+                    display: block;
+                    height: 100%;
+                    overflow: auto;
+                }
+            `);
+
+            sheet.insertRule('scrollable-vertical > * { height: max-content }');
+        }
+
+        { // About an <scrollable-horizontal> element.
+            sheet.insertRule(`
+                scrollable-horizontal {
+                    display: block;
+                    width: 100%;
+                    overflow: auto;
+                }
+            `);
+
+            sheet.insertRule('scrollable-horizontal > * { width: max-content; }')
+        }
+
+        // Defines the style rules that apply to the children of this element.
+        document.adoptedStyleSheets = [...document.adoptedStyleSheets, sheet];
     }
 }

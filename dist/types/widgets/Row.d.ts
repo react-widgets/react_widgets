@@ -8,7 +8,6 @@ export interface RowProperties extends DeepOmit<CSSProperties, "display" | "flex
     reverse?: any;
     wrap?: any;
     size?: SizeUnit;
-    scrollable?: any;
     align?: RowAlignment;
     [key: string]: any;
 }

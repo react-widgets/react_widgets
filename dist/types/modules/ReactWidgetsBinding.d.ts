@@ -9,5 +9,5 @@ export declare class ReactWidgetsBinding {
     optionValueOf(name: keyof ReactWidgets.Option): boolean;
     initialize(): void;
     /** Initializes a required style sheet on the document. */
-    initializeStyleSheet(): void;
+    initializeStyleSheet(sheet: CSSStyleSheet): void;
 }
