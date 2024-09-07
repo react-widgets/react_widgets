@@ -23,12 +23,20 @@ export function Expanded({direction, children}: {
         const wrapper = wrapperRef.current;
         const wrapperParent = wrapper.parentElement;
         const wrapperOthers = Array.from(wrapperParent.children).filter(c => c != wrapper);
+        
+        let previousWidth = 0;
+        let previousHeight = 0;
 
-        const observer = new ResizeObserver(() => {
-            // Ensures that it does not affect the existing parent layout calculations.
-            direction == "vertical"
-                ? wrapper.style.height = "0px"
-                : wrapper.style.width = "0px";
+        const observer = new ResizeObserver(entries => {
+            const currentWidth = entries[0].contentBoxSize[0].inlineSize;
+            const currentHeight = entries[0].contentBoxSize[0].blockSize;
+
+            // When a given size has not changed, no calculation will be performed.
+            if (direction == "vertical" && previousHeight == currentHeight) return;
+            if (direction == "horizontal" && previousWidth == currentWidth) return;
+
+            previousWidth = currentWidth;
+            previousHeight = currentHeight;
 
             // Calculates the sum of the sizes of all the parent children, excluding itself.
             const othersSize = wrapperOthers.reduce((value, other) => {
@@ -39,11 +47,15 @@ export function Expanded({direction, children}: {
                 }
             }, {width: 0, height: 0});
 
-            if (direction == "vertical") {
-                wrapper.style.height = `calc(100% - ${othersSize.height}px)`;
-            } else {
-                wrapper.style.width = `calc(100% - ${othersSize.width}px)`;
-            }
+            // An observer may trigger unnecessary calls due to a `reflow` caused by a next size definition,
+            // therefore, The observer must disconnect for a while until the next frame.
+            observer.disconnect();
+
+            direction == "vertical"
+                ? wrapper.style.height = `calc(100% - ${othersSize.height}px)`
+                : wrapper.style.minWidth = `calc(100% - ${othersSize.width}px)`;
+
+            requestAnimationFrame(() => observer.observe(wrapperParent));
         });
 
         observer.observe(wrapperParent);

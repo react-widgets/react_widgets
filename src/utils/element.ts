@@ -23,11 +23,6 @@ export class ElementUtil {
         const borderT = parseFloat(style.borderTop);
         const borderB = parseFloat(style.borderBottom);
 
-        // Calculate total size based on box-sizing.
-        if (boxSizing === 'border-box') {
-            return {width, height};
-        }
-
         // if content-box.
         return {
             width: width + paddingL + paddingR + borderL + borderR,
