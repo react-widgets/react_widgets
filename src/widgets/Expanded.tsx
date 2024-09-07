@@ -1,8 +1,18 @@
 import { ReactNode, useLayoutEffect, useRef } from "react";
 import { ElementUtil } from "../utils/element";
 
+/** Signature for the type of a direction for Expanded widget. */
 export type ExpandedDirection = "vertical" | "horizontal";
 
+/**
+ * A widget that adapts to fill the remaining space within its parent container.
+ * This component adjusts its size based on the available space left after
+ * 
+ * considering other siblings within the same parent element.
+ * It supports both vertical and horizontal directions.
+ * 
+ * See Also, Primarily used to resolve issues with inheriting the parent size as is.
+*/
 export function Expanded({direction, children}: {
     direction: ExpandedDirection,
     children: ReactNode
@@ -14,10 +24,11 @@ export function Expanded({direction, children}: {
         const wrapperParent = wrapper.parentElement;
         const wrapperOthers = Array.from(wrapperParent.children).filter(c => c != wrapper);
 
-        const onLayout = () => {
+        const observer = new ResizeObserver(() => {
             // Ensures that it does not affect the existing parent layout calculations.
-            wrapper.style.width = "0px";
-            wrapper.style.height = "0px";
+            direction == "vertical"
+                ? wrapper.style.height = "0px"
+                : wrapper.style.width = "0px";
 
             // Calculates the sum of the sizes of all the parent children, excluding itself.
             const othersSize = wrapperOthers.reduce((value, other) => {
@@ -28,29 +39,16 @@ export function Expanded({direction, children}: {
                 }
             }, {width: 0, height: 0});
 
-            const parentSize = ElementUtil.measureSize(wrapperParent);
-            const parentWidth = parentSize.width;
-            const parentHeight = parentSize.height;
-
             if (direction == "vertical") {
-                wrapper.style.width = "unset";
-                wrapper.style.height = `${Math.max(0, parentHeight - othersSize.height)}px`;
+                wrapper.style.height = `calc(100% - ${othersSize.height}px)`;
             } else {
-                wrapper.style.height = "unset";
-                wrapper.style.width = `${Math.max(0, parentWidth - othersSize.width)}px`;
+                wrapper.style.width = `calc(100% - ${othersSize.width}px)`;
             }
-        }
+        });
 
-        // Called only when the window size changes. In the case of `ResizeObserver`,
-        // it may be involved in the layout, causing the callback to be called multiple times,
-        // and warnings may be triggered by external libraries.
-        //
-        addEventListener("resize", onLayout);
+        observer.observe(wrapperParent);
 
-        // Needs to be explicitly called once initially.
-        onLayout();
-
-        return () => removeEventListener("resize", onLayout);
+        return () => observer.disconnect();
     }, []);
 
     return (
