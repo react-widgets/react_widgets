@@ -9,6 +9,9 @@ export class ElementUtil {
     /** Gets a intrinsic size of the given html element. */
     static measureSize(target: Element): MeasuredSize {
         const style = getComputedStyle(target);
+        const boxSizing = style.boxSizing;
+
+        // Parse sizes all.
         const width = parseFloat(style.width);
         const height = parseFloat(style.height);
         const paddingL = parseFloat(style.paddingLeft);
@@ -20,6 +23,12 @@ export class ElementUtil {
         const borderT = parseFloat(style.borderTop);
         const borderB = parseFloat(style.borderBottom);
 
+        // Calculate total size based on box-sizing.
+        if (boxSizing === 'border-box') {
+            return {width, height};
+        }
+
+        // if content-box.
         return {
             width: width + paddingL + paddingR + borderL + borderR,
             height: height + paddingT + paddingB + borderT + borderB
