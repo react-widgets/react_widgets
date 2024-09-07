@@ -7,11 +7,18 @@ export class ElementUtil {
     }
 
     /** Gets a intrinsic size of the given html element. */
-    static measureSize(target: HTMLElement): MeasuredSize {
-        const computedStyle = getComputedStyle(target);
+    static measureSize(target: Element): MeasuredSize {
+        const style = getComputedStyle(target);
+        const width = parseFloat(style.width);
+        const height = parseFloat(style.height);
+        const paddingL = parseFloat(style.paddingLeft);
+        const paddingR = parseFloat(style.paddingRight);
+        const paddingT = parseFloat(style.paddingTop);
+        const paddingB = parseFloat(style.paddingBottom);
+
         return {
-            width: parseFloat(computedStyle.width),
-            height: parseFloat(computedStyle.height)
+            width: width + paddingL + paddingR,
+            height: height + paddingT + paddingB
         };
     }
 }
