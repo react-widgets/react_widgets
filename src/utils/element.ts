@@ -19,8 +19,6 @@ export class ElementUtil {
         const borderR = parseFloat(style.borderRight);
         const borderT = parseFloat(style.borderTop);
         const borderB = parseFloat(style.borderBottom);
-
-        // Get the box-sizing property, which determines how width and height are calculated.
         const boxSizing = style.boxSizing;
 
         let totalWidth = width;
