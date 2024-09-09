@@ -26,7 +26,7 @@ export type DurationUnit = string | "var()" | "s" | "ms";
  */
 export type CurvesUnit = string | "var()" | "cubic-bezier(0, 0, 1, 1)";
 
-/** Signature for the interface of a measured size about width, height. */
+/** Signature for the type that defines a intrinsic size(i.e. width, height) of a element. */
 export type MeasuredSize = {width: number, height: number};
 
 export namespace ReactWidgets {

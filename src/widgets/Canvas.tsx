@@ -69,7 +69,7 @@ export namespace Canvas {
                 canvas.style.width = width;
                 canvas.style.height = height;
 
-                const canvasSize = ElementUtil.measureSize(canvas); // reflowed
+                const canvasSize = ElementUtil.sizeOf(canvas); // reflowed
                 canvas.setAttribute("width", `${canvasSize.width}px`);
                 canvas.setAttribute("height", `${canvasSize.height}px`);
 

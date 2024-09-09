@@ -35,8 +35,8 @@ export namespace AnimatedFoldable {
         useLayoutEffect(() => {
             const outer = wrapperRef.current;
             const inner = outer.firstElementChild as HTMLElement;
-            const innerSize = ElementUtil.measureSize(inner);
-            const startSize = ElementUtil.measureSize(outer);
+            const innerSize = ElementUtil.sizeOf(inner);
+            const startSize = ElementUtil.sizeOf(outer);
 
             inner.ontransitionend = event => {
                 event.stopPropagation();
@@ -48,7 +48,7 @@ export namespace AnimatedFoldable {
             } else {
                 outer.style.width = null;
                 inner.style.width = null;
-                const unsetSize = ElementUtil.measureSize(outer);
+                const unsetSize = ElementUtil.sizeOf(outer);
 
                 if (opacity) {
                     visible ? outer.style.opacity = "1"
@@ -110,8 +110,8 @@ export namespace AnimatedFoldable {
         useLayoutEffect(() => {
             const outer = wrapperRef.current;
             const inner = outer.firstElementChild as HTMLElement;
-            const innerSize = ElementUtil.measureSize(inner);
-            const startSize = ElementUtil.measureSize(outer);
+            const innerSize = ElementUtil.sizeOf(inner);
+            const startSize = ElementUtil.sizeOf(outer);
 
             inner.ontransitionend = event => {
                 event.stopPropagation();
@@ -123,7 +123,7 @@ export namespace AnimatedFoldable {
             } else {
                 outer.style.height = null;
                 inner.style.height = null;
-                const unsetSize = ElementUtil.measureSize(outer);
+                const unsetSize = ElementUtil.sizeOf(outer);
 
                 if (opacity) {
                     visible ? outer.style.opacity = "1"

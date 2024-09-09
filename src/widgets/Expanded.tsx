@@ -40,7 +40,7 @@ export function Expanded({direction, children}: {
 
             // Calculates the sum of the sizes of all the parent children, excluding itself.
             const othersSize = wrapperOthers.reduce((value, other) => {
-                const size = ElementUtil.measureSize(other);
+                const size = ElementUtil.sizeOf(other);
                 return {
                     width: value.width + size.width,
                     height: value.height + size.height

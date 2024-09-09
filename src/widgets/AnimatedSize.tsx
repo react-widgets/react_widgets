@@ -22,7 +22,7 @@ export function AnimatedSize({children, duration, curve, sizeTolerance}: {
     const getInner = () => getOuter().firstElementChild as HTMLElement;
 
     useLayoutEffect(() => {
-        const innerSize = ElementUtil.measureSize(getInner());
+        const innerSize = ElementUtil.sizeOf(getInner());
 
         { // Defines initial measured size about width and height.
             lowerSizeRef.current = innerSize;
@@ -50,7 +50,7 @@ export function AnimatedSize({children, duration, curve, sizeTolerance}: {
             inner.style.minHeight = null;
 
             const lowerSize = lowerSizeRef.current;
-            const upperSize = ElementUtil.measureSize(inner); // reflowed
+            const upperSize = ElementUtil.sizeOf(inner); // reflowed
 
             // Is not the children in this element has resized.
             if (lowerSize.width  == upperSize.width
@@ -79,7 +79,7 @@ export function AnimatedSize({children, duration, curve, sizeTolerance}: {
         }
 
         const observer = new ResizeObserver(() => {
-            lowerSizeRef.current = ElementUtil.measureSize(outer);
+            lowerSizeRef.current = ElementUtil.sizeOf(outer);
         });
 
         observer.observe(outer, {box: "device-pixel-content-box"});

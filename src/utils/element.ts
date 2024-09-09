@@ -6,12 +6,9 @@ export class ElementUtil {
         target.getBoundingClientRect();
     }
 
-    /** Gets a intrinsic size of the given html element. */
-    static measureSize(target: Element): MeasuredSize {
-        const style = getComputedStyle(target);
-        const boxSizing = style.boxSizing;
-
-        // Parse sizes all.
+    /** Gets a intrinsic size(i.e. width, height) of a given element. */
+    static sizeOf(element: Element): MeasuredSize {
+        const style = getComputedStyle(element);
         const width = parseFloat(style.width);
         const height = parseFloat(style.height);
         const paddingL = parseFloat(style.paddingLeft);
@@ -23,10 +20,22 @@ export class ElementUtil {
         const borderT = parseFloat(style.borderTop);
         const borderB = parseFloat(style.borderBottom);
 
-        // if content-box.
+        // Get the box-sizing property, which determines how width and height are calculated.
+        const boxSizing = style.boxSizing;
+
+        let totalWidth = width;
+        let totalHeight = height;
+
+        // When box-sizing is set to `content-box`, add padding and border to the width and height,
+        // because the reported width/height doesn't include these in content-box mode.
+        if (boxSizing == "content-box") {
+            totalWidth += paddingL + paddingR + borderL + borderR;
+            totalHeight += paddingT + paddingB + borderT + borderB;
+        }
+
         return {
-            width: width + paddingL + paddingR + borderL + borderR,
-            height: height + paddingT + paddingB + borderT + borderB
+            width: totalWidth,
+            height: totalHeight
         };
     }
 }
