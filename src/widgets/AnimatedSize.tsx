@@ -1,7 +1,7 @@
 import { ReactNode, useLayoutEffect, useRef } from "react";
 import { CurvesUnit, MeasuredSize } from "../types";
-import { ElementUtil } from "../utils/element";
 import { Box } from "./Box";
+import { ElementUtil } from "@web-package/utility";
 
 export interface AnimatedSizeOption {
     autoMeasureUniqueSize: boolean,
@@ -22,7 +22,7 @@ export function AnimatedSize({children, duration, curve, sizeTolerance}: {
     const getInner = () => getOuter().firstElementChild as HTMLElement;
 
     useLayoutEffect(() => {
-        const innerSize = ElementUtil.sizeOf(getInner());
+        const innerSize = ElementUtil.intrinsicSizeOf(getInner());
 
         { // Defines initial measured size about width and height.
             lowerSizeRef.current = innerSize;
@@ -50,7 +50,7 @@ export function AnimatedSize({children, duration, curve, sizeTolerance}: {
             inner.style.minHeight = null;
 
             const lowerSize = lowerSizeRef.current;
-            const upperSize = ElementUtil.sizeOf(inner); // reflowed
+            const upperSize = ElementUtil.intrinsicSizeOf(inner); // reflowed
 
             // Is not the children in this element has resized.
             if (lowerSize.width  == upperSize.width
@@ -79,7 +79,7 @@ export function AnimatedSize({children, duration, curve, sizeTolerance}: {
         }
 
         const observer = new ResizeObserver(() => {
-            lowerSizeRef.current = ElementUtil.sizeOf(outer);
+            lowerSizeRef.current = ElementUtil.intrinsicSizeOf(outer);
         });
 
         observer.observe(outer, {box: "device-pixel-content-box"});

@@ -1,6 +1,6 @@
 import { useLayoutEffect, useRef } from "react";
 import { SizeUnit } from "../types";
-import { ElementUtil } from "../utils/element";
+import { ElementUtil } from "@web-package/utility";
 
 /** Signature for the callback function that is called when a canvas drawing. */
 export type CanvasDrawCallback<T extends RenderingContext> = (context: T) => void;
@@ -69,7 +69,7 @@ export namespace Canvas {
                 canvas.style.width = width;
                 canvas.style.height = height;
 
-                const canvasSize = ElementUtil.sizeOf(canvas); // reflowed
+                const canvasSize = ElementUtil.intrinsicSizeOf(canvas); // reflowed
                 canvas.setAttribute("width", `${canvasSize.width}px`);
                 canvas.setAttribute("height", `${canvasSize.height}px`);
 

@@ -1,7 +1,7 @@
 import { CSSProperties, ReactNode, useLayoutEffect, useRef } from "react";
 import { CurvesUnit, DurationUnit, DeepOmit } from "../types";
 import { Box } from "./Box";
-import { ElementUtil } from "../utils/element";
+import { ElementUtil } from "@web-package/utility";
 
 export namespace AnimatedFoldable {
     export type Overflow = "visible" | "hidden" | "clip" | "scroll" | "auto";
@@ -35,8 +35,8 @@ export namespace AnimatedFoldable {
         useLayoutEffect(() => {
             const outer = wrapperRef.current;
             const inner = outer.firstElementChild as HTMLElement;
-            const innerSize = ElementUtil.sizeOf(inner);
-            const startSize = ElementUtil.sizeOf(outer);
+            const innerSize = ElementUtil.intrinsicSizeOf(inner);
+            const startSize = ElementUtil.intrinsicSizeOf(outer);
 
             inner.ontransitionend = event => {
                 event.stopPropagation();
@@ -48,7 +48,7 @@ export namespace AnimatedFoldable {
             } else {
                 outer.style.width = null;
                 inner.style.width = null;
-                const unsetSize = ElementUtil.sizeOf(outer);
+                const unsetSize = ElementUtil.intrinsicSizeOf(outer);
 
                 if (opacity) {
                     visible ? outer.style.opacity = "1"
@@ -110,8 +110,8 @@ export namespace AnimatedFoldable {
         useLayoutEffect(() => {
             const outer = wrapperRef.current;
             const inner = outer.firstElementChild as HTMLElement;
-            const innerSize = ElementUtil.sizeOf(inner);
-            const startSize = ElementUtil.sizeOf(outer);
+            const innerSize = ElementUtil.intrinsicSizeOf(inner);
+            const startSize = ElementUtil.intrinsicSizeOf(outer);
 
             inner.ontransitionend = event => {
                 event.stopPropagation();
@@ -123,7 +123,7 @@ export namespace AnimatedFoldable {
             } else {
                 outer.style.height = null;
                 inner.style.height = null;
-                const unsetSize = ElementUtil.sizeOf(outer);
+                const unsetSize = ElementUtil.intrinsicSizeOf(outer);
 
                 if (opacity) {
                     visible ? outer.style.opacity = "1"
