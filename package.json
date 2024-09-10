@@ -20,6 +20,7 @@
     "widget"
   ],
   "devDependencies": {
+    "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-terser": "^0.4.4",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.2.24",
