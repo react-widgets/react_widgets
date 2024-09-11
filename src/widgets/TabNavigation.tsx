@@ -67,7 +67,7 @@ export namespace TabNavigation {
             wrapperLine.style.width = `${itemRect.width}px`;
             wrapperLine.style.marginLeft = `${itemRect.left - bodyRect.left}px`;
 
-            // Transition animations about line should only be applied after the margin is finally defining.
+            // Transition animations about the line should only be applied after a margin is finally defining.
             if (wrapperLine.style.transitionProperty == null) {
                 requestAnimationFrame(() => wrapperLine.style.transitionProperty = "margin, width");
             }
@@ -123,9 +123,9 @@ export namespace TabNavigation {
             wrapperLine.style.height = `${itemRect.height}px`;
             wrapperLine.style.marginTop = `${itemRect.top - bodyRect.top}px`;
 
-            // Transition animations about line should only be applied after the margin is finally defining.
+            // Transition animations about the line should only be applied after a margin is finally defining.
             if (wrapperLine.style.transitionProperty == null) {
-                requestAnimationFrame(() => wrapperLine.style.transitionProperty = "margin, width");
+                requestAnimationFrame(() => wrapperLine.style.transitionProperty = "margin, height");
             }
         }, [index]);
 
