@@ -66,12 +66,17 @@ export namespace TabNavigation {
 
             wrapperLine.style.width = `${itemRect.width}px`;
             wrapperLine.style.marginLeft = `${itemRect.left - bodyRect.left}px`;
+
+            // Transition animations about line should only be applied after the margin is finally defining.
+            if (wrapperLine.style.transitionProperty == null) {
+                requestAnimationFrame(() => wrapperLine.style.transitionProperty = "margin, width");
+            }
         }, [index]);
 
         return (
             <Box refer={wrapperRef}>
                 <Row gap={gap} children={children} />
-                <Box transitionDuration={duration} transitionProperty="margin, width" transitionTimingFunction={curve}>
+                <Box transitionDuration={duration} transitionTimingFunction={curve}>
                     <Box
                         width={rawStyle.width}
                         height={index != null ? rawStyle.thickness : 0}
@@ -117,6 +122,11 @@ export namespace TabNavigation {
 
             wrapperLine.style.height = `${itemRect.height}px`;
             wrapperLine.style.marginTop = `${itemRect.top - bodyRect.top}px`;
+
+            // Transition animations about line should only be applied after the margin is finally defining.
+            if (wrapperLine.style.transitionProperty == null) {
+                requestAnimationFrame(() => wrapperLine.style.transitionProperty = "margin, width");
+            }
         }, [index]);
 
         return (
@@ -125,7 +135,6 @@ export namespace TabNavigation {
                     display="flex"
                     alignItems="center"
                     transitionDuration={duration}
-                    transitionProperty="margin, height"
                     transitionTimingFunction={curve}
                 >
                     <Box
