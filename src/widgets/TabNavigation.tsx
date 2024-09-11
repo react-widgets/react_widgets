@@ -3,6 +3,7 @@ import { CurvesUnit, DurationUnit, SizeUnit } from "../types";
 import { Box } from "./Box";
 import { Row } from "./Row";
 import { Column } from "./Column";
+import { DOMRectUtil } from "@web-package/utility"
 
 export namespace TabNavigation {
     export interface Style {
@@ -59,10 +60,10 @@ export namespace TabNavigation {
             const wrapper = wrapperRef.current;
             const wrapperBody = wrapper.firstElementChild as HTMLElement;
             const wrapperLine = wrapper.lastElementChild as HTMLElement;
-            const current = getItemByIndex(wrapperBody.children, index);
+            const currentBody = getItemByIndex(wrapperBody.children, index);
 
-            const bodyRect = wrapperBody.getBoundingClientRect();
-            const itemRect = current.getBoundingClientRect();
+            const bodyRect = DOMRectUtil.intrinsicOf(wrapperBody);
+            const itemRect = DOMRectUtil.intrinsicOf(currentBody);
 
             wrapperLine.style.width = `${itemRect.width}px`;
             wrapperLine.style.marginLeft = `${itemRect.left - bodyRect.left}px`;
@@ -115,10 +116,10 @@ export namespace TabNavigation {
             const wrapper = wrapperRef.current;
             const wrapperBody = wrapper.lastElementChild as HTMLElement;
             const wrapperLine = wrapper.firstElementChild as HTMLElement;
-            const current = getItemByIndex(wrapperBody.children, index);
+            const currentBody = getItemByIndex(wrapperBody.children, index);
 
-            const bodyRect = wrapperBody.getBoundingClientRect();
-            const itemRect = current.getBoundingClientRect();
+            const bodyRect = DOMRectUtil.intrinsicOf(wrapperBody);
+            const itemRect = DOMRectUtil.intrinsicOf(currentBody);
 
             wrapperLine.style.height = `${itemRect.height}px`;
             wrapperLine.style.marginTop = `${itemRect.top - bodyRect.top}px`;
