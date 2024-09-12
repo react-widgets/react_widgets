@@ -33,11 +33,9 @@ export function ConstraintBuilder<T>({constraints, builder}: {
             }
 
             // Memoize and recycle the builder result based on the value.
-            // Because of due to the widget's characteristic where the result
-            // remains the same if the input value is unchanged, i.e. unupdated.
-            const children = useMemo(() => builder(value), [value]);
-
-            return <ConditionalRender value={value} children={children} />;
+            // Because of due to the widget's characteristic where
+            // the result remains the same if the input value is unchanged.
+            return useMemo(() => builder(value), [value]);
         }} />
     );
 }

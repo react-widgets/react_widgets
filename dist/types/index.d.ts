@@ -7,6 +7,7 @@ export { Box, BoxProperties } from "./widgets/Box";
 export { Canvas, CanvasController, CanvasDrawCallback } from "./widgets/Canvas";
 export { Column, ColumnProperties } from "./widgets/Column";
 export { Row, RowProperties } from "./widgets/Row";
+export { ConditionalRender } from "./widgets/ConditionalRender";
 export { ConstraintBuilder, Constraint, ConstraintsBuilder } from "./widgets/ConstraintBuilder";
 export { Expanded } from "./widgets/Expanded";
 export { Grid, GridProperties } from "./widgets/Grid";

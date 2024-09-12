@@ -13,7 +13,8 @@ export default function App() {
                 new Constraint(-Infinity, 1000, 0),
             ]}
             builder={value => {
-                return <Box padding="15px"><h1>{value}</h1></Box>;
+                console.log(value);
+                return <Box padding="15px"><Boo /></Box>;
             }}
         />
     )
