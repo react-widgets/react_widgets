@@ -25,7 +25,6 @@ export type RowAlignment =
 export interface RowProperties extends DeepOmit<CSSProperties, "display" | "flexDirection" | "flexWrap" | "gap" | "alignItems" | "alignContent" | "justifyContent"> {
     className?: string,
     children?: ReactNode,
-    gap?: SizeUnit,
     paddingAndGap?: SizeUnit;
     reverse?: any,
     wrap?: any,
