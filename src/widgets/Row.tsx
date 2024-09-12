@@ -39,7 +39,6 @@ export function Row(p: RowProperties) {
     const style: CSSProperties = {...p, ...{
         flexDirection: p.reverse ? "row-reverse" : undefined,
         flexWrap: p.wrap ? "wrap" : undefined,
-        gap: p.gap,
     } as CSSProperties};
 
     if (p.size) {

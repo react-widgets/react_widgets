@@ -40,7 +40,6 @@ export function Column(p: ColumnProperties) {
     const style: CSSProperties = {...p, ...{
         flexDirection: p.reverse ? "column-reverse" : undefined,
         flexWrap: p.wrap ? "wrap" : undefined,
-        gap: p.gap,
     } as CSSProperties};
 
     if (p.size) {
