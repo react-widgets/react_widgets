@@ -5,6 +5,7 @@ export interface ColumnProperties extends DeepOmit<CSSProperties, "display" | "f
     className?: string;
     children?: ReactNode;
     gap?: SizeUnit;
+    paddingAndGap?: SizeUnit;
     reverse?: any;
     wrap?: any;
     size?: SizeUnit;

@@ -6,7 +6,7 @@
   "scripts": {
     "build": "webpack",
     "watch": "webpack -w",
-    "dev": "webpack-dev-server --hot"
+    "serve": "webpack serve --hot"
   },
   "devDependencies": {
     "html-webpack-plugin": "^5.6.0",

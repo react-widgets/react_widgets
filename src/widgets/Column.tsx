@@ -26,6 +26,7 @@ export interface ColumnProperties extends DeepOmit<CSSProperties, "display" | "f
     className?: string;
     children?: ReactNode;
     gap?: SizeUnit;
+    paddingAndGap?: SizeUnit;
     reverse?: any;
     wrap?: any;
     size?: SizeUnit;
@@ -44,10 +45,17 @@ export function Column(p: ColumnProperties) {
     } as CSSProperties};
 
     if (p.size) {
-        console.assert(p.width == null, "The width cannot be defined when defining the size.");
-        console.assert(p.height == null, "The height cannot be defined when defining the size.");
+        console.assert(p.width == null, "The `width` cannot be defined when defining the `size`.");
+        console.assert(p.height == null, "The `height` cannot be defined when defining the `size`.");
         style.width = p.size;
         style.height = p.size;
+    }
+
+    if (p.paddingAndGap) {
+        console.assert(p.padding == null, "The `padding` cannot be defined when defining the `paddingAndGap`.");
+        console.assert(p.gap == null, "The `gap` cannot be defined when defining the `paddingAndGap`.");
+        style.padding = p.paddingAndGap;
+        style.gap = p.paddingAndGap;
     }
 
     // BOTTOM RELATED

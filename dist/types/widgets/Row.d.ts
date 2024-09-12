@@ -5,6 +5,7 @@ export interface RowProperties extends DeepOmit<CSSProperties, "display" | "flex
     className?: string;
     children?: ReactNode;
     gap?: SizeUnit;
+    paddingAndGap?: SizeUnit;
     reverse?: any;
     wrap?: any;
     size?: SizeUnit;
