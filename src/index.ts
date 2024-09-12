@@ -1,5 +1,12 @@
-import { ReactWidgetsBinding } from "./modules/ReactWidgetsBinding";
+import { ReactWidgetsBinding } from "./modules/react_widgets_binding";
 
+/** About related the modules. */
+export { ApplicationBinding, App } from "./modules/application_binding";
+export { ApplicationListener, AppListener } from "./modules/application_listener";
+export { ApplicationEvent, AppEvent } from "./modules/application_event";
+export { ReactWidgetsBinding } from "./modules/react_widgets_binding";
+
+/** About related the widgets. */
 export { ReactWidgets } from "./types";
 export { AnimatedFoldable } from "./widgets/AnimatedFoldable";
 export { AnimatedReplace } from "./widgets/AnimatedReplace";
