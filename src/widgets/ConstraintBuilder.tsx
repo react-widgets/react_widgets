@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, useMemo } from "react";
 import { SizeBuilder } from "./SizeBuilder";
 import { ConditionalRender } from "./ConditionalRender";
 
@@ -32,7 +32,12 @@ export function ConstraintBuilder<T>({constraints, builder}: {
                 throw new Error("No constraint value exists for the current window size.");
             }
 
-            return <ConditionalRender value={value} children={builder(value)} />;
+            // Memoize and recycle the builder result based on the value.
+            // Because of due to the widget's characteristic where the result
+            // remains the same if the input value is unchanged, i.e. unupdated.
+            const renderedChildren = useMemo(() => builder(value), [value]);
+
+            return <ConditionalRender value={value} children={renderedChildren} />;
         }} />
     );
 }
