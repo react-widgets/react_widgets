@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import { SizeBuilder } from "./SizeBuilder";
+import { ConditionalRender } from "./ConditionalRender";
 
 /** Signature for a factory function of a react-node about constraint. */
 export type ConstraintsBuilder<T> = (value: T) => ReactNode;
@@ -30,8 +31,8 @@ export function ConstraintBuilder<T>({constraints, builder}: {
             if (value == null) {
                 throw new Error("No constraint value exists for the current window size.");
             }
-            
-            return builder(value);
+
+            return <ConditionalRender value={value} children={builder(value)} />;
         }} />
     );
 }
