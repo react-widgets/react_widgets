@@ -49,6 +49,7 @@ export class ReactWidgetsBinding {
             `);
 
             sheet.insertRule('scrollable-vertical > * { height: max-content }');
+            sheet.insertRule('scrollable-vertical[scrollbar-none]::-webkit-scrollbar { display: none; }');
         }
 
         { // About an <scrollable-horizontal> element.
@@ -60,7 +61,8 @@ export class ReactWidgetsBinding {
                 }
             `);
 
-            sheet.insertRule('scrollable-horizontal > * { width: max-content; }')
+            sheet.insertRule('scrollable-horizontal > * { width: max-content; }');
+            sheet.insertRule('scrollable-horizontal[scrollbar-none]::-webkit-scrollbar { display: none; }');
         }
 
         // Defines the style rules that apply to the children of this element.

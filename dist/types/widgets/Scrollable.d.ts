@@ -1,8 +1,8 @@
 export declare namespace Scrollable {
-    function Vertical({ children }: {
+    interface Properties {
         children: JSX.Element;
-    }): import("react/jsx-runtime").JSX.Element;
-    function Horizontal({ children }: {
-        children: JSX.Element;
-    }): import("react/jsx-runtime").JSX.Element;
+        scrollbar?: boolean;
+    }
+    function Vertical(p: Properties): import("react/jsx-runtime").JSX.Element;
+    function Horizontal(p: Properties): import("react/jsx-runtime").JSX.Element;
 }

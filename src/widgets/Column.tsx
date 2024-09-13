@@ -1,5 +1,4 @@
-import { Children, CSSProperties, ReactNode } from "react";
-import { Scrollable } from "./Scrollable";
+import { CSSProperties, ReactNode } from "react";
 import { DeepOmit, SizeUnit } from "../types";
 
 export type ColumnAlignment =

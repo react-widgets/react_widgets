@@ -7,11 +7,18 @@ customElements.define("scrollable-vertical", ScrollableVerticalElement);
 */
 
 export namespace Scrollable {
-    export function Vertical({children}: {children: JSX.Element}) {
-        return <scrollable-vertical children={children} />;
+    export interface Properties {
+        children: JSX.Element;
+        scrollbar?: boolean;
     }
 
-    export function Horizontal({children}: {children: JSX.Element}) {
-        return <scrollable-horizontal children={children} />;
+    export function Vertical(p: Properties) {
+        const scrollbar = !(p.scrollbar ?? true);
+        return <scrollable-vertical children={p.children} {...(scrollbar && {"scrollbar-none": ""})} />;
+    }
+
+    export function Horizontal(p: Properties) {
+        const scrollbar = !(p.scrollbar ?? true);
+        return <scrollable-horizontal children={p.children} {...(scrollbar && {"scrollbar-none": ""})} />;
     }
 }

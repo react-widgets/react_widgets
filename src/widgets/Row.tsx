@@ -1,5 +1,4 @@
 import { CSSProperties, ReactNode } from "react";
-import { Scrollable } from "./Scrollable";
 import { DeepOmit, SizeUnit } from "../types";
 
 export type RowAlignment =
