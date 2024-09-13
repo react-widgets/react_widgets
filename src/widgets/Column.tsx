@@ -22,7 +22,7 @@ export type ColumnAlignment =
     | "spaceEvenlyCenter"
     | "spaceEvenlyRight";
 
-export interface ColumnProperties extends DeepOmit<CSSProperties, "display" | "flexDirection" | "flexWrap" | "gap" | "alignItems" | "alignContent" | "justifyContent"> {
+export interface ColumnProperties extends DeepOmit<CSSProperties, "display" | "flexDirection" | "flexWrap" | "alignItems" | "alignContent" | "justifyContent"> {
     className?: string;
     children?: ReactNode;
     paddingAndGap?: SizeUnit;

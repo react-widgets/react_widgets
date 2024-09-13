@@ -22,7 +22,7 @@ export type RowAlignment =
     | "topSpaceAround"
     | "topSpaceEvenly"
 
-export interface RowProperties extends DeepOmit<CSSProperties, "display" | "flexDirection" | "flexWrap" | "gap" | "alignItems" | "alignContent" | "justifyContent"> {
+export interface RowProperties extends DeepOmit<CSSProperties, "display" | "flexDirection" | "flexWrap" | "alignItems" | "alignContent" | "justifyContent"> {
     className?: string,
     children?: ReactNode,
     paddingAndGap?: SizeUnit;
