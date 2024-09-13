@@ -9,7 +9,7 @@
           </tr>
         </tbody>
     </table>
-    You need to learn more about the <a href="https://github.com/react-widgets/react_widgets">react-widgets-router</a> package that is the extension of this package!
+    You need to learn more about the <a href="https://github.com/react-widgets/react_widgets-router">react-widgets-router</a> package that is the extension of this package!
 </div>
 
 # Introduction
