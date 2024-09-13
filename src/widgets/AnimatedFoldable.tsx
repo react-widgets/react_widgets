@@ -66,14 +66,14 @@ export namespace AnimatedFoldable {
                         outer.style.width = null;
                         inner.style.width = null;
                     }
-                    
+
                     inner.style.width = `${unsetSize.width}px`;
                 } else {
                     outer.style.width = `${startSize.width}px`;
                     inner.style.width = `${unsetSize.width}px`;
-    
+
                     ElementUtil.reflow(outer);
-    
+
                     outer.style.width = `0px`;
                     outer.ontransitionend = null;
                 }
@@ -141,14 +141,14 @@ export namespace AnimatedFoldable {
                         outer.style.height = null;
                         inner.style.height = null;
                     }
-                    
+
                     inner.style.height = `${unsetSize.height}px`;
                 } else {
                     outer.style.height = `${startSize.height}px`;
                     inner.style.height = `${unsetSize.height}px`;
-    
+
                     ElementUtil.reflow(outer);
-    
+
                     outer.style.height = `0px`;
                     outer.ontransitionend = null;
                 }

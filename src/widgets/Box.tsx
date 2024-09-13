@@ -1,7 +1,7 @@
 import { CSSProperties, ReactNode, Ref } from "react";
 import { SizeUnit } from "../types";
 
-export interface BoxProperties extends CSSProperties {
+export interface BoxProperties extends CSSProperties, JSX.IntrinsicAttributes {
     refer?: Ref<HTMLDivElement>,
     className?: string,
     children?: ReactNode,

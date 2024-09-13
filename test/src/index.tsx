@@ -1,8 +1,9 @@
-import { Box, Column, Constraint, ConstraintBuilder, Expanded, ReactWidgets, Row, Scrollable } from "react-widgets";
+import { Box, Constraint, ConstraintBuilder, ReactWidgets } from "react-widgets";
 import { createRoot } from "react-dom/client";
 
 ReactWidgets.REACT_WIDGETS_OPTION = {
-    useStrict: true
+    useStrict: true,
+    useDefaultMemo: true,
 }
 
 export default function App() {
@@ -14,14 +15,14 @@ export default function App() {
             ]}
             builder={value => {
                 console.log(value);
-                return <Box padding="15px"><Boo /></Box>;
+                return <Box padding="15px"></Box>;
             }}
         />
     )
 }
 
 export function Boo() {
-    console.log("sdfdfsdfsd");
+    console.log("boo");
     return <h1>Hello, World!</h1>;
 }
 

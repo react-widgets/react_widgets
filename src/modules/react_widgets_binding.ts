@@ -8,8 +8,10 @@ export class ReactWidgetsBinding {
         return this._instance ?? (this._instance = new ReactWidgetsBinding());
     }
 
+    /** A global default value has been defined for this package. */
     static default: ReactWidgets.Option = {
         useStrict: true,
+        useDefaultMemo: true,
     }
 
     /** Sets the current react-widgets option values. */

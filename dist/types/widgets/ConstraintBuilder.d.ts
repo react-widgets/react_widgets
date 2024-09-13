@@ -7,7 +7,8 @@ export declare class Constraint<T = number> {
     value: T;
     constructor(min: number, max: number, value: T);
 }
-export declare function ConstraintBuilder<T>({ constraints, builder }: {
+export declare function ConstraintBuilder<T>({ constraints, usememo, builder }: {
     constraints: Constraint<T>[];
+    usememo?: boolean;
     builder: ConstraintsBuilder<T>;
 }): import("react/jsx-runtime").JSX.Element;

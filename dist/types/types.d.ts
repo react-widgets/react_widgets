@@ -34,6 +34,12 @@ export declare namespace ReactWidgets {
          * And default value is true.
          */
         useStrict: boolean;
+        /**
+         * Whether to define the package to use React's built-in memoization features to
+         * cache rendering results and other data for performance optimization by default,
+         * unless explicitly overridden by component-specific memoization options.
+         */
+        useDefaultMemo: boolean;
     }
 }
 /** Signature for the types that defines a component of React. */

@@ -1,6 +1,6 @@
 import { ReactNode, useMemo } from "react";
 import { SizeBuilder } from "./SizeBuilder";
-import { ConditionalRender } from "./ConditionalRender";
+import { ReactWidgetsBinding } from "../modules/react_widgets_binding";
 
 /** Signature for a factory function of a react-node about constraint. */
 export type ConstraintsBuilder<T> = (value: T) => ReactNode;
@@ -15,9 +15,10 @@ export class Constraint<T = number> {
     }
 }
 
-export function ConstraintBuilder<T>({constraints, builder}: {
+export function ConstraintBuilder<T>({constraints, usememo, builder}: {
     constraints: Constraint<T>[],
-    builder: ConstraintsBuilder<T>
+    usememo?: boolean;
+    builder: ConstraintsBuilder<T>,
 }) {
     console.assert(
         constraints.length != 0,
@@ -35,7 +36,11 @@ export function ConstraintBuilder<T>({constraints, builder}: {
             // Memoize and recycle the builder result based on the value.
             // Because of due to the widget's characteristic where
             // the result remains the same if the input value is unchanged.
-            return useMemo(() => builder(value), [value]);
+            if (usememo ?? ReactWidgetsBinding.instance.optionValueOf("useDefaultMemo")) {
+                return useMemo(() => builder(value), [value]);
+            }
+
+            return builder(value);
         }} />
     );
 }
