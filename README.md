@@ -9,8 +9,10 @@
           </tr>
         </tbody>
     </table>
+    You need to learn more about the <a href="https://github.com/react-widgets/react_widgets">react-widgets-router</a> package that is the extension of this package!
 </div>
 
+# Introduction
 This package provides templates that significantly reduce CSS development work in a React environment, while enhancing readability and maintainability by consolidating style definitions. It fosters a more suitable development environment for Declarative UI.
 
 > Consider integrating not only business logic but also design logic into script code.
