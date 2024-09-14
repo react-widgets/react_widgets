@@ -84,7 +84,7 @@ export function AnimatedSize({children, duration, curve, sizeTolerance}: {
             lowerSizeRef.current = ElementUtil.intrinsicSizeOf(outer);
         });
 
-        observer.observe(outer, {box: "device-pixel-content-box"});
+        observer.observe(outer, {box: "border-box"});
 
         return () => observer.disconnect();
     }, [children]);

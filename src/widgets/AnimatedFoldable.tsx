@@ -64,7 +64,7 @@ export namespace AnimatedFoldable {
                     inner.style.width = `${startSize.width}px`;
 
                     ElementUtil.reflow(outer);
-    
+
                     outer.style.width = `${unsetSize.width}px`;
                     outer.ontransitionend = () => {
                         outer.style.width = null;
