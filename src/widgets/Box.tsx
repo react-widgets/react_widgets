@@ -38,7 +38,7 @@ export interface BoxProperties extends BoxCSSProperties<CSSProperties> {
 }
 
 export const Box = forwardRef<HTMLElement, BoxProperties>((p, ref) => {
-    const style: CSSProperties = {...p.style};
+    const style = {...p};
     const props: HTMLProps<HTMLElement> = {
         id: p.id,
         className: p.className,
