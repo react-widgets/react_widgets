@@ -2,6 +2,7 @@ import { CSSProperties, ReactNode, useLayoutEffect, useRef } from "react";
 import { CurvesUnit, DurationUnit, DeepOmit } from "../types";
 import { Box } from "./Box";
 import { ElementUtil } from "@web-package/utility";
+import { ReactWidgetsBinding } from "../modules/react_widgets_binding";
 
 export namespace AnimatedFoldable {
     export type Overflow = "visible" | "hidden" | "clip" | "scroll" | "auto";
@@ -31,6 +32,9 @@ export namespace AnimatedFoldable {
         const visibleRef = useRef<boolean>(visible);
         const wrapperRef = useRef<HTMLDivElement>(null);
         const opacity = transition?.opacity ?? false;
+        const willChange = ReactWidgetsBinding.instance.optionValueOf("useWillChange")
+            ? opacity ? "width, opacity" : "width"
+            : undefined;
 
         useLayoutEffect(() => {
             const outer = wrapperRef.current;
@@ -87,6 +91,7 @@ export namespace AnimatedFoldable {
                 ref={wrapperRef}
                 opacity={opacity ? visible ? "1" : "0" : undefined}
                 overflow={overflow}
+                willChange={willChange}
                 transitionProperty={opacity ? "width, opacity" : "width"}
                 transitionDuration={duration}
                 transitionTimingFunction={curve}
@@ -106,6 +111,9 @@ export namespace AnimatedFoldable {
         const visibleRef = useRef<boolean>(visible);
         const wrapperRef = useRef<HTMLDivElement>(null);
         const opacity = transition?.opacity ?? false;
+        const willChange = ReactWidgetsBinding.instance.optionValueOf("useWillChange")
+            ? opacity ? "height, opacity" : "height"
+            : undefined;
 
         useLayoutEffect(() => {
             const outer = wrapperRef.current;
@@ -162,6 +170,7 @@ export namespace AnimatedFoldable {
                 ref={wrapperRef}
                 opacity={opacity ? visible ? "1" : "0" : undefined}
                 overflow={overflow}
+                willChange={willChange}
                 transitionProperty={opacity ? "height, opacity" : "height"}
                 transitionDuration={duration}
                 transitionTimingFunction={curve}

@@ -12,6 +12,7 @@ export class ReactWidgetsBinding {
     static default: ReactWidgets.Option = {
         useStrict: true,
         useDefaultMemo: true,
+        useWillChange: true,
     }
 
     /** Sets the current react-widgets option values. */

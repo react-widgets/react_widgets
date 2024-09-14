@@ -40,11 +40,16 @@ export namespace ReactWidgets {
          */
         useStrict: boolean;
         /**
-         * Whether to define the package to use React's built-in memoization features to
+         * Whether to define the package to use React built-in memoization features to
          * cache rendering results and other data for performance optimization by default,
          * unless explicitly overridden by component-specific memoization options.
          */
         useDefaultMemo: boolean;
+        /**
+         * Whether to apply the `will-change` CSS property to transition elements
+         * by default for performance optimization about a browser.
+         */
+        useWillChange: boolean;
     }
 }
 

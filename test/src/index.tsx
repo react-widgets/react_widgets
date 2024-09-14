@@ -1,10 +1,11 @@
-import { Box, ReactWidgets, Row, Scrollable } from "react-widgets";
+import { AnimatedFoldable, Box, ReactWidgets, Row, Scrollable } from "react-widgets";
 import { createRoot } from "react-dom/client";
 import { useLayoutEffect, useRef } from "react";
 
 ReactWidgets.REACT_WIDGETS_OPTION = {
     useStrict: true,
     useDefaultMemo: true,
+    useWillChange: true,
 }
 
 export default function App() {
@@ -32,7 +33,9 @@ export default function App() {
                 <h1>3</h1>
                 <h1>4</h1>
                 <h1>5</h1>
-                <Box ref={ref} tagName="button">Hello, World!</Box>
+                <AnimatedFoldable.Horizontal visible={true} duration="0.5s">
+                    <Box ref={ref} tagName="button">Hello, World!</Box>
+                </AnimatedFoldable.Horizontal>
             </Row>
         </Scrollable.Horizontal>
     )

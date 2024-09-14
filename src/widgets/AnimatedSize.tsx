@@ -1,7 +1,8 @@
 import { ReactNode, useLayoutEffect, useRef } from "react";
-import { CurvesUnit, MeasuredSize } from "../types";
+import { CurvesUnit, MeasuredSize, ReactWidgets } from "../types";
 import { Box } from "./Box";
 import { ElementUtil } from "@web-package/utility";
+import { ReactWidgetsBinding } from "../modules/react_widgets_binding";
 
 export interface AnimatedSizeOption {
     autoMeasureUniqueSize: boolean,
@@ -17,6 +18,7 @@ export function AnimatedSize({children, duration, curve, sizeTolerance}: {
     const wrapperRef = useRef<HTMLDivElement>(null);
     const lowerSizeRef = useRef<MeasuredSize>(null);
     const upperSizeRef = useRef<MeasuredSize>(null);
+    const willChange = ReactWidgetsBinding.instance.optionValueOf("useWillChange") ? "width, height" : undefined;
 
     const getOuter = () => wrapperRef.current;
     const getInner = () => getOuter().firstElementChild as HTMLElement;
@@ -91,6 +93,7 @@ export function AnimatedSize({children, duration, curve, sizeTolerance}: {
         <Box
             ref={wrapperRef}
             overflow="hidden"
+            willChange={willChange}
             transitionProperty="width, height"
             transitionDuration={duration}
             transitionTimingFunction={curve}
