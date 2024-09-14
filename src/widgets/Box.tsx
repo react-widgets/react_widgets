@@ -17,6 +17,7 @@ export type BoxCSSProperties<T> = {
 export interface BoxProperties extends BoxCSSProperties<CSSProperties> {
     id?: string;
     className?: string;
+    innerHTML?: string;
     children?: ReactNode;
     tagName?: ElementType;
     size?: SizeUnit;
@@ -44,6 +45,9 @@ export const Box = forwardRef<HTMLElement, BoxProperties>((p, ref) => {
         className: p.className,
         children: p.children,
         ref: ref,
+
+        // About HTML syntax string for child element.
+        dangerouslySetInnerHTML: p.innerHTML ? {__html: p.innerHTML} : undefined,
 
         // About event handler for HTML element.
         onClick: p.onClick,

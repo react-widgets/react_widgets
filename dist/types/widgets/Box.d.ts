@@ -13,6 +13,7 @@ export type BoxCSSProperties<T> = {
 export interface BoxProperties extends BoxCSSProperties<CSSProperties> {
     id?: string;
     className?: string;
+    innerHTML?: string;
     children?: ReactNode;
     tagName?: ElementType;
     size?: SizeUnit;
