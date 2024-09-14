@@ -1,18 +1,38 @@
-import { CSSProperties, ReactNode, Ref } from "react";
+import { CSSProperties, DetailedHTMLProps, ElementType, forwardRef, HTMLProps, ReactNode, Ref } from "react";
+import { ReactWidgetsBinding } from "../modules/react_widgets_binding";
+import { jsx } from "react/jsx-runtime";
 import { SizeUnit } from "../types";
 
-export interface BoxProperties extends CSSProperties, JSX.IntrinsicAttributes {
-    refer?: Ref<HTMLDivElement>,
-    className?: string,
-    children?: ReactNode,
-    focusable?: boolean,
-    size?: SizeUnit,
+export type BoxCSSPropertiesBehvaior<T> = {
+    default: T;
+    onHover?: T;
+    onFocus?: T;
+    onFocusVisible?: T;
+    onActive?: T;
+}
+
+export type BoxCSSProperties<T> = {
+    [P in keyof T]?: T[P] | BoxCSSPropertiesBehvaior<T[P]>;
+}
+
+export interface BoxProperties extends Omit<BoxCSSProperties<CSSProperties>, "style"> {
+    id?: string;
+    className?: string;
+    children?: ReactNode;
+    tagName?: ElementType;
+    size?: SizeUnit;
 
     [key: string]: any;
 }
 
-export function Box(p: BoxProperties) {
-    const style = p as CSSProperties;
+export const Box = forwardRef<HTMLElement, BoxProperties>((p, ref) => {
+    const style = {...p.style};
+    const props = {
+        id: p.id,
+        className: p.className,
+        children: p.children,
+        ref: ref, // forward the ref properly
+    };
 
     if (p.size) {
         console.assert(p.width == null, "The width cannot be defined when defining the size.");
@@ -21,13 +41,5 @@ export function Box(p: BoxProperties) {
         style.height = p.size;
     }
 
-    return (
-        <div
-            ref={p.refer}
-            className={p.className}
-            tabIndex={p.focusable ? 0 : null}
-            style={style}
-            children={p.children}
-        />
-    )
-}
+    return jsx(p.tagName ?? "div", {...props, style: style});
+});

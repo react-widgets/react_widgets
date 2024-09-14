@@ -1,11 +1,21 @@
-import { CSSProperties, ReactNode, Ref } from "react";
+import { CSSProperties, ElementType, ReactNode } from "react";
 import { SizeUnit } from "../types";
-export interface BoxProperties extends CSSProperties, JSX.IntrinsicAttributes {
-    refer?: Ref<HTMLDivElement>;
+export type BoxCSSPropertiesBehvaior<T> = {
+    default: T;
+    onHover?: T;
+    onFocus?: T;
+    onFocusVisible?: T;
+    onActive?: T;
+};
+export type BoxCSSProperties<T> = {
+    [P in keyof T]?: T[P] | BoxCSSPropertiesBehvaior<T[P]>;
+};
+export interface BoxProperties extends Omit<BoxCSSProperties<CSSProperties>, "style"> {
+    id?: string;
     className?: string;
     children?: ReactNode;
-    focusable?: boolean;
+    tagName?: ElementType;
     size?: SizeUnit;
     [key: string]: any;
 }
-export declare function Box(p: BoxProperties): import("react/jsx-runtime").JSX.Element;
+export declare const Box: import("react").ForwardRefExoticComponent<Omit<BoxProperties, "ref"> & import("react").RefAttributes<HTMLElement>>;

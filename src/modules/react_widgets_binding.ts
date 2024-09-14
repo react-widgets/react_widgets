@@ -19,6 +19,15 @@ export class ReactWidgetsBinding {
         ReactWidgets.REACT_WIDGETS_OPTION = value;
     }
 
+    private ids = new Map<string, number>();
+
+    getElementIdByTag(key: keyof JSX.IntrinsicElements) {
+        const id = (this.ids.get(key) ?? 0) + 1;
+
+        // Returned as div1~div999
+        return key + this.ids.set(key, id).get(key);
+    }
+
     optionValueOf(name: keyof ReactWidgets.Option) {
         return ReactWidgets.REACT_WIDGETS_OPTION[name] ?? ReactWidgetsBinding.default[name];
     }

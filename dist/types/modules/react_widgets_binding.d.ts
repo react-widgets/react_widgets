@@ -7,6 +7,8 @@ export declare class ReactWidgetsBinding {
     static default: ReactWidgets.Option;
     /** Sets the current react-widgets option values. */
     set currentOption(value: Partial<ReactWidgets.Option>);
+    private ids;
+    getElementIdByTag(key: keyof JSX.IntrinsicElements): string;
     optionValueOf(name: keyof ReactWidgets.Option): boolean;
     initialize(): void;
     /** Initializes a required style sheet on the document. */

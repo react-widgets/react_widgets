@@ -1,5 +1,6 @@
-import { ReactWidgets, Row, Scrollable } from "react-widgets";
+import { Box, ReactWidgets, Row, Scrollable } from "react-widgets";
 import { createRoot } from "react-dom/client";
+import { useLayoutEffect, useRef } from "react";
 
 ReactWidgets.REACT_WIDGETS_OPTION = {
     useStrict: true,
@@ -7,6 +8,12 @@ ReactWidgets.REACT_WIDGETS_OPTION = {
 }
 
 export default function App() {
+    const ref = useRef<HTMLDivElement>(null);
+
+    useLayoutEffect(() => {
+        console.log(ref.current);
+    });
+
     return (
         <Scrollable.Horizontal>
             <Row gap="30px" padding="15px">
@@ -25,6 +32,7 @@ export default function App() {
                 <h1>3</h1>
                 <h1>4</h1>
                 <h1>5</h1>
+                <Box ref={ref} tagName="button">Hello, World!</Box>
             </Row>
         </Scrollable.Horizontal>
     )
