@@ -76,7 +76,7 @@ export function AppBarConnection({appbars, children}: {
     }, []);
 
     return (
-        <Box display="flex" refer={wrapperRef}>
+        <Box display="flex" ref={wrapperRef}>
             <Box position="fixed" width="100%" willChange="transform" children={appbars.map(e => e.component)} />
             <Box>{children}</Box>
         </Box>

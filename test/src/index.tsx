@@ -32,7 +32,7 @@ export default function App() {
                 <h1>3</h1>
                 <h1>4</h1>
                 <h1>5</h1>
-                <Box ref={ref} tagName="button" backgroundColor="red">Hello, World!</Box>
+                <Box ref={ref} tagName="button">Hello, World!</Box>
             </Row>
         </Scrollable.Horizontal>
     )

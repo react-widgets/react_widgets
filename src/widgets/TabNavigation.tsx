@@ -75,7 +75,7 @@ export namespace TabNavigation {
         }, [index]);
 
         return (
-            <Box refer={wrapperRef}>
+            <Box ref={wrapperRef}>
                 <Row gap={gap} children={children} />
                 <Box transitionDuration={duration} transitionTimingFunction={curve}>
                     <Box
@@ -131,7 +131,7 @@ export namespace TabNavigation {
         }, [index]);
 
         return (
-            <Box display="flex" refer={wrapperRef}>
+            <Box display="flex" ref={wrapperRef}>
                 <Box
                     display="flex"
                     alignItems="center"

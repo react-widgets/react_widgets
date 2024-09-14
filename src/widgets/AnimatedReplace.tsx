@@ -35,7 +35,7 @@ export namespace AnimatedReplace {
 
         return (
             <Box
-                refer={wrapperRef}
+                ref={wrapperRef}
                 display="flex"
                 children={children.map(item => <div>{item}</div>)}
             />

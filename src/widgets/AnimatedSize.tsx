@@ -89,7 +89,7 @@ export function AnimatedSize({children, duration, curve, sizeTolerance}: {
 
     return (
         <Box
-            refer={wrapperRef}
+            ref={wrapperRef}
             overflow="hidden"
             transitionProperty="width, height"
             transitionDuration={duration}

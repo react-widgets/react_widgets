@@ -84,7 +84,7 @@ export namespace AnimatedFoldable {
 
         return (
             <Box
-                refer={wrapperRef}
+                ref={wrapperRef}
                 opacity={opacity ? visible ? "1" : "0" : undefined}
                 overflow={overflow}
                 transitionProperty={opacity ? "width, opacity" : "width"}
@@ -159,7 +159,7 @@ export namespace AnimatedFoldable {
 
         return (
             <Box
-                refer={wrapperRef}
+                ref={wrapperRef}
                 opacity={opacity ? visible ? "1" : "0" : undefined}
                 overflow={overflow}
                 transitionProperty={opacity ? "height, opacity" : "height"}
