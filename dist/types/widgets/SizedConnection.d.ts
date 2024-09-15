@@ -1,5 +1,6 @@
 import { IntrinsicSize } from "@web-package/utility";
-import { ReactNode } from "react";
+import { BoxProperties } from "./Box";
+import { DeepOmit } from "../types";
 export declare const SizedConnectionContext: import("react").Context<SizedConnectionBinding>;
 export type SizedConnectionListener = (size: IntrinsicSize) => void;
 export declare class SizedConnectionBinding {
@@ -15,6 +16,4 @@ export declare class SizedConnectionBinding {
  *
  * Used with `SizedMaster` and `SizedSlaver` widgets.
  */
-export declare function SizedConnection({ children }: {
-    children: ReactNode;
-}): import("react/jsx-runtime").JSX.Element;
+export declare function SizedConnection(p: DeepOmit<BoxProperties, "position">): import("react/jsx-runtime").JSX.Element;

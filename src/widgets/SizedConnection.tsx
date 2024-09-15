@@ -1,6 +1,7 @@
 import { IntrinsicSize } from "@web-package/utility";
 import { createContext, ReactNode, useState } from "react"
-import { Box } from "./Box";
+import { Box, BoxProperties } from "./Box";
+import { DeepOmit } from "../types";
 
 export const SizedConnectionContext = createContext<SizedConnectionBinding | null>(null);
 export type SizedConnectionListener = (size: IntrinsicSize) => void;
@@ -35,13 +36,12 @@ export class SizedConnectionBinding {
  * 
  * Used with `SizedMaster` and `SizedSlaver` widgets.
  */
-export function SizedConnection({children}: {
-    children: ReactNode
-}) {
+export function SizedConnection(p: DeepOmit<BoxProperties, "position">) {
     const [instance, _] = useState(new SizedConnectionBinding());
+    const {children, ...props} = p;
 
     return (
         // To communication between the master and the slaver widgets.
-        <Box position="relative"><SizedConnectionContext.Provider value={instance} children={children} /></Box>
+        <Box position="relative" {...props}><SizedConnectionContext.Provider value={instance} children={children} /></Box>
     )
 }
