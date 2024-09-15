@@ -35,7 +35,7 @@ return (
 # Preview
 The image below is a simple use video of [Quark Icons](https://quarkicons.com/) and a website created using @web-package/react-widgets and its extension, @web-package/react-widget-router.
 
-https://github.com/user-attachments/assets/c57c5d2b-ddb7-4144-bb33-f7c26e4cebf4
+![preview](https://github.com/user-attachments/assets/cd1b147b-3043-496f-9ebc-e76b634d468c)
 
 # Usage
 
