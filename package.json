@@ -16,8 +16,10 @@
   },
   "keywords": [
     "react",
+    "react-package",
     "template",
-    "widget"
+    "widget",
+    "layout"
   ],
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^15.2.3",
