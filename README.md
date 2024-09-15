@@ -15,6 +15,9 @@
 # Introduction
 This package provides templates that significantly reduce CSS development work in a React environment, while enhancing readability and maintainability by consolidating style definitions. It fosters a more suitable development environment for Declarative UI.
 
+> [!NOTE]
+> Other widgets will be added sequentially in the README.md, and detailed usage will be covered through the related website once this package is officially released.
+
 > Consider integrating not only business logic but also design logic into script code.
 
 ```tsx
@@ -28,6 +31,13 @@ return (
     </Scrollable.Horizontal>
 )
 ```
+
+# Preview
+The image below is a simple use video of [Quark Icons](https://quarkicons.com/) and a website created using @web-package/react-widgets and its extension, @web-package/react-widget-router.
+
+https://github.com/user-attachments/assets/c57c5d2b-ddb7-4144-bb33-f7c26e4cebf4
+
+# Usage
 
 ## How to make responsive animated size?
 Interestingly, even when wrapped with this widget, it does not impact the layout calculations of existing child elements. This is because the React widget package is designed to assist with layout calculations while striving to minimize any impact on the existing layout.
@@ -51,7 +61,7 @@ function ExampleFolding() {
 
     return (<>
         <button onClick={() => setVisible(!visible)}>Fold</button>
-        <!-- Or using AnimatedFoldable.Vertical widget -->
+        { /* or using AnimatedFoldable.Vertical widget */ }
         <AnimatedFoldable.Horizontal visible={visible} duration="0.3s">
             <Row>
                 <Box>Hello, World 1</Box>
@@ -90,6 +100,3 @@ return (
     } />
 )
 ```
-
-> [!IMPORTENT]
-> Other widgets will be added sequentially in the README.md, and detailed usage will be covered through the related website once this package is officially released.
