@@ -54,7 +54,8 @@ export class ReactWidgetsBinding {
                 scrollable-vertical {
                     display: block;
                     height: 100%;
-                    overflow: auto;
+                    overflow-y: auto;
+                    overflow-x: clip;
                 }
             `);
 
@@ -67,7 +68,8 @@ export class ReactWidgetsBinding {
                 scrollable-horizontal {
                     display: block;
                     width: 100%;
-                    overflow: auto;
+                    overflow-x: auto;
+                    overflow-y: clip;
                 }
             `);
 
