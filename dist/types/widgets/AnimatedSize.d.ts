@@ -4,9 +4,8 @@ export interface AnimatedSizeOption {
     autoMeasureUniqueSize: boolean;
     sizeTolerance: number;
 }
-export declare function AnimatedSize({ children, duration, curve, sizeTolerance }: {
+export declare function AnimatedSize({ children, duration, curve }: {
     children: ReactNode;
     duration: string;
     curve?: CurvesUnit;
-    sizeTolerance?: number;
 }): import("react/jsx-runtime").JSX.Element;

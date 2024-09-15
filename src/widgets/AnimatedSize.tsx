@@ -9,11 +9,10 @@ export interface AnimatedSizeOption {
     sizeTolerance: number,
 }
 
-export function AnimatedSize({children, duration, curve, sizeTolerance}: {
+export function AnimatedSize({children, duration, curve}: {
     children: ReactNode,
     duration: string,
     curve?: CurvesUnit,
-    sizeTolerance?: number,
 }) {
     const wrapperRef = useRef<HTMLDivElement>(null);
     const lowerSizeRef = useRef<MeasuredSize>(null);

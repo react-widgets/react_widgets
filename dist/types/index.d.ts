@@ -6,8 +6,6 @@ export { ReactWidgetsBinding } from "./modules/react_widgets_binding";
 /** About related the widgets. */
 export { ReactWidgets } from "./types";
 export { AnimatedFoldable } from "./widgets/AnimatedFoldable";
-export { AnimatedReplace } from "./widgets/AnimatedReplace";
-export { AnimatedPage } from "./widgets/AnimatedPage";
 export { AnimatedSize } from "./widgets/AnimatedSize";
 export { Box, BoxProperties } from "./widgets/Box";
 export { Canvas, CanvasController, CanvasDrawCallback } from "./widgets/Canvas";

@@ -11,7 +11,7 @@ export type BoxCSSPropertiesBehvaior<T> = {
 }
 
 export type BoxCSSProperties<T> = {
-    [P in keyof T]?: T[P] | BoxCSSPropertiesBehvaior<T[P]>;
+    [P in keyof T]?: T[P]; // | BoxCSSPropertiesBehvaior<T[P]>;
 }
 
 export interface BoxProperties extends BoxCSSProperties<CSSProperties> {

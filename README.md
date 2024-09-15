@@ -5,7 +5,7 @@
         <thead>
           <tr>
             <th>Version</th>
-            <th>v0.0.0-dev1</th>
+            <th>v1.0.0-beta1</th>
           </tr>
         </tbody>
     </table>
@@ -18,18 +18,54 @@ This package provides templates that significantly reduce CSS development work i
 > Consider integrating not only business logic but also design logic into script code.
 
 ```tsx
-return <Box backgroundColor="red">hello world</Box>
+return <Box backgroundColor="red">Hello, World</Box>
 ```
 
 ```tsx
-return <Row scrollable gap="15px">...</Row>
-// OR
-// <Scrollable.Horizontal>
-//     <Row gap="15px">...</Row>
-// </Scrollable.Horizontal>
+return (
+    <Scrollable.Horizontal>
+        <Row gap="5px" padding="15px">...[children]</Row>
+    </Scrollable.Horizontal>
+)
+```
+
+## How to make responsive animated size?
+Interestingly, even when wrapped with this widget, it does not impact the layout calculations of existing child elements. This is because the React widget package is designed to assist with layout calculations while striving to minimize any impact on the existing layout.
+
+```tsx
+return (
+    <AnimatedSize duration="0.3s">
+        <Box>Hello, World 1</Box>
+        <Box>Hello, World 2</Box> <!-- Dynamic inserted -->
+        <Box>Hello, World 3</Box> <!-- Dynamic inserted -->
+    </AnimatedSize>
+)
+```
+
+## how to make responsive folding animation?
+You can be using the `AnimatedFoldable.Vertical` or `AnimatedFoldable.Horizontal` widgets to resolve it.
+
+```tsx
+function ExampleFolding() {
+    const [visible, setVisible] = useState(true);
+
+    return (<>
+        <button onClick={() => setVisible(!visible)}>Fold</button>
+        <!-- Or using AnimatedFoldable.Vertical widget -->
+        <AnimatedFoldable.Horizontal visible={visible} duration="0.3s">
+            <Row>
+                <Box>Hello, World 1</Box>
+                <Box>Hello, World 2</Box>
+                <Box>Hello, World 3</Box>
+            </Row>
+        </AnimatedFoldable.Horizontal>
+    </>)
+}
 ```
 
 ## How to make responsive grid?
+You can be using the `ConstraintBuilder` with `Grid` widgets to resolve it.
+
 ```tsx
 return (
     <ConstraintBuilder<number>
@@ -38,6 +74,8 @@ return (
             new Constraint(600, 1000, 2),
             new Constraint(-Infinity, 600, 1)
         ]}
+        /* You need to set this option accordingly according to the situation. */
+        usememo={true}
         builder={(value: number) => {
             return (
                 <Grid gap="5px" rowCount={value}>
@@ -52,3 +90,6 @@ return (
     } />
 )
 ```
+
+> [!IMPORTENT]
+> Other widgets will be added sequentially in the README.md, and detailed usage will be covered through the related website once this package is officially released.
