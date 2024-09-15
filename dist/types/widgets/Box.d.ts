@@ -1,4 +1,4 @@
-import { CSSProperties, ElementType, FunctionComponent, ReactNode } from "react";
+import { CSSProperties, ElementType, FunctionComponent, ReactNode, Ref } from "react";
 import { SizeUnit } from "../types";
 export type BoxCSSPropertiesBehvaior<T> = {
     default: T;
@@ -17,6 +17,7 @@ export interface BoxProperties extends BoxCSSProperties<CSSProperties> {
     children?: ReactNode;
     tagName?: ElementType;
     size?: SizeUnit;
+    ref?: Ref<HTMLElement>;
     onClick?: React.MouseEventHandler<HTMLElement>;
     onClickCapture?: React.MouseEventHandler<HTMLElement>;
     onDoubleClick?: React.MouseEventHandler<HTMLElement>;

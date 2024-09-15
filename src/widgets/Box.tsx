@@ -1,4 +1,4 @@
-import { CSSProperties, ElementType, forwardRef, FunctionComponent, HTMLProps, ReactNode } from "react";
+import { CSSProperties, ElementType, forwardRef, FunctionComponent, HTMLProps, ReactNode, Ref } from "react";
 import { jsx } from "react/jsx-runtime";
 import { SizeUnit } from "../types";
 
@@ -21,6 +21,7 @@ export interface BoxProperties extends BoxCSSProperties<CSSProperties> {
     children?: ReactNode;
     tagName?: ElementType;
     size?: SizeUnit;
+    ref?: Ref<HTMLElement>;
 
     onClick?: React.MouseEventHandler<HTMLElement>;
     onClickCapture?: React.MouseEventHandler<HTMLElement>;
