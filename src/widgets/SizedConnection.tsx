@@ -30,18 +30,17 @@ export class SizedConnectionBinding {
 }
 
 /**
- * This widget is used to resolve the issue where one element's size change causes another
- * element to undergo reflow, leading to delays in operations such as animations,
- * due to the strong dependency between two elements with high reflow costs.
+ * This widget is used to imperatively resolve situations where, due to the lack of
+ * dependencies, size changes and reflows do not occur based on certain elements
+ * that perform independent layout calculations.
  * 
  * Used with `SizedMaster` and `SizedSlaver` widgets.
  */
-export function SizedConnection(p: DeepOmit<BoxProperties, "position">) {
+export function SizedConnection({children}: {children: ReactNode}) {
     const [instance, _] = useState(new SizedConnectionBinding());
-    const {children, ...props} = p;
 
     return (
         // To communication between the master and the slaver widgets.
-        <Box position="relative" {...props}><SizedConnectionContext.Provider value={instance} children={children} /></Box>
+        <SizedConnectionContext.Provider value={instance} children={children} />
     )
 }

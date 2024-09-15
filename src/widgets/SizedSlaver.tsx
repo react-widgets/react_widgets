@@ -10,9 +10,9 @@ import { Box } from "./Box";
 export type SizedSlaverCallback = (size: IntrinsicSize, element: HTMLElement) => void;
 
 /**
- * This widget is used to resolve the issue where one element's size change causes another
- * element to undergo reflow, leading to delays in operations such as animations,
- * due to the strong dependency between two elements with high reflow costs.
+ * This widget is used to imperatively resolve situations where, due to the lack of
+ * dependencies, size changes and reflows do not occur based on certain elements
+ * that perform independent layout calculations.
  * 
  * Used with `SizedConnection` and `SizedMaster` widgets.
  */
