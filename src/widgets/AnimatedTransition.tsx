@@ -41,7 +41,7 @@ export function AnimatedTransition<T = any>({value, style, animation, children}:
     const [_, setState] = useState(0);
 
     // A change in the current key means that the child has been updated.
-    if (states.length != 0 && states[states.length - 1].key != key) {
+    if (states.length != 0 && states[states.length - 1].key !== key) {
         states.push({key: key, id: countRef.current += 1});
     }
 
