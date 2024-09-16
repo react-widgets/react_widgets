@@ -174,10 +174,11 @@ export function AnimatedTransitionRender<T = any>({value, first, latest, childre
 
     // To allow the current element to refer to the parent element size.
     const position = latest ? undefined : "absolute";
+    const cacheKey = latest ? children : value;
 
     return (
         <Box ref={wrapperRef} position={position}>
-            <ConditionalRender value={value} children={children} />
+            <ConditionalRender value={cacheKey} children={children} />
         </Box>
     )
 }
