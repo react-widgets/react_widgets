@@ -5,7 +5,7 @@
         <thead>
           <tr>
             <th>Version</th>
-            <th>v1.0.0-beta1</th>
+            <th>v1.0.0-beta2</th>
           </tr>
         </tbody>
     </table>
@@ -18,7 +18,7 @@ This package provides templates that significantly reduce CSS development work i
 > [!NOTE]
 > Other widgets will be added sequentially in the README.md, and detailed usage will be covered through the related website once this package is officially released.
 
-> Consider integrating not only business logic but also design logic into script code.
+> Consider integrating not only business logic but also design logic into script code, See Also, If you want the change-log by version for this package. refer to [Change Log](CHANGELOG.md) for details.
 
 ```tsx
 return <Box backgroundColor="red">Hello, World</Box>
