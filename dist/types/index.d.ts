@@ -9,6 +9,7 @@ export { AnimatedFoldable } from "./widgets/AnimatedFoldable";
 export { AnimatedTransition, AnimatedTransitionAnimation } from "./widgets/AnimatedTransition";
 export { AnimatedSize } from "./widgets/AnimatedSize";
 export { Box, BoxProperties } from "./widgets/Box";
+export { Invisible } from "./widgets/Invisible";
 export { Canvas, CanvasController, CanvasDrawCallback } from "./widgets/Canvas";
 export { Column, ColumnProperties } from "./widgets/Column";
 export { Row, RowProperties } from "./widgets/Row";

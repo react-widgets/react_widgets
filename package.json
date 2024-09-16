@@ -1,6 +1,6 @@
 {
   "name": "@web-package/react-widgets",
-  "version": "1.0.0-beta3",
+  "version": "1.0.0-beta4",
   "description": "This is package that provides templates that can significantly reduce CSS development works in a react development environment.",
   "author": "Dev Ttangkong",
   "license": "Apache-2.0",

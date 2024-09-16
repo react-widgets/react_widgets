@@ -14,6 +14,7 @@ export { AnimatedTransition, AnimatedTransitionAnimation } from "./widgets/Anima
 // export { AnimatedPage } from "./widgets/AnimatedPage";
 export { AnimatedSize } from "./widgets/AnimatedSize";
 export { Box, BoxProperties } from "./widgets/Box";
+export { Invisible } from "./widgets/Invisible";
 export { Canvas, CanvasController, CanvasDrawCallback } from "./widgets/Canvas";
 export { Column, ColumnProperties } from "./widgets/Column";
 export { Row, RowProperties } from "./widgets/Row";
