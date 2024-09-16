@@ -76,7 +76,7 @@ export function AnimatedTransitionRender<T = any>({value, first, latest, childre
     animation: AnimatedTransitionAnimation;
 }) {
     const wrapperRef = useRef<HTMLDivElement>(null);
-    const previousSizeRef = useRef<MeasuredSize>(null);
+    const previousSizeRef = useRef<MeasuredSize>({width: 0, height: 0});
 
     console.assert(
         animation.duration != null || animation.fadeInDuration != null,
