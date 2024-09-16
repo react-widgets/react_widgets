@@ -15,7 +15,7 @@ export default function App() {
         <Column size="100%">
             <button onClick={() => setCount(count + 1)}>Count Up</button>
             <AnimatedTransition value={count} animation={{duration: "0.3s", fadeIn: {from: {opacity: 0}, to: {opacity: 1}}, fadeOut: {to: {opacity: 0}}}}>
-                <Box backgroundColor="red">Hello, World! {count}</Box>
+                <Box>Hello, World! {count}</Box>
             </AnimatedTransition>
         </Column>
     )

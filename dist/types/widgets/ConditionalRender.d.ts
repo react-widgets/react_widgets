@@ -6,5 +6,6 @@ import { ReactNode } from "react";
  */
 export declare const ConditionalRender: import("react").MemoExoticComponent<(props: {
     value: any;
+    active?: boolean;
     children: ReactNode;
 }) => ReactNode>;
