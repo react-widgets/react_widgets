@@ -1,4 +1,4 @@
-import { AnimatedTransition, Column, ReactWidgets } from "react-widgets";
+import { AnimatedTransition, Box, Column, ReactWidgets } from "react-widgets";
 import { createRoot } from "react-dom/client";
 import { useState } from "react";
 
@@ -15,7 +15,7 @@ export default function App() {
         <Column size="100%">
             <button onClick={() => setCount(count + 1)}>Count Up</button>
             <AnimatedTransition value={count} animation={{duration: "0.3s", fadeIn: {from: {opacity: 0}, to: {opacity: 1}}, fadeOut: {to: {opacity: 0}}}}>
-                <>Hello, World! {count}</>
+                <Box backgroundColor="red">Hello, World! {count}</Box>
             </AnimatedTransition>
         </Column>
     )

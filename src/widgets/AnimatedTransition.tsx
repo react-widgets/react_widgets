@@ -1,8 +1,7 @@
 import { CSSProperties, ReactNode, useLayoutEffect, useRef, useState } from "react";
-import { DeepOmit, DurationUnit } from "../types";
+import { DeepOmit, DurationUnit, MeasuredSize } from "../types";
 import { ConditionalRender } from "./ConditionalRender";
 import { Box } from "./Box";
-import { ElementUtil } from "@web-package/utility";
 
 /** Signature for the types that defines a transition animation about `AnimatedTransition` widget. */
 export type AnimatedTransitionAnimation = {
@@ -77,6 +76,7 @@ export function AnimatedTransitionRender<T = any>({value, first, latest, childre
     animation: AnimatedTransitionAnimation;
 }) {
     const wrapperRef = useRef<HTMLDivElement>(null);
+    const previousSizeRef = useRef<MeasuredSize>(null);
 
     console.assert(
         animation.duration != null || animation.fadeInDuration != null,
@@ -122,6 +122,10 @@ export function AnimatedTransitionRender<T = any>({value, first, latest, childre
             }
         } else {
             const fadeOutDuration = animation.fadeOutDuration ?? animation.duration;
+            const size = previousSizeRef.current;
+
+            wrapper.style.width = `${size.width}px`;
+            wrapper.style.height = `${size.height}px`;
 
             if (typeof animation.fadeOut == "string") { // is CSS animation
                 wrapper.style.animation = `${animation.fadeOut} ${fadeOutDuration}`;
@@ -155,8 +159,24 @@ export function AnimatedTransitionRender<T = any>({value, first, latest, childre
         }
     }, [latest]);
 
+    useLayoutEffect(() => {
+        const observer = new ResizeObserver(entries => {
+            previousSizeRef.current = {
+                width: entries[0].contentRect.width,
+                height: entries[0].contentRect.height,
+            }
+        });
+
+        observer.observe(wrapperRef.current);
+
+        return () => observer.disconnect();
+    }, []);
+
+    // To allow the current element to refer to the parent element size.
+    const position = latest ? undefined : "absolute";
+
     return (
-        <Box ref={wrapperRef} position="absolute">
+        <Box ref={wrapperRef} position={position}>
             <ConditionalRender value={value} children={children} />
         </Box>
     )
