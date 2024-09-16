@@ -13,7 +13,7 @@
 </div>
 
 # Introduction
-This package provides templates that significantly reduce CSS development work in a React environment, while enhancing readability and maintainability by consolidating style definitions. It fosters a more suitable development environment for Declarative UI.
+This package provides templates that significantly reduce CSS development work in a React environment, while enhancing readability and maintainability by consolidating style definitions. It fosters a more suitable development environment for Declarative UI. Additionally, it includes widgets designed to improve performance.
 
 > [!NOTE]
 > Other widgets will be added sequentially in the README.md, and detailed usage will be covered through the related website once this package is officially released.
@@ -52,11 +52,11 @@ return (
 )
 ```
 
-## how to make responsive folding animation?
+## How to make responsive folding animation?
 You can be using the `AnimatedFoldable.Vertical` or `AnimatedFoldable.Horizontal` widgets to resolve it.
 
 ```tsx
-function ExampleFolding() {
+function ExampleComponent() {
     const [visible, setVisible] = useState(true);
 
     return (<>
@@ -70,6 +70,36 @@ function ExampleFolding() {
             </Row>
         </AnimatedFoldable.Horizontal>
     </>)
+}
+```
+
+## How to animate child component changes?
+If you want to animate dynamic changes in a child component (e.g. when transitioning out of a loading screen or in other similar cases), you can easily achieve this by simply using the `AnimatedTransition` widget.
+
+> See Also, You don't need to forward the `value` property value by unconditionally, but it helps define more clearly whether the child component state has changed.
+
+```tsx
+export default function ExampleComponent() {
+    const [count, setCount] = useState(0);
+
+    // You can be using like this:
+    // 
+    // { // when using CSS animation
+    //     fadeIn: "keyframe-name"
+    //     fadeOut: "keyframe-name"
+    // }
+    return (
+        <Column size="100%">
+            <button onClick={() => setCount(count + 1)}>Count Up</button>
+            <AnimatedTransition value={count} animation={{
+                duration: "0.3s",
+                fadeIn:  {from: {opacity: 0}, to: {opacity: 1}},
+                fadeOut: {from: {opacity: 1}, to: {opacity: 0}}
+            }}>
+                <Box>Hello, World! {count}</Box>
+            </AnimatedTransition>
+        </Column>
+    )
 }
 ```
 

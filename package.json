@@ -16,10 +16,18 @@
   },
   "keywords": [
     "react",
+    "react-ui",
     "react-package",
+    "react-widgets",
     "template",
     "widget",
-    "layout"
+    "layout",
+    "animation",
+    "responsive",
+    "ui-components",
+    "component-library",
+    "frontend",
+    "client-side"
   ],
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^15.2.3",
