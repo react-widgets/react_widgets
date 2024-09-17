@@ -15,7 +15,7 @@ export namespace AnimatedFoldable {
         | "transitionDuration"
         | "transitionTimingFunction"
     >
-    
+
     export interface HorizontalStyle {
         start: DeepOmit<StyleCSSProperties, "width" | "minWidth" | "maxWidth">;
         end  : DeepOmit<StyleCSSProperties, "width" | "minWidth" | "maxWidth">;

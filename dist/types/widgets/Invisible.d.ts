@@ -6,9 +6,10 @@ import { ReactNode } from "react";
  * This can significantly improve performance in scenarios involving large amounts of UI data,
  * such as displaying vector images in UI/UX.
  */
-export declare function Invisible({ size, width, height, children }: {
+export declare function Invisible({ size, width, height, children, threshold }: {
     size?: string;
     width?: string;
     height?: string;
+    threshold?: number;
     children: ReactNode;
 }): import("react/jsx-runtime").JSX.Element;

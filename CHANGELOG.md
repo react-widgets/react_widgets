@@ -11,3 +11,5 @@
 
 # 1.0.0-beta5
 - Fixed an issue in the `AnimatedFoldable` widget where the non-visible state was affected by changes in the size of its children, causing the height of the layout to change or break.
+
+- Fixed an issue where elements in the invisible widget were only rendered if they were fully visible. Now, elements will be rendered as long as they are partially visible, even if only 0.1% of the element is in view.

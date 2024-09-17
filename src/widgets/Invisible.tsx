@@ -8,10 +8,11 @@ import { Box } from "./Box";
  * This can significantly improve performance in scenarios involving large amounts of UI data,
  * such as displaying vector images in UI/UX.
  */
-export function Invisible({size, width, height, children}: {
+export function Invisible({size, width, height, children, threshold = 1e-10}: {
     size?: string;
     width?: string;
     height?: string;
+    threshold?: number;
     children: ReactNode;
 }) {
     const wrapperRef = useRef<HTMLElement>(null);
@@ -22,7 +23,6 @@ export function Invisible({size, width, height, children}: {
 
         const observer = new IntersectionObserver(entries => {
             for (const entry of entries) {
-
                 // If the wrapper element is not visible, hide the child element.
                 if (entry.intersectionRatio == 0) {
                     child.style.display = "none";
@@ -31,7 +31,7 @@ export function Invisible({size, width, height, children}: {
                     child.style.removeProperty("display");
                 }
             }
-        }, {threshold: [0, 1]});
+        }, {threshold});
 
         observer.observe(wrapper);
 
