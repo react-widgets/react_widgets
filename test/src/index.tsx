@@ -1,4 +1,4 @@
-import { AnimatedFoldable, AnimatedTransition, Box, Column, ReactWidgets, Row } from "react-widgets";
+import { AnimatedFoldable, AnimatedTransition, Box, Column, ReactWidgets, Row, Scrollable, TabNavigation } from "react-widgets";
 import { createRoot } from "react-dom/client";
 import { useState } from "react";
 
@@ -9,15 +9,18 @@ ReactWidgets.REACT_WIDGETS_OPTION = {
 }
 
 export default function App() {
-    const [toggle, setToggle] = useState(true);
+    const [index, setIndex] = useState(2);
 
     return (
-        <Row>
-            <button onClick={() => setToggle(!toggle)}>Update Toggle</button>
-            <AnimatedFoldable.Horizontal visible={toggle} duration="0.5s">
-                <button>Hello World!</button>
-            </AnimatedFoldable.Horizontal>
-        </Row>
+        <Scrollable.Horizontal>
+            <TabNavigation.Horizontal index={index} duration="0.3s">
+                <Box onClick={() => setIndex(0)} backgroundColor="red">Hello World 0</Box>
+                <Box onClick={() => setIndex(1)} backgroundColor="blue">World 1</Box>
+                <Box onClick={() => setIndex(2)} backgroundColor="red">Hello World 2</Box>
+                <Box onClick={() => setIndex(3)} backgroundColor="blue">World 3</Box>
+                <Box onClick={() => setIndex(4)} backgroundColor="red">Hello World 4</Box>
+            </TabNavigation.Horizontal>
+        </Scrollable.Horizontal>
     )
 }
 

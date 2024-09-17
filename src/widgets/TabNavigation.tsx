@@ -45,6 +45,7 @@ export namespace TabNavigation {
         curve?: CurvesUnit,
         gap?: SizeUnit
     }) {
+        const indexedRef = useRef<number>(index);
         const wrapperRef = useRef<HTMLDivElement>(null);
         const rawStyle = {
             ...defualtStyle,
@@ -55,29 +56,34 @@ export namespace TabNavigation {
         console.assert(index != Infinity, "The index of TabNavigation cannot be infinity.");
 
         useLayoutEffect(() => {
-            if (index == null) return;
-
             const wrapper = wrapperRef.current;
             const wrapperBody = wrapper.firstElementChild as HTMLElement;
             const wrapperLine = wrapper.lastElementChild as HTMLElement;
             const currentBody = getItemByIndex(wrapperBody.children, index);
+
+            // Apply CSS Transition animation only when a given index changes.
+            if (index != indexedRef.current) {
+                wrapperLine.style.transitionProperty = "margin, width";
+                wrapperLine.style.transitionDuration = duration;
+                wrapperLine.style.transitionTimingFunction = curve;
+                indexedRef.current = index;
+            }
 
             const bodyRect = DOMRectUtil.intrinsicOf(wrapperBody);
             const itemRect = DOMRectUtil.intrinsicOf(currentBody);
 
             wrapperLine.style.width = `${itemRect.width}px`;
             wrapperLine.style.marginLeft = `${itemRect.left - bodyRect.left}px`;
-
-            // Transition animations about the line should only be applied after a margin is finally defining.
-            if (wrapperLine.style.transitionProperty == null) {
-                requestAnimationFrame(() => wrapperLine.style.transitionProperty = "margin, width");
-            }
+            wrapperLine.ontransitionend = () => {
+                wrapperLine.style.removeProperty("transition-property");
+                wrapperLine.style.removeProperty("transition-duration");
+            };
         }, [index]);
 
         return (
             <Box ref={wrapperRef}>
                 <Row gap={gap} children={children} />
-                <Box transitionDuration={duration} transitionTimingFunction={curve}>
+                <Box>
                     <Box
                         width={rawStyle.width}
                         height={index != null ? rawStyle.thickness : 0}
@@ -101,6 +107,7 @@ export namespace TabNavigation {
         curve?: CurvesUnit,
         gap?: SizeUnit
     }) {
+        const indexedRef = useRef<number>(index);
         const wrapperRef = useRef<HTMLDivElement>(null);
         const rawStyle = {
             ...defualtStyle,
@@ -111,33 +118,33 @@ export namespace TabNavigation {
         console.assert(index != Infinity, "The index of TabNavigation cannot be infinity.");
 
         useLayoutEffect(() => {
-            if (index == null) return;
-
             const wrapper = wrapperRef.current;
             const wrapperBody = wrapper.lastElementChild as HTMLElement;
             const wrapperLine = wrapper.firstElementChild as HTMLElement;
             const currentBody = getItemByIndex(wrapperBody.children, index);
+
+            // Apply CSS Transition animation only when a given index changes.
+            if (index != indexedRef.current) {
+                wrapperLine.style.transitionProperty = "margin, height";
+                wrapperLine.style.transitionDuration = duration;
+                wrapperLine.style.transitionTimingFunction = curve;
+                indexedRef.current = index;
+            }
 
             const bodyRect = DOMRectUtil.intrinsicOf(wrapperBody);
             const itemRect = DOMRectUtil.intrinsicOf(currentBody);
 
             wrapperLine.style.height = `${itemRect.height}px`;
             wrapperLine.style.marginTop = `${itemRect.top - bodyRect.top}px`;
-
-            // Transition animations about the line should only be applied after a margin is finally defining.
-            if (wrapperLine.style.transitionProperty == null) {
-                requestAnimationFrame(() => wrapperLine.style.transitionProperty = "margin, height");
-            }
+            wrapperLine.ontransitionend = () => {
+                wrapperLine.style.removeProperty("transition-property");
+                wrapperLine.style.removeProperty("transition-duration");
+            };
         }, [index]);
 
         return (
             <Box display="flex" ref={wrapperRef}>
-                <Box
-                    display="flex"
-                    alignItems="center"
-                    transitionDuration={duration}
-                    transitionTimingFunction={curve}
-                >
+                <Box display="flex" alignItems="center">
                     <Box
                         width={index != null ? rawStyle.thickness : 0}
                         height={rawStyle.width}
