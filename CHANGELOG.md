@@ -8,3 +8,6 @@
 
 # 1.0.0-beta4
 - Added the `Invisible` widget. Under the assumption that the size of the child element is explicitly known, this widget excludes the child element from both rendering and reflow if the element is not visible, significantly improving performance.
+
+# 1.0.0-beta5
+- Fixed an issue in the `AnimatedFoldable` widget where the non-visible state was affected by changes in the size of its children, causing the height of the layout to change or break.

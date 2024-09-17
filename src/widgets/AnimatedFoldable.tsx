@@ -74,12 +74,12 @@ export namespace AnimatedFoldable {
                     inner.style.width = `${unsetSize.width}px`;
                 } else {
                     outer.style.width = `${startSize.width}px`;
-                    inner.style.width = `${unsetSize.width}px`;
+                    inner.style.width = "max-content";
 
                     ElementUtil.reflow(outer);
 
-                    outer.style.width = `0px`;
-                    outer.ontransitionend = null;
+                    outer.style.width = "0px";
+                    outer.ontransitionend = () => null;
                 }
             }
 
@@ -153,11 +153,11 @@ export namespace AnimatedFoldable {
                     inner.style.height = `${unsetSize.height}px`;
                 } else {
                     outer.style.height = `${startSize.height}px`;
-                    inner.style.height = `${unsetSize.height}px`;
+                    inner.style.height = "max-content";
 
                     ElementUtil.reflow(outer);
 
-                    outer.style.height = `0px`;
+                    outer.style.height = "0px";
                     outer.ontransitionend = null;
                 }
             }

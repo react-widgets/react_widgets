@@ -1,4 +1,4 @@
-import { AnimatedTransition, Box, Column, ReactWidgets } from "react-widgets";
+import { AnimatedFoldable, AnimatedTransition, Box, Column, ReactWidgets, Row } from "react-widgets";
 import { createRoot } from "react-dom/client";
 import { useState } from "react";
 
@@ -9,15 +9,15 @@ ReactWidgets.REACT_WIDGETS_OPTION = {
 }
 
 export default function App() {
-    const [count, setCount] = useState(0);
+    const [toggle, setToggle] = useState(true);
 
     return (
-        <Column size="100%">
-            <button onClick={() => setCount(count + 1)}>Count Up</button>
-            <AnimatedTransition value={count} animation={{duration: "0.3s", fadeIn: {from: {opacity: 0}, to: {opacity: 1}}, fadeOut: {to: {opacity: 0}}}}>
-                <Box>Hello, World! {count}</Box>
-            </AnimatedTransition>
-        </Column>
+        <Row>
+            <button onClick={() => setToggle(!toggle)}>Update Toggle</button>
+            <AnimatedFoldable.Horizontal visible={toggle} duration="0.5s">
+                <button>Hello World!</button>
+            </AnimatedFoldable.Horizontal>
+        </Row>
     )
 }
 
