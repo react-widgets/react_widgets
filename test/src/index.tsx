@@ -1,4 +1,4 @@
-import { AnimatedSize, AnimatedSlider, Box, Column, ReactWidgets, Row } from "react-widgets";
+import { AnimatedFoldable, AnimatedSize, AnimatedSlider, Box, Column, ReactWidgets, Row, TabNavigation } from "react-widgets";
 import { createRoot } from "react-dom/client";
 import { useState } from "react";
 
@@ -9,20 +9,16 @@ ReactWidgets.REACT_WIDGETS_OPTION = {
 }
 
 export default function App() {
-    const [index, setIndex] = useState(1);
+    const [index, setIndex] = useState(0);
 
     return (
-        <Column padding="15px">
-            <Row paddingAndGap="5px">
-                <button onClick={() => setIndex(index - 1)}>To {index - 1}</button>
-                <button onClick={() => setIndex(index + 1)}>To {index + 1}</button>
-            </Row>
-            <Box backgroundColor="red">
-                <AnimatedSize duration="0.5s">
-                    <Column>{Array.from({length: index}).map((e, i) => <h1 key={i}>{`Hello, World ${i}`}</h1>)}</Column>
-                </AnimatedSize>
-            </Box>
-        </Column>
+        <Box padding="15px">
+            <TabNavigation.Horizontal index={index}  gap="15px" duration="0.5s">
+                <h1 onClick={() => setIndex(0)} style={{backgroundColor: "red"}}>Item 1</h1>
+                <h1 onClick={() => setIndex(1)} style={{backgroundColor: "red"}}>Item 2</h1>
+                <h1 onClick={() => setIndex(2)} style={{backgroundColor: "red"}}>Item 3</h1>
+            </TabNavigation.Horizontal>
+        </Box>
     )
 }
 

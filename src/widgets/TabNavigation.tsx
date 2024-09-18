@@ -39,7 +39,7 @@ export namespace TabNavigation {
 
     export function Horizontal({children, index, style, duration, curve, gap}: {
         children: ReactNode,
-        index?: number,
+        index: number,
         style?: Style
         duration: DurationUnit,
         curve?: CurvesUnit,
@@ -101,7 +101,7 @@ export namespace TabNavigation {
 
     export function Vertical({children, index, style, duration, curve, gap}: {
         children: ReactNode,
-        index?: number,
+        index: number,
         style?: Style
         duration: DurationUnit,
         curve?: CurvesUnit,

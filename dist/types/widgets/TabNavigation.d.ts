@@ -10,7 +10,7 @@ export declare namespace TabNavigation {
     const defualtStyle: Style;
     function Horizontal({ children, index, style, duration, curve, gap }: {
         children: ReactNode;
-        index?: number;
+        index: number;
         style?: Style;
         duration: DurationUnit;
         curve?: CurvesUnit;
@@ -18,7 +18,7 @@ export declare namespace TabNavigation {
     }): import("react/jsx-runtime").JSX.Element;
     function Vertical({ children, index, style, duration, curve, gap }: {
         children: ReactNode;
-        index?: number;
+        index: number;
         style?: Style;
         duration: DurationUnit;
         curve?: CurvesUnit;
