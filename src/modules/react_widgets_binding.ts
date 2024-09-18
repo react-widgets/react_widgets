@@ -77,6 +77,17 @@ export class ReactWidgetsBinding {
             sheet.insertRule('scrollable-horizontal[scrollbar-none]::-webkit-scrollbar { display: none; }');
         }
 
+        { // About an <widget-invisible>
+            sheet.insertRule(`
+                widget-invisible { display: contents; }
+            `);
+
+            sheet.insertRule(`
+                widget-invisible[active] { display: initial; }
+                widget-invisible[active] > * { display: none !important; }
+            `);
+        }
+
         // Defines the style rules that apply to the children of this element.
         document.adoptedStyleSheets = [...document.adoptedStyleSheets, sheet];
     }

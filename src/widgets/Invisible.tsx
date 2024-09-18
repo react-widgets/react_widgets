@@ -15,20 +15,21 @@ export function Invisible({size, width, height, children, threshold = 1e-10}: {
     threshold?: number;
     children: ReactNode;
 }) {
-    const wrapperRef = useRef<HTMLElement>(null);
+    const wrapperRef = useRef<HTMLDivElement>(null);
 
     useLayoutEffect(() => {
         const wrapper = wrapperRef.current;
-        const child = wrapper.firstElementChild as HTMLElement;
 
         const observer = new IntersectionObserver(entries => {
             for (const entry of entries) {
                 // If the wrapper element is not visible, hide the child element.
                 if (entry.intersectionRatio == 0) {
-                    child.style.display = "none";
+                    wrapper.style.width = width ?? size;
+                    wrapper.style.height = height ?? size;
+                    wrapper.setAttribute("active", "");
                 } else {
                     // If the wrapper becomes visible, restore the child element display.
-                    child.style.removeProperty("display");
+                    wrapper.removeAttribute("active");
                 }
             }
         }, {threshold});
@@ -39,8 +40,6 @@ export function Invisible({size, width, height, children, threshold = 1e-10}: {
     }, []);
 
     return (
-        <Box ref={wrapperRef} width={width ?? size} height={height ?? size}>
-            <Box children={children} />
-        </Box>
+        <widget-invisible ref={wrapperRef} children={children} />
     );
 }

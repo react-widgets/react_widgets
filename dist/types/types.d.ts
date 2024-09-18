@@ -54,6 +54,7 @@ declare module "react/jsx-runtime" {
         interface IntrinsicElements {
             "widget-row": JSXCustomElement<HTMLDivElement>;
             "widget-column": JSXCustomElement<HTMLDivElement>;
+            "widget-invisible": JSXCustomElement<HTMLDivElement>;
             "scrollable-vertical": JSXCustomElement<HTMLDivElement>;
             "scrollable-horizontal": JSXCustomElement<HTMLDivElement>;
         }
