@@ -84,6 +84,9 @@ export class ReactWidgetsBinding {
 
             sheet.insertRule(`
                 widget-invisible[active] { display: initial; }
+            `);
+
+            sheet.insertRule(`
                 widget-invisible[active] > * { display: none !important; }
             `);
         }
