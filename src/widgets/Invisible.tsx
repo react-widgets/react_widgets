@@ -1,5 +1,5 @@
+import { ElementUtil } from "@web-package/utility";
 import { ReactNode, useLayoutEffect, useRef } from "react";
-import { Box } from "./Box";
 
 /**
  * This widget is used under the assumption that the size of the child is explicitly known.
@@ -24,8 +24,20 @@ export function Invisible({size, width, height, children, threshold = 1e-10}: {
             for (const entry of entries) {
                 // If the wrapper element is not visible, hide the child element.
                 if (entry.intersectionRatio == 0) {
-                    wrapper.style.width = width ?? size;
-                    wrapper.style.height = height ?? size;
+                    const _width = width ?? size;
+                    const _height = height ?? size;
+
+                    // Avoid calling the computedStyle function if a intrinsic size of
+                    // a explicitly unique child element is already provided.
+                    if (_width && _height) {
+                        wrapper.style.width = _width;
+                        wrapper.style.height = _height;
+                    } else {
+                        const intrinsicSize = ElementUtil.intrinsicSizeOf(wrapper.firstElementChild);
+                        wrapper.style.width = `${intrinsicSize.width}px`;
+                        wrapper.style.height = `${intrinsicSize.height}px`;
+                    }
+
                     wrapper.setAttribute("active", "");
                 } else {
                     // If the wrapper becomes visible, restore the child element display.
