@@ -52,6 +52,9 @@ return (
 )
 ```
 
+### Simple Preview
+![preview](https://github.com/user-attachments/assets/c0a87919-9703-4ead-9025-e6d43d1e57e3)
+
 ## How to make responsive folding animation?
 You can be using the `AnimatedFoldable.Vertical` or `AnimatedFoldable.Horizontal` widgets to resolve it.
 
@@ -72,6 +75,9 @@ function ExampleComponent() {
     </>)
 }
 ```
+
+### Simple Preview
+![preview](https://github.com/user-attachments/assets/d3959d24-37f5-44b0-b659-08b4428e5092)
 
 ## How to animate child component changes?
 If you want to animate dynamic changes in a child component (e.g. when transitioning out of a loading screen or in other similar cases), you can easily achieve this by simply using the `AnimatedTransition` widget.
@@ -102,6 +108,26 @@ export default function ExampleComponent() {
     )
 }
 ```
+
+## How to make Tab Navigation?
+You can be using the `TabNavigation.Vertical` or `TabNavigation.Horizontal` widgets to resolve it.
+
+```tsx
+export default function ExampleComponent() {
+    const [index, setIndex] = useState(0);
+
+    return (
+        <TabNavigation.Horizontal index={index}  gap="15px" duration="0.5s">
+            <h1 onClick={() => setIndex(0)}>Item 1</h1>
+            <h1 onClick={() => setIndex(1)}>Item 2</h1>
+            <h1 onClick={() => setIndex(2)}>Item 3</h1>
+        </TabNavigation.Horizontal>
+    )
+}
+```
+
+### Simple Preview
+![ezgif-6-50460d4d25](https://github.com/user-attachments/assets/7312ac10-0ca2-404b-acb7-3437c89d8f82)
 
 ## How to make responsive grid?
 You can be using the `ConstraintBuilder` with `Grid` widgets to resolve it.
