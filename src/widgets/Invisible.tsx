@@ -29,7 +29,7 @@ export function Invisible({size, width, height, children, threshold = 1e-10}: {
 
                     // Avoid calling the computedStyle function if a intrinsic size of
                     // a explicitly unique child element is already provided.
-                    if (_width && _height) {
+                    if (_width != null && _height != null) {
                         wrapper.style.width = _width;
                         wrapper.style.height = _height;
                     } else {
