@@ -1,4 +1,4 @@
-import { ReactNode, useLayoutEffect, useRef } from "react";
+import { CSSProperties, HTMLAttributes, ReactNode, useLayoutEffect, useRef } from "react";
 import { CurvesUnit, MeasuredSize, ReactWidgets } from "../types";
 import { Box } from "./Box";
 import { ElementUtil } from "@web-package/utility";
@@ -9,8 +9,9 @@ export interface AnimatedSizeOption {
     sizeTolerance: number,
 }
 
-export function AnimatedSize({children, duration, curve}: {
+export function AnimatedSize({children, overflow = "clip", duration, curve}: {
     children: ReactNode,
+    overflow?: CSSProperties["overflow"],
     duration: string,
     curve?: CurvesUnit,
 }) {
@@ -45,6 +46,8 @@ export function AnimatedSize({children, duration, curve}: {
         // See Also, using MutationObserver to detect changes in the size
         // of child elements is not considered a best practice in React.
         {
+            outer.style.display = "contents";
+            inner.style.display = "contents";
             outer.style.width = null;
             outer.style.height = null;
             inner.style.minWidth = null;
@@ -61,6 +64,7 @@ export function AnimatedSize({children, duration, curve}: {
 
             upperSizeRef.current = upperSize;
 
+            outer.style.display = null;
             outer.style.width = `${lowerSize.width}px`;
             outer.style.height = `${lowerSize.height}px`;
 
@@ -69,6 +73,8 @@ export function AnimatedSize({children, duration, curve}: {
             outer.style.width = `${upperSize.width}px`;
             outer.style.height = `${upperSize.height}px`;
             outer.ontransitionend = () => {
+                outer.style.display = "contents";
+                inner.style.display = "contents";
                 outer.style.width = null;
                 outer.style.height = null;
                 inner.style.minWidth = null;
@@ -91,13 +97,12 @@ export function AnimatedSize({children, duration, curve}: {
     return (
         <Box
             ref={wrapperRef}
-            overflow="hidden"
+            overflow={overflow}
             willChange={willChange}
             transitionProperty="width, height"
             transitionDuration={duration}
             transitionTimingFunction={curve}
-        >
-            <div>{children}</div>
-        </Box>
+            children={<div>{children}</div>}
+        />
     )
 }

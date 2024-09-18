@@ -15,3 +15,6 @@
 - Fixed an issue where elements in the `Invisible` widget were only rendered if they were fully visible. Now, elements will be rendered as long as they are partially visible, even if only 0.1% of the element is in view.
 
 - Fixed an issue where the transition animation was applied to the line indicator element in the `TabNavigation` widget when the initial index was a positive number instead of 0.
+
+# 1.0.0-beta6
+- Fixed an issue by modifying the AnimatedSize widget to exclude the wrapping element from layout calculations when not in animation state, optimizing performance.

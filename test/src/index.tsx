@@ -1,4 +1,4 @@
-import { AnimatedFoldable, AnimatedTransition, Box, Column, ReactWidgets, Row, Scrollable, TabNavigation } from "react-widgets";
+import { AnimatedSize, AnimatedSlider, Box, Column, ReactWidgets, Row } from "react-widgets";
 import { createRoot } from "react-dom/client";
 import { useState } from "react";
 
@@ -9,18 +9,20 @@ ReactWidgets.REACT_WIDGETS_OPTION = {
 }
 
 export default function App() {
-    const [index, setIndex] = useState(2);
+    const [index, setIndex] = useState(1);
 
     return (
-        <Scrollable.Horizontal>
-            <TabNavigation.Horizontal index={index} duration="0.3s">
-                <Box onClick={() => setIndex(0)} backgroundColor="red">Hello World 0</Box>
-                <Box onClick={() => setIndex(1)} backgroundColor="blue">World 1</Box>
-                <Box onClick={() => setIndex(2)} backgroundColor="red">Hello World 2</Box>
-                <Box onClick={() => setIndex(3)} backgroundColor="blue">World 3</Box>
-                <Box onClick={() => setIndex(4)} backgroundColor="red">Hello World 4</Box>
-            </TabNavigation.Horizontal>
-        </Scrollable.Horizontal>
+        <Column padding="15px">
+            <Row paddingAndGap="5px">
+                <button onClick={() => setIndex(index - 1)}>To {index - 1}</button>
+                <button onClick={() => setIndex(index + 1)}>To {index + 1}</button>
+            </Row>
+            <Box backgroundColor="red">
+                <AnimatedSize duration="0.5s">
+                    <Column>{Array.from({length: index}).map((e, i) => <h1 key={i}>{`Hello, World ${i}`}</h1>)}</Column>
+                </AnimatedSize>
+            </Box>
+        </Column>
     )
 }
 
