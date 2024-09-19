@@ -10,7 +10,7 @@ export { ReactWidgetsBinding } from "./modules/react_widgets_binding";
 export { ReactWidgets } from "./types";
 export { AnimatedFoldable } from "./widgets/AnimatedFoldable";
 export { AnimatedTransition, AnimatedTransitionAnimation } from "./widgets/AnimatedTransition";
-export { AnimatedSlider } from "./widgets/AnimatedSlider";
+// export { AnimatedSlider } from "./widgets/AnimatedSlider";
 // export { AnimatedPage } from "./widgets/AnimatedPage";
 export { AnimatedSize } from "./widgets/AnimatedSize";
 export { Box, BoxProperties } from "./widgets/Box";

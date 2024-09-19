@@ -17,4 +17,6 @@
 - Fixed an issue where the transition animation was applied to the line indicator element in the `TabNavigation` widget when the initial index was a positive number instead of 0.
 
 # 1.0.0-beta6
-- Fixed an issue by modifying the AnimatedSize widget to exclude the wrapping element from layout calculations when not in animation state, optimizing performance.
+- Fixed an issue by modifying the `AnimatedSize` widget to exclude the wrapping element from layout calculations when not in animation state, optimizing performance.
+
+- Updated the README.md to provide more detailed explanations and clarifications throughout the project documentation.
