@@ -5,7 +5,14 @@ import { Row } from "./Row";
 import { Column } from "./Column";
 import { DOMRectUtil } from "@web-package/utility"
 
+/**
+ * This namespace provides components for horizontal and vertical tab navigation.
+ * It handles the rendering of navigation items and applies transitions for
+ * visual effects when changing the active tab.
+ */
 export namespace TabNavigation {
+
+    /** Signature for the interface that defines a custom style of tab-navigation. */
     export interface Style {
         backgroundColor?: string,
         borderRadius?: string
@@ -13,8 +20,10 @@ export namespace TabNavigation {
         thickness?: string
     }
 
-    export const defualtStyle: Style = {
+    /** This value defines a default style of tab-navigation. */
+    export const DEFUALT_STYLE: Required<Style> = {
         backgroundColor: "black",
+        borderRadius: undefined,
         width: "100%",
         thickness: "3px"
     };
@@ -48,7 +57,7 @@ export namespace TabNavigation {
         const indexedRef = useRef<number>(index);
         const wrapperRef = useRef<HTMLDivElement>(null);
         const rawStyle = {
-            ...defualtStyle,
+            ...DEFUALT_STYLE,
             ...style
         }
 
@@ -110,7 +119,7 @@ export namespace TabNavigation {
         const indexedRef = useRef<number>(index);
         const wrapperRef = useRef<HTMLDivElement>(null);
         const rawStyle = {
-            ...defualtStyle,
+            ...DEFUALT_STYLE,
             ...style
         }
 
