@@ -109,6 +109,12 @@ export default function ExampleComponent() {
 }
 ```
 
+### Simple Preview
+> fadeIn:  {from: {opacity: 0, transform: "translateY(100%)"}, to: {opacity: 1, transform: ""}},<br>
+> fadeOut: {from: {opacity: 1, transform: ""}, to: {opacity: 0, transform: "translateY(-100%)"}}
+
+![ezgif-5-0d105f42bd](https://github.com/user-attachments/assets/c8696a97-adb1-4e24-a9f7-e3b7d52a7c0b)
+
 ## How to make Tab Navigation?
 You can be using the `TabNavigation.Vertical` or `TabNavigation.Horizontal` widgets to resolve it.
 
