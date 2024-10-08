@@ -50,8 +50,8 @@ export function AnimatedSize({children, overflow = "clip", duration, curve}: {
             inner.style.display = "contents";
             outer.style.width = null;
             outer.style.height = null;
-            inner.style.minWidth = null;
-            inner.style.minHeight = null;
+            inner.style.width = null;
+            inner.style.height = null;
 
             const lowerSize = lowerSizeRef.current;
             const upperSize = ElementUtil.intrinsicSizeOf(inner); // reflowed
@@ -77,12 +77,12 @@ export function AnimatedSize({children, overflow = "clip", duration, curve}: {
                 inner.style.display = "contents";
                 outer.style.width = null;
                 outer.style.height = null;
-                inner.style.minWidth = null;
-                inner.style.minHeight = null;
+                inner.style.width = null;
+                inner.style.height = null;
             }
 
-            inner.style.minWidth = `${upperSize.width}px`;
-            inner.style.minHeight = `${upperSize.height}px`;
+            inner.style.width = `${upperSize.width}px`;
+            inner.style.height = `${upperSize.height}px`;
         }
 
         const observer = new ResizeObserver(() => {

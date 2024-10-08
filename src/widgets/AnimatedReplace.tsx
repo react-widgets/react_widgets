@@ -3,13 +3,14 @@ import { DurationUnit } from "../types"
 import { Box } from "./Box";
 import { Row } from "./Row";
 
-export namespace AnimatedSlider {
-    export function Horizontal({index, duration, lazyLoad = true, children}: {
+export namespace AnimatedReplace {
+    export function Horizontal({index, duration, lazyLoad = true, children: pChildren}: {
         index: number;
         duration: DurationUnit;
         lazyLoad?: boolean;
-        children: JSX.Element[];
+        children: JSX.Element | JSX.Element[];
     }) {
+        const children = Array.isArray(pChildren) ? pChildren : [pChildren];
         const indexRef = useRef<number>(index);
         const stateRef = useRef<number[]>([]);
         const states = stateRef.current;
@@ -32,7 +33,7 @@ export namespace AnimatedSlider {
             <Row position="relative">{
                 states.map(state => {
                     return (
-                        <AnimatedSliderSliver
+                        <AnimatedReplaceSliver
                             key={state}
                             index={state}
                             first={state == 0}
@@ -46,7 +47,7 @@ export namespace AnimatedSlider {
     }
 }
 
-export function AnimatedSliderSliver({first, index, current, children}: {
+export function AnimatedReplaceSliver({first, index, current, children}: {
     first: boolean;
     index: number;
     current: number;
