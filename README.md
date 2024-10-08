@@ -33,7 +33,7 @@ return (
 ```
 
 # Preview
-The image below is a simple use gif of [Quark Icons](https://quarkicons.com/) and a website created using @web-package/react-widgets and its extension, @web-package/react-widget-router.
+The image below is a simple use gif of [Quark Icons](https://quarkicons.com/) and a website created using @web-package/react-widgets and its extension, @web-package/react-widgets-router.
 
 ![preview](https://github.com/user-attachments/assets/cd1b147b-3043-496f-9ebc-e76b634d468c)
 
