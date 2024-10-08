@@ -20,3 +20,6 @@
 - Fixed an issue by modifying the `AnimatedSize` widget to exclude the wrapping element from layout calculations when not in animation state, optimizing performance.
 
 - Updated the README.md to provide more detailed explanations and clarifications throughout the project documentation.
+
+# 1.0.0-beta7
+- fixed an issue about AnimatedSize widget.
