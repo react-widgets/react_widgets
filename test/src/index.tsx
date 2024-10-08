@@ -15,7 +15,7 @@ export default function App() {
         <Column>
             <button onClick={() => setCount(count + 1)}>count up</button>
             <AnimatedSize duration="0.5s">
-                <Box padding="15px" backgroundColor="red">
+                <Box display="flex" width="max-content" padding="15px" backgroundColor="red">
                     <h1>{Array.from({length: count}).map(() => "Hello, World!")}</h1>
                 </Box>
             </AnimatedSize>

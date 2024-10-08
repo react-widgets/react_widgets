@@ -81,6 +81,7 @@ export function AnimatedSize({children, overflow = "clip", duration, curve}: {
                 inner.style.minHeight = null;
             }
 
+            inner.style.display = null;
             inner.style.minWidth = `${upperSize.width}px`;
             inner.style.minHeight = `${upperSize.height}px`;
         }
