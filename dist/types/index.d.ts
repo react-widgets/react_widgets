@@ -7,7 +7,6 @@ export { ReactWidgetsBinding } from "./modules/react_widgets_binding";
 export { ReactWidgets } from "./types";
 export { AnimatedFoldable } from "./widgets/AnimatedFoldable";
 export { AnimatedTransition, AnimatedTransitionAnimation } from "./widgets/AnimatedTransition";
-export { AnimatedReplace } from "./widgets/AnimatedReplace";
 export { AnimatedSize } from "./widgets/AnimatedSize";
 export { Box, BoxProperties } from "./widgets/Box";
 export { Invisible } from "./widgets/Invisible";
