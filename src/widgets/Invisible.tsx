@@ -39,15 +39,23 @@ export function Invisible({size, width, height, children, threshold = 1e-10}: {
         const _width = width ?? size;
         const _height = height ?? size;
 
-        // Avoid calling the computedStyle function if a intrinsic size of
-        // a explicitly unique child element is already provided.
-        if (_width != null && _height != null) {
-            wrapper.style.width = _width;
-            wrapper.style.height = _height;
-        } else {
-            const intrinsicSize = ElementUtil.intrinsicSizeOf(wrapper.firstElementChild);
-            wrapper.style.width = `${intrinsicSize.width}px`;
-            wrapper.style.height = `${intrinsicSize.height}px`;
+        const observer = new ResizeObserver(() => {
+            // Avoid calling the computedStyle function if a intrinsic size of
+            // a explicitly unique child element is already provided.
+            if (_width != null && _height != null) {
+                wrapper.style.width = _width;
+                wrapper.style.height = _height;
+            } else {
+                const intrinsicSize = ElementUtil.intrinsicSizeOf(wrapper.firstElementChild);
+                wrapper.style.width = `${_width ?? intrinsicSize.width}px`;
+                wrapper.style.height = `${_height ?? intrinsicSize.height}px`;
+            }
+        });
+
+        observer.observe(wrapper.firstElementChild, {box: "border-box"});
+
+        return () => {
+            observer.disconnect();
         }
     }, [size, width, height]);
 
