@@ -1,6 +1,6 @@
 import { AnimatedSize, AnimatedTransition, Box, Column, ReactWidgets, Row } from "react-widgets";
 import { createRoot } from "react-dom/client";
-import { useState } from "react";
+import { useLayoutEffect, useState } from "react";
 
 ReactWidgets.REACT_WIDGETS_OPTION = {
     useStrict: true,
@@ -12,7 +12,7 @@ export default function App() {
     const [count, setCount] = useState(3);
 
     return (
-        <Column>
+        <Column size="100%" align="center">
             <button onClick={() => setCount(count - 1)}>count up</button>
             <Column display="flex" width="max-content" padding="15px" backgroundColor="red">
                 <h1>{Array.from({length: count}).map(() => "Hello, World!").join(" ")}</h1>

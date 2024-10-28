@@ -24,9 +24,13 @@ export function AnimatedSize({children, overflow = "clip", duration, curve}: {
     const getInner = () => getOuter().firstElementChild as HTMLElement;
 
     // Defines the previous intrinsic size when recomponented for a size transition animation.
-    if (getOuter()) {
-        lowerSizeRef.current = ElementUtil.intrinsicSizeOf(getOuter());
-    }
+    useLayoutEffect(() => {
+        const observer = new ResizeObserver(() => {
+            lowerSizeRef.current = ElementUtil.intrinsicSizeOf(getOuter());
+        });
+
+        observer.observe(getOuter());
+    }, []);
 
     useLayoutEffect(() => {
         const outer = getOuter();
@@ -42,6 +46,8 @@ export function AnimatedSize({children, overflow = "clip", duration, curve}: {
         // See Also, using MutationObserver to detect changes in the size
         // of child elements is not considered a best practice in React.
         {
+            if (!lowerSizeRef.current) return;
+
             outer.style.display = "contents";
             inner.style.display = "contents";
             outer.style.width = null;
@@ -49,13 +55,8 @@ export function AnimatedSize({children, overflow = "clip", duration, curve}: {
             outer.style.height = null;
             inner.style.height = null;
 
-            // Ignores the tasks about animation in initial layout phase.
-            if (!lowerSizeRef.current) return;
-
             const lowerSize = lowerSizeRef.current;
             const upperSize = ElementUtil.intrinsicSizeOf(inner); // reflowed
-
-            console.log("upper", upperSize);
 
             // Is not the children in this element has resized.
             if (lowerSize.width  == upperSize.width
