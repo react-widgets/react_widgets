@@ -23,13 +23,19 @@ export function AnimatedSize({children, overflow = "clip", duration, curve}: {
     const getOuter = () => wrapperRef.current;
     const getInner = () => getOuter().firstElementChild as HTMLElement;
 
-    // Defines the previous intrinsic size when recomponented for a size transition animation.
     useLayoutEffect(() => {
+        // Using resize observer because the intrinsic size of the previous element
+        // cannot be accurately obtained when recomponented after.
         const observer = new ResizeObserver(() => {
+
+            // Defines the previous intrinsic size when recomponented
+            // for a size transition animation.
             lowerSizeRef.current = ElementUtil.intrinsicSizeOf(getOuter());
         });
 
-        observer.observe(getOuter());
+        observer.observe(getOuter(), {"box": "border-box"});
+
+        return () => observer.disconnect();
     }, []);
 
     useLayoutEffect(() => {
