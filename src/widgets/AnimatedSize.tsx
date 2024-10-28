@@ -25,6 +25,11 @@ export function AnimatedSize({children, overflow = "clip", duration, curve}: {
 
     // Defines the previous intrinsic size when recomponented for a size transition animation.
     if (getOuter()) {
+        const outer = getOuter();
+        const inner = getInner();
+        outer.style.display = "contents";
+        inner.style.display = "contents";
+
         lowerSizeRef.current = ElementUtil.intrinsicSizeOf(getOuter());
     }
 
@@ -77,7 +82,7 @@ export function AnimatedSize({children, overflow = "clip", duration, curve}: {
                 outer.style.width = null;
                 outer.style.height = null;
                 inner.style.minWidth = null;
-                inner.style.minHeight = null;
+                inner.style.minWidth = null;
             }
 
             inner.style.display = null;

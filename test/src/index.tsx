@@ -14,11 +14,12 @@ export default function App() {
     return (
         <Column>
             <button onClick={() => setCount(count + 1)}>count up</button>
-            <AnimatedSize duration="0.5s">
-                <Box display="flex" width="max-content" padding="15px" backgroundColor="red">
-                    <h1>{Array.from({length: count}).map(() => "Hello, World!").join(" ")}</h1>
-                </Box>
-            </AnimatedSize>
+            <Column display="flex" width="max-content" padding="15px" backgroundColor="red">
+                <h1>{Array.from({length: count}).map(() => "Hello, World!").join(" ")}</h1>
+                <AnimatedSize duration="10s">
+                    <input style={{width: "100%"}} />
+                </AnimatedSize>
+            </Column>
         </Column>
     )
 }
