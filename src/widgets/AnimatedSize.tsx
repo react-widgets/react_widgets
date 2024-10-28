@@ -26,6 +26,8 @@ export function AnimatedSize({children, overflow = "clip", duration, curve}: {
     // Defines the previous intrinsic size when recomponented for a size transition animation.
     if (getOuter()) {
         lowerSizeRef.current = ElementUtil.intrinsicSizeOf(getOuter());
+
+        console.log("lower", lowerSizeRef.current);
     }
 
     useLayoutEffect(() => {
@@ -54,6 +56,8 @@ export function AnimatedSize({children, overflow = "clip", duration, curve}: {
 
             const lowerSize = lowerSizeRef.current;
             const upperSize = ElementUtil.intrinsicSizeOf(inner); // reflowed
+
+            console.log("upper", upperSize);
 
             // Is not the children in this element has resized.
             if (lowerSize.width  == upperSize.width
