@@ -22,4 +22,7 @@
 - Updated the README.md to provide more detailed explanations and clarifications throughout the project documentation.
 
 # 1.0.0-beta7
-- fixed an issue about AnimatedSize widget.
+- Fixed an issue about `AnimatedSize` widget.
+
+# 1.0.0-beta8
+- Fixed an issue where the `AnimatedWidget` widget could not accurately define its previous intrinsic size of the element.

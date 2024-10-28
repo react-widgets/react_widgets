@@ -9,15 +9,14 @@ ReactWidgets.REACT_WIDGETS_OPTION = {
 }
 
 export default function App() {
-    const [count, setCount] = useState(3);
+    const [count, setCount] = useState(1);
 
     return (
         <Column size="100%" align="center">
-            <button onClick={() => setCount(count - 1)}>count up</button>
+            <button onClick={() => setCount(count + 1)}>count up</button>
             <Column display="flex" width="max-content" padding="15px" backgroundColor="red">
-                <h1>{Array.from({length: count}).map(() => "Hello, World!").join(" ")}</h1>
-                <AnimatedSize duration="10s">
-                    <input style={{width: "100%", boxSizing: "border-box"}} />
+                <AnimatedSize duration="1s">
+                    <h1>{Array.from({length: count}).map(() => "Hello, World!").join(" ")}</h1>
                 </AnimatedSize>
             </Column>
         </Column>
