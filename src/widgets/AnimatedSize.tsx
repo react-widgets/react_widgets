@@ -1,5 +1,5 @@
-import { CSSProperties, HTMLAttributes, ReactNode, useLayoutEffect, useRef } from "react";
-import { CurvesUnit, MeasuredSize, ReactWidgets } from "../types";
+import { CSSProperties, ReactNode, useInsertionEffect, useLayoutEffect, useRef } from "react";
+import { CurvesUnit, MeasuredSize } from "../types";
 import { Box } from "./Box";
 import { ElementUtil } from "@web-package/utility";
 import { ReactWidgetsBinding } from "../modules/react_widgets_binding";
@@ -23,19 +23,10 @@ export function AnimatedSize({children, overflow = "clip", duration, curve}: {
     const getOuter = () => wrapperRef.current;
     const getInner = () => getOuter().firstElementChild as HTMLElement;
 
-    useLayoutEffect(() => {
-        const observer = new ResizeObserver(() => {
-            lowerSizeRef.current = ElementUtil.intrinsicSizeOf(
-                // The size of the wrapper element is not defined at the initialing,
-                // so the layout size of the inner element must be calculated.
-                lowerSizeRef.current ? getOuter() : getInner()
-            );
-        });
-
-        observer.observe(getOuter(), {box: "border-box"});
-
-        return () => observer.disconnect();
-    }, []);
+    // Defines the previous intrinsic size when recomponented for a size transition animation.
+    if (getOuter()) {
+        lowerSizeRef.current = ElementUtil.intrinsicSizeOf(getOuter());
+    }
 
     useLayoutEffect(() => {
         const outer = getOuter();
