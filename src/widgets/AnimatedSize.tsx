@@ -24,19 +24,24 @@ export function AnimatedSize({children, overflow = "clip", duration, curve}: {
     const getInner = () => getOuter().firstElementChild as HTMLElement;
 
     useLayoutEffect(() => {
-        const innerSize = ElementUtil.intrinsicSizeOf(getInner());
+        const observer = new ResizeObserver(() => {
+            lowerSizeRef.current = ElementUtil.intrinsicSizeOf(
+                // The size of the wrapper element is not defined at the initialing,
+                // so the layout size of the inner element must be calculated.
+                lowerSizeRef.current ? getOuter() : getInner()
+            );
+        });
 
-        { // Defines initial measured size about width and height.
-            lowerSizeRef.current = innerSize;
-            upperSizeRef.current = innerSize;
-        }
-    }, [])
+        observer.observe(getOuter(), {box: "border-box"});
+
+        return () => observer.disconnect();
+    }, []);
 
     useLayoutEffect(() => {
         const outer = getOuter();
         const inner = getInner();
 
-        (inner.firstChild as HTMLElement).ontransitionend = event => {
+        inner.ontransitionend = event => {
             event.stopPropagation();
         }
 
@@ -49,9 +54,12 @@ export function AnimatedSize({children, overflow = "clip", duration, curve}: {
             outer.style.display = "contents";
             inner.style.display = "contents";
             outer.style.width = null;
-            outer.style.height = null;
             inner.style.width = null;
+            outer.style.height = null;
             inner.style.height = null;
+
+            // Ignores the tasks about animation in initial layout phase.
+            if (!lowerSizeRef.current) return;
 
             const lowerSize = lowerSizeRef.current;
             const upperSize = ElementUtil.intrinsicSizeOf(inner); // reflowed
@@ -85,14 +93,6 @@ export function AnimatedSize({children, overflow = "clip", duration, curve}: {
             inner.style.minWidth = `${upperSize.width}px`;
             inner.style.minHeight = `${upperSize.height}px`;
         }
-
-        const observer = new ResizeObserver(() => {
-            lowerSizeRef.current = ElementUtil.intrinsicSizeOf(outer);
-        });
-
-        observer.observe(outer, {box: "border-box"});
-
-        return () => observer.disconnect();
     }, [children]);
 
     return (
