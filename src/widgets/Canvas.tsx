@@ -69,11 +69,15 @@ export namespace Canvas {
                 canvas.style.width = width;
                 canvas.style.height = height;
 
+                observer.disconnect();
+
                 const canvasSize = ElementUtil.intrinsicSizeOf(canvas); // reflowed
                 canvas.setAttribute("width", `${canvasSize.width}px`);
                 canvas.setAttribute("height", `${canvasSize.height}px`);
 
                 onDraw(canvas.getContext(contextType) as T);
+
+                requestAnimationFrame(() => observer.observe(canvas));
             });
 
             observer.observe(canvas);
