@@ -69,6 +69,7 @@ export namespace Canvas {
                 canvas.style.width = width;
                 canvas.style.height = height;
 
+                // Prevents observer callbacks from being called again due to style attribute definitions.
                 observer.disconnect();
 
                 const canvasSize = ElementUtil.intrinsicSizeOf(canvas); // reflowed
@@ -77,6 +78,7 @@ export namespace Canvas {
 
                 onDraw(canvas.getContext(contextType) as T);
 
+                // Reactivates the disconnected observer after the next frame to detect size changes.
                 requestAnimationFrame(() => observer.observe(canvas));
             });
 
