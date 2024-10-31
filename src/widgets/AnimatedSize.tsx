@@ -23,20 +23,9 @@ export function AnimatedSize({children, overflow = "clip", duration, curve}: {
     const getOuter = () => wrapperRef.current;
     const getInner = () => getOuter().firstElementChild as HTMLElement;
 
-    useLayoutEffect(() => {
-        // Using resize observer because the intrinsic size of the previous element
-        // cannot be accurately obtained when recomponented after.
-        const observer = new ResizeObserver(() => {
-
-            // Defines the previous intrinsic size when recomponented
-            // for a size transition animation.
-            lowerSizeRef.current = ElementUtil.intrinsicSizeOf(getOuter());
-        });
-
-        observer.observe(getOuter(), {"box": "border-box"});
-
-        return () => observer.disconnect();
-    }, []);
+    // Defines the previous intrinsic size when recomponented
+    // for a size transition animation.
+    lowerSizeRef.current = ElementUtil.intrinsicSizeOf(getOuter());
 
     useLayoutEffect(() => {
         const outer = getOuter();
@@ -54,44 +43,46 @@ export function AnimatedSize({children, overflow = "clip", duration, curve}: {
         {
             if (!lowerSizeRef.current) return;
 
-            outer.style.display = "contents";
-            inner.style.display = "contents";
-            outer.style.width = null;
-            inner.style.width = null;
-            outer.style.height = null;
-            inner.style.height = null;
-
-            const lowerSize = lowerSizeRef.current;
-            const upperSize = ElementUtil.intrinsicSizeOf(inner); // reflowed
-
-            // Is not the children in this element has resized.
-            if (lowerSize.width  == upperSize.width
-             && lowerSize.height == upperSize.height) {
-                return;
-            }
-
-            upperSizeRef.current = upperSize;
-
-            outer.style.display = null;
-            outer.style.width = `${lowerSize.width}px`;
-            outer.style.height = `${lowerSize.height}px`;
-
-            ElementUtil.reflow(inner);
-
-            outer.style.width = `${upperSize.width}px`;
-            outer.style.height = `${upperSize.height}px`;
-            outer.ontransitionend = () => {
+            queueMicrotask(() => {
                 outer.style.display = "contents";
                 inner.style.display = "contents";
                 outer.style.width = null;
+                inner.style.width = null;
                 outer.style.height = null;
-                inner.style.minWidth = null;
-                inner.style.minWidth = null;
-            }
+                inner.style.height = null;
 
-            inner.style.display = null;
-            inner.style.minWidth = `${upperSize.width}px`;
-            inner.style.minHeight = `${upperSize.height}px`;
+                const lowerSize = lowerSizeRef.current;
+                const upperSize = ElementUtil.intrinsicSizeOf(inner); // reflowed
+
+                // Is not the children in this element has resized.
+                if (lowerSize.width == upperSize.width
+                 && lowerSize.height == upperSize.height) {
+                    return;
+                }
+
+                upperSizeRef.current = upperSize;
+
+                outer.style.display = null;
+                outer.style.width = `${lowerSize.width}px`;
+                outer.style.height = `${lowerSize.height}px`;
+
+                ElementUtil.reflow(inner);
+
+                outer.style.width = `${upperSize.width}px`;
+                outer.style.height = `${upperSize.height}px`;
+                outer.ontransitionend = () => {
+                    outer.style.display = "contents";
+                    inner.style.display = "contents";
+                    outer.style.width = null;
+                    outer.style.height = null;
+                    inner.style.minWidth = null;
+                    inner.style.minWidth = null;
+                }
+
+                inner.style.display = null;
+                inner.style.minWidth = `${upperSize.width}px`;
+                inner.style.minHeight = `${upperSize.height}px`;
+            });
         }
     }, [children]);
 
