@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef } from "react";
+import { useEffect, useLayoutEffect, useRef } from "react";
 import { SizeUnit } from "../types";
 import { ElementUtil } from "@web-package/utility";
 
@@ -60,6 +60,7 @@ export namespace Canvas {
         controller?: CanvasController
     }) {
         const canvasRef = useRef<HTMLCanvasElement>(null);
+        const initedRef = useRef<boolean>(false);
 
         useLayoutEffect(() => {
             const canvas = canvasRef.current;
@@ -98,6 +99,16 @@ export namespace Canvas {
                 controller.addListener(() => onDraw(canvas.getContext(contextType) as T));
             }
         }, [controller]);
+
+        useEffect(() => {
+            if (initedRef.current == false) {
+                initedRef.current = true;
+                return;
+            }
+
+            // Redraw the canvas whenever recomponented this widget.
+            controller.redraw();
+        });
 
         return (
             <canvas ref={canvasRef} />

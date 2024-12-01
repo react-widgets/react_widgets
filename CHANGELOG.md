@@ -26,3 +26,7 @@
 
 # 1.0.0-beta8
 - Fixed an issue where the `AnimatedWidget` widget could not accurately define its previous intrinsic size of the element.
+
+# 1.0.0-beta9
+- Fixed an issue where an exception occurred while the `Canvas` widget was detecting size changes.
+- Updated the `Canvas` widget to ensure it redraws even after being recomposed.
