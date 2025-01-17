@@ -1,6 +1,8 @@
-import { CSSProperties, ReactNode } from "react";
+import { CSSProperties, FunctionComponent, ReactNode, Ref } from "react";
 import { DeepOmit, SizeUnit } from "../types";
 export interface GridProperties extends DeepOmit<CSSProperties, "display" | "gridTemplateColumns" | "padding" | "margin"> {
+    ref?: Ref<HTMLElement>;
+    className?: string;
     children?: ReactNode;
     rowCount: number;
     gap?: SizeUnit;
@@ -10,4 +12,4 @@ export interface GridProperties extends DeepOmit<CSSProperties, "display" | "gri
     margin?: string;
     [key: string]: any;
 }
-export declare function Grid(p: GridProperties): import("react/jsx-runtime").JSX.Element;
+export declare const Grid: FunctionComponent<GridProperties>;

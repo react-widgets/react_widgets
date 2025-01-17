@@ -60,7 +60,7 @@ export class ReactWidgetsBinding {
             `);
 
             sheet.insertRule('scrollable-vertical > * { height: max-content }');
-            sheet.insertRule('scrollable-vertical[scrollbar-none]::-webkit-scrollbar { display: none; }');
+            sheet.insertRule('scrollable-vertical[scrollbar-none]::-webkit-scrollbar { display: none !important; }');
         }
 
         { // About an <scrollable-horizontal> element.
@@ -74,7 +74,7 @@ export class ReactWidgetsBinding {
             `);
 
             sheet.insertRule('scrollable-horizontal > * { width: max-content; }');
-            sheet.insertRule('scrollable-horizontal[scrollbar-none]::-webkit-scrollbar { display: none; }');
+            sheet.insertRule('scrollable-horizontal[scrollbar-none]::-webkit-scrollbar { display: none !important; }');
         }
 
         { // About an <widget-invisible>

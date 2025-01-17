@@ -52,6 +52,7 @@ type JSXCustomElement<T extends HTMLElement> = HTMLAttributes<T> & RefAttributes
 declare module "react/jsx-runtime" {
     namespace JSX {
         interface IntrinsicElements {
+            "widget-grid": JSXCustomElement<HTMLDivElement>;
             "widget-row": JSXCustomElement<HTMLDivElement>;
             "widget-column": JSXCustomElement<HTMLDivElement>;
             "widget-invisible": JSXCustomElement<HTMLDivElement>;

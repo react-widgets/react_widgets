@@ -1,19 +1,21 @@
-import { CSSProperties, ReactNode } from "react";
+import { CSSProperties, forwardRef, FunctionComponent, LegacyRef, ReactNode, Ref } from "react";
 import { DeepOmit, SizeUnit } from "../types";
 
 export interface GridProperties extends DeepOmit<CSSProperties, "display" | "gridTemplateColumns" | "padding" | "margin"> {
-    children?: ReactNode,
-    rowCount: number,
-    gap?: SizeUnit,
-    verticalGap?: string,
-    horizontalGap?: string,
-    padding?: string,
-    margin?: string,
+    ref?: Ref<HTMLElement>;
+    className?: string;
+    children?: ReactNode;
+    rowCount: number;
+    gap?: SizeUnit;
+    verticalGap?: string;
+    horizontalGap?: string;
+    padding?: string;
+    margin?: string;
 
     [key: string]: any;
 }
 
-export function Grid(p: GridProperties) {
+export const Grid = forwardRef<HTMLElement, GridProperties>((p, ref) => {
     const style: CSSProperties = {...p, ...{ // given style + automatic and required style
         gridTemplateColumns: Array.from({length: p.rowCount}, () => "1fr").join(" "),
         padding: p.padding,
@@ -29,7 +31,6 @@ export function Grid(p: GridProperties) {
     }
 
     return (
-        /** @ts-ignore */
-        <widget-grid style={style} children={p.children} />
+        <widget-grid ref={ref as LegacyRef<HTMLDivElement>} className={p.className} style={style} children={p.children} />
     )
-}
+}) as FunctionComponent<GridProperties>;

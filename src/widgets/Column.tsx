@@ -1,4 +1,4 @@
-import { CSSProperties, ReactNode } from "react";
+import { CSSProperties, forwardRef, FunctionComponent, LegacyRef, ReactNode, Ref } from "react";
 import { DeepOmit, SizeUnit } from "../types";
 
 export type ColumnAlignment =
@@ -22,6 +22,7 @@ export type ColumnAlignment =
     | "spaceEvenlyRight";
 
 export interface ColumnProperties extends DeepOmit<CSSProperties, "display" | "flexDirection" | "flexWrap" | "alignItems" | "alignContent" | "justifyContent"> {
+    ref?: Ref<HTMLElement>;
     className?: string;
     children?: ReactNode;
     paddingAndGap?: SizeUnit;
@@ -34,7 +35,7 @@ export interface ColumnProperties extends DeepOmit<CSSProperties, "display" | "f
     [key: string]: any;
 }
 
-export function Column(p: ColumnProperties) {
+export const Column = forwardRef<HTMLElement, ColumnProperties>((p, ref) => {
     const align = p.align;
     const style: CSSProperties = {...p, ...{
         flexDirection: p.reverse ? "column-reverse" : undefined,
@@ -132,5 +133,7 @@ export function Column(p: ColumnProperties) {
         style.justifyContent = "space-evenly";
     }
 
-    return <widget-column className={p.className} style={style} children={p.children} />
-}
+    return (
+        <widget-column ref={ref as LegacyRef<HTMLDivElement>} className={p.className} style={style} children={p.children} />
+    )
+}) as FunctionComponent<ColumnProperties>;

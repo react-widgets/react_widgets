@@ -1,4 +1,4 @@
-import { CSSProperties, ReactNode } from "react";
+import { CSSProperties, forwardRef, FunctionComponent, ReactNode, Ref } from "react";
 import { DeepOmit, SizeUnit } from "../types";
 
 export type RowAlignment =
@@ -22,18 +22,19 @@ export type RowAlignment =
     | "topSpaceEvenly"
 
 export interface RowProperties extends DeepOmit<CSSProperties, "display" | "flexDirection" | "flexWrap" | "alignItems" | "alignContent" | "justifyContent"> {
-    className?: string,
-    children?: ReactNode,
+    ref?: Ref<HTMLElement>;
+    className?: string;
+    children?: ReactNode;
     paddingAndGap?: SizeUnit;
-    reverse?: any,
-    wrap?: any,
-    size?: SizeUnit,
+    reverse?: any;
+    wrap?: any;
+    size?: SizeUnit;
     align?: RowAlignment;
 
     [key: string]: any;
 }
 
-export function Row(p: RowProperties) {
+export const Row = forwardRef<HTMLElement, RowProperties>((p, ref) => {
     const align = p.align;
     const style: CSSProperties = {...p, ...{
         flexDirection: p.reverse ? "row-reverse" : undefined,
@@ -123,5 +124,7 @@ export function Row(p: RowProperties) {
         style.justifyContent = "space-evenly";
     }
 
-    return <widget-row className={p.className} style={style} children={p.children} />
-}
+    return (
+        <widget-row ref={ref as React.LegacyRef<HTMLDivElement>} className={p.className} style={style} children={p.children} />
+    )
+}) as FunctionComponent<RowProperties>;

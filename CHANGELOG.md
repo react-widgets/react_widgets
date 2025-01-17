@@ -30,3 +30,10 @@
 # 1.0.0-beta9
 - Fixed an issue where an exception occurred while the `Canvas` widget was detecting size changes.
 - Updated the `Canvas` widget to ensure it redraws even after being recomposed.
+
+# 1.0.0-beta11
+- Fixed an issue where the scrollbar would appear in the `Scrollable` widget despite being defined as false, due to CSS priority differences in the development environment.
+
+- Updated the `Grid` widget to ensure react ref hooks work correctly.
+- Updated the `Row` widget to ensure react ref hooks work correctly.
+- Updated the `Colunn` widget to ensure react ref hooks work correctly.

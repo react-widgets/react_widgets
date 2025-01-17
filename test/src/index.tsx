@@ -1,6 +1,6 @@
-import { AnimatedSize, AnimatedTransition, Box, Column, ReactWidgets, Row } from "react-widgets";
+import { Box, Column, ReactWidgets, Row, Scrollable } from "react-widgets";
 import { createRoot } from "react-dom/client";
-import { useLayoutEffect, useState } from "react";
+import { useLayoutEffect, useRef } from "react";
 
 ReactWidgets.REACT_WIDGETS_OPTION = {
     useStrict: true,
@@ -9,17 +9,20 @@ ReactWidgets.REACT_WIDGETS_OPTION = {
 }
 
 export default function App() {
-    const [count, setCount] = useState(1);
+    const targetRef = useRef<HTMLDivElement>(null);
+
+    useLayoutEffect(() => {
+        console.log(targetRef.current);
+    });
 
     return (
-        <Column size="100%" align="center">
-            <button onClick={() => setCount(count + 1)}>count up</button>
-            <Column display="flex" width="max-content" padding="15px" backgroundColor="red">
-                <AnimatedSize duration="1s">
-                    <h1>{Array.from({length: count}).map(() => "Hello, World!").join(" ")}</h1>
-                </AnimatedSize>
-            </Column>
-        </Column>
+        <Scrollable.Horizontal scrollbar={false}>
+            <Row ref={targetRef}>
+                {Array.from({length: 100}).map((_, index) => {
+                    return <h1 key={index}>Hello, World!</h1>
+                })}
+            </Row>
+        </Scrollable.Horizontal>
     )
 }
 
