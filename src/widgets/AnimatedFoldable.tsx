@@ -5,20 +5,12 @@ import { ElementUtil } from "@web-package/utility";
 import { ReactWidgetsBinding } from "../modules/react_widgets_binding";
 
 export namespace AnimatedFoldable {
+    /** Signature for the constants that defines CSS style properties about overflow. */
     export type Overflow = "visible" | "hidden" | "clip" | "scroll" | "auto";
-    export type Transition = {
+
+    /** Signature for the interface that defines whether the transition animations is active. */
+    export interface Transition {
         opacity: boolean;
-    }
-
-    export type StyleCSSProperties = DeepOmit<CSSProperties,
-        | "transitionProperty"
-        | "transitionDuration"
-        | "transitionTimingFunction"
-    >
-
-    export interface HorizontalStyle {
-        start: DeepOmit<StyleCSSProperties, "width" | "minWidth" | "maxWidth">;
-        end  : DeepOmit<StyleCSSProperties, "width" | "minWidth" | "maxWidth">;
     }
 
     export function Horizontal({visible, overflow = "hidden", duration, transition = {opacity: false}, curve, children}: {
@@ -176,6 +168,20 @@ export namespace AnimatedFoldable {
                 transitionTimingFunction={curve}
                 children={<div>{children}</div>}
             />
+        )
+    }
+
+    export function Bidirectional(p: {
+        visible: boolean,
+        overflow?: Overflow,
+        transition?: Transition,
+        duration: DurationUnit,
+        curve?: CurvesUnit,
+        children: ReactNode
+    }) {
+        const { children, ...props } = p;
+        return (
+            <Vertical {...props}><Horizontal {...props}>{children}</Horizontal></Vertical>
         )
     }
 }

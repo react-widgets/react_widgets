@@ -37,3 +37,6 @@
 - Updated the `Grid` widget to ensure react ref hooks work correctly.
 - Updated the `Row` widget to ensure react ref hooks work correctly.
 - Updated the `Colunn` widget to ensure react ref hooks work correctly.
+
+# 1.0.0-beta12
+- Added widget `AnimatedFoldable.Bidirectional`, which combines the functionality of the existing Vertical and Horizontal widgets into a single component, enabling seamless bidirectional animations.
