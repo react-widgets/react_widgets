@@ -26,9 +26,6 @@ export { Ignore } from "./widgets/Ignore";
 export { Layout } from "./widgets/Layout";
 export { Scrollable } from "./widgets/Scrollable";
 export { SizeBuilder, SizedBuilder } from "./widgets/SizeBuilder";
-export { SizedConnection, SizedConnectionBinding, SizedConnectionListener, SizedConnectionContext } from "./widgets/SizedConnection";
-export { SizedMaster } from "./widgets/SizedMaster";
-export { SizedSlaver, SizedSlaverCallback } from "./widgets/SizedSlaver";
 export { TabNavigation } from "./widgets/TabNavigation";
 export { Text, TextProperties, TextAlignment } from "./widgets/Text";
 
