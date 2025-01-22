@@ -1,24 +1,19 @@
-
-/*
-export class ScrollableVerticalElement extends HTMLElement {}
-export class ScrollableHorzontalElement extends HTMLElement {}
-
-customElements.define("scrollable-vertical", ScrollableVerticalElement);
-*/
+import { forwardRef, FunctionComponent, Ref } from "react";
 
 export namespace Scrollable {
     export interface Properties {
+        ref?: Ref<HTMLElement>;
         children: JSX.Element;
         scrollbar?: boolean;
     }
 
-    export function Vertical(p: Properties) {
+    export const Vertical = forwardRef<HTMLElement, Properties>((p, ref) => {
         const scrollbar = !(p.scrollbar ?? true);
-        return <scrollable-vertical children={p.children} {...(scrollbar && {"scrollbar-none": ""})} />;
-    }
+        return <scrollable-vertical ref={ref as React.LegacyRef<HTMLDivElement>} children={p.children} {...(scrollbar && {"scrollbar-none": ""})} />;
+    }) as FunctionComponent<Properties>;
 
-    export function Horizontal(p: Properties) {
+    export const Horizontal = forwardRef<HTMLElement, Properties>((p, ref) => {
         const scrollbar = !(p.scrollbar ?? true);
-        return <scrollable-horizontal children={p.children} {...(scrollbar && {"scrollbar-none": ""})} />;
-    }
+        return <scrollable-horizontal ref={ref as React.LegacyRef<HTMLDivElement>} children={p.children} {...(scrollbar && {"scrollbar-none": ""})} />;
+    }) as FunctionComponent<Properties>;
 }

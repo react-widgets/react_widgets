@@ -48,6 +48,7 @@ export class ReactWidgetsBinding {
         sheet.insertRule('widget-row { display: flex; flex-direction: row; }');
         sheet.insertRule('widget-column { display: flex; flex-direction: column; }');
         sheet.insertRule('widget-grid { display: grid; }');
+        sheet.insertRule(`*.ignore { display: contents; }`);
 
         { // About an <scrollable-vertical> element.
             sheet.insertRule(`

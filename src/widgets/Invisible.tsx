@@ -33,7 +33,7 @@ export function Invisible({size, width, height, children, threshold = 1e-10}: {
 
         return () => observer.disconnect();
     }, []);
-    
+
     useLayoutEffect(() => {
         const wrapper = wrapperRef.current;
         const _width = width ?? size;
