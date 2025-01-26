@@ -1,16 +1,12 @@
-import { ReactNode } from "react";
 import { DurationUnit } from "../types";
+import { Property } from "csstype";
 export declare namespace AnimatedSlider {
-    function Horizontal({ index, duration, lazyLoad, children }: {
+    interface Properties {
         index: number;
         duration: DurationUnit;
-        lazyLoad?: boolean;
-        children: JSX.Element[];
-    }): import("react/jsx-runtime").JSX.Element;
+        viewport?: string;
+        overflow?: Property.Overflow;
+        children: JSX.Element | JSX.Element[];
+    }
+    function Horizontal({ index, duration, viewport, overflow, children: pChildren }: Properties): import("react/jsx-runtime").JSX.Element;
 }
-export declare function AnimatedSliderSliver({ first, index, current, children }: {
-    first: boolean;
-    index: number;
-    current: number;
-    children: ReactNode;
-}): import("react/jsx-runtime").JSX.Element;

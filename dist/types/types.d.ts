@@ -55,6 +55,7 @@ declare module "react/jsx-runtime" {
             "widget-grid": JSXCustomElement<HTMLDivElement>;
             "widget-row": JSXCustomElement<HTMLDivElement>;
             "widget-column": JSXCustomElement<HTMLDivElement>;
+            "widget-ignore": JSXCustomElement<HTMLDivElement>;
             "widget-invisible": JSXCustomElement<HTMLDivElement>;
             "scrollable-vertical": JSXCustomElement<HTMLDivElement>;
             "scrollable-horizontal": JSXCustomElement<HTMLDivElement>;

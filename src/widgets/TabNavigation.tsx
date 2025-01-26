@@ -40,7 +40,7 @@ export namespace TabNavigation {
 
         let ignoreCount = 0;
         for (let i = 0; i <= index; i++) {
-            if (children[i + ignoreCount].className == "ignore") ignoreCount++;
+            if (children[i + ignoreCount].tagName == "WIDGET-IGNORE") ignoreCount++;
         }
 
         return children[index + ignoreCount];

@@ -1,6 +1,6 @@
-import { Box, Column, Invisible, ReactWidgets, Row, Scrollable } from "react-widgets";
+import { AnimatedSlider, Box, Column, ReactWidgets, TabNavigation } from "react-widgets";
 import { createRoot } from "react-dom/client";
-import { useLayoutEffect, useRef } from "react";
+import { useState } from "react";
 
 ReactWidgets.REACT_WIDGETS_OPTION = {
     useStrict: true,
@@ -9,14 +9,21 @@ ReactWidgets.REACT_WIDGETS_OPTION = {
 }
 
 export default function App() {
+    const [index, setIndex] = useState<number>(0);
+
     return (
-        <Scrollable.Horizontal scrollbar={false}>
-            <Column>
-                {Array.from({length: 100}).map((_, index) => {
-                    return <Invisible><h1 key={index}>Hello, World!</h1></Invisible>
-                })}
-            </Column>
-        </Scrollable.Horizontal>
+        <Column paddingAndGap="15px">
+            <TabNavigation.Horizontal index={index} duration="0.3s">
+                <Box padding="15px" onClick={() => setIndex(0)}>Red</Box>
+                <Box padding="15px" onClick={() => setIndex(1)}>Green</Box>
+                <Box padding="15px" onClick={() => setIndex(2)}>Blue</Box>
+            </TabNavigation.Horizontal>
+            <AnimatedSlider.Horizontal index={index} duration="0.3s">
+                <Box width="50%" height="200px" backgroundColor="red" />
+                <Box width="25%" height="400px" backgroundColor="green" />
+                <Box width="75%" height="300px" backgroundColor="blue" />
+            </AnimatedSlider.Horizontal>
+        </Column>
     )
 }
 
