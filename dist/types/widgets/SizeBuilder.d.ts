@@ -16,5 +16,4 @@ export declare namespace SizeBuilder {
      * it is a specific situation.
      */
     function Viewport({ builder }: Properties): import("react/jsx-runtime").JSX.Element;
-    function Parent({ builder }: Properties): void;
 }

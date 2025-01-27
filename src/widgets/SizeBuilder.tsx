@@ -38,7 +38,7 @@ export namespace SizeBuilder {
     }
 
     // TODO: Need to develop a SizeBuilder that returns the size of the parent widget.
-    export function Parent({builder}: Properties) {
+    function Parent({builder}: Properties) {
         
     }
 }

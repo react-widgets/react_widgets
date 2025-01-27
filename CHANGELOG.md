@@ -41,3 +41,4 @@
 # 1.0.0-beta12
 - Added widget `AnimatedFoldable.Bidirectional`, which combines the functionality of the existing Vertical and Horizontal widgets into a single component, enabling seamless bidirectional animations.
 - Fixed an issue where the ref was not applied to the `Scrollable.Vertical` and `Scrollable.Horizontal` widget by using `forwardRef` function.
+- Added widget `AnimatedSlider.Horizontal`.
